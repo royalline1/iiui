@@ -21,7 +21,7 @@ class SemesterWisePLOAttainmentReport(models.AbstractModel):
         line_ids = []
 
         if program_id and batch_id and academic_semester_id:
-            students = self.env['odoocms.student'].search([('program_id','=',program_id),('batch_id','=',batch_id),('academic_semester_id','=',academic_semester_id)])
+            students = self.env['odoocms.student'].search([('program_id','=',program_id),('batch_id','=',batch_id)])
             for student in students:
                 line = {
                     'student_id' : student.id_number,
