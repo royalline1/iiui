@@ -31,12 +31,14 @@
         'wizard/report/semester_result_export_view.xml',
         'wizard/report/gpa_warning_wizard_view.xml',
         'wizard/report/student_exam_slip_wiz_view.xml',
+        'wizard/report/student_semester_dmc_wiz_view.xml',
         
         'reports/report.xml',
         'reports/student_provisional_certificate_report.xml',
         'reports/gpa_wise_student_report.xml',
         'reports/gpa_warning_report.xml',
         'reports/student_exam_slip_report.xml',
+        'reports/student_semester_dmc_report.xml',
         
         
     ],
