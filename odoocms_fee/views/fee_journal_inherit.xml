@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="account_journal_inherit" model="ir.ui.view">
+            <field name="name">account.journal.fee.element</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="is_fee"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_odoocms_campus_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.campus.form.inherit</field>
+            <field name="model">odoocms.campus</field>
+            <field name="inherit_id" ref="odoocms.view_odoocms_campus_form"/>
+            <field name="arch" type="xml">
+
+                <field name="code" position="after">
+                    <field name="analytic_tag_id"/>
+                </field>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

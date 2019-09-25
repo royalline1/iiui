@@ -1,0 +1,104 @@
+<odoo>
+<!--    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;-->
+	<template id ="odoocms_obe.obe_clo_to_plo_mapping_report">
+			<t t-call="web.basic_layout">
+                <style>
+                    #semester-plo {
+                          border-collapse: collapse;
+                          width: 100%;
+                            margin-top:15px;
+                        }
+
+                        #semester-plo td, #semester-plo th {
+                          border: 1px solid #ddd;
+                          padding: 2px;
+                        }
+
+                        #semester-plo tr:nth-child(even){background-color: #f2f2f2;}
+
+                        #semester-plo tr:hover {background-color: #ddd;}
+
+                        #semester-plo th {
+                          padding-top: 11px;
+                          padding-bottom: 11px;
+                          text-align: center;
+                          background-color: #6f1964;
+                          color: white;
+                        }
+
+                    .verticalTableHeader {
+                        font-size:13px;
+                        height:120px;
+                        writing-mode: vertical-lr;
+                       -ms-writing-mode: tb-rl;
+                       transform: rotate(180deg);
+
+                    }
+
+
+                </style>
+				<div class="page" style="font-size: 13px; padding:30px ">
+                    <div style="font-size:14px;font-weight:bold;text-align:center;">
+                          <span>CLO to PLO Mapping</span>
+                    </div>
+                    <div style="font-size:14px;text-align:left;">
+                        <span style="text-weight:bold ">Program:</span>&#160;<span style="color:#4b1869" t-esc="batch.program_id.name"/>
+                    </div>
+                    <div style="font-size:14px; text-align:left;">
+                       <span style="text-weight:bold ">Batch:</span>&#160; <span style="color:#4b1869" t-esc="batch.name"/>
+                    </div>
+                     <div style="font-size:14px; text-align:left;">
+                       <span style="text-weight:bold ">Session:</span>&#160; <span style="color:#4b1869" t-esc="batch.academic_session_id.name"/>
+                    </div>
+                     <div style="font-size:14px; text-align:left;">
+                       <span style="text-weight:bold ">Course:</span>&#160; <span style="color:#4b1869" t-esc="course.subject_id.code"/><span>-</span><span style="color:#4b1869" t-esc="course.subject_id.name"/>
+                    </div>
+
+                    <table id="semester-plo">
+                         <tr>
+                             <th rowspan="2" colspan="2" style="width:5px; height:auto; background: #fff">&#160;</th>
+                             <t t-foreach="plo_line_ids" t-as="plo">
+                                 <th style="width:5px; height:auto"> <span class="verticalTableHeader"  t-esc="plo['name']"/></th>
+                             </t>
+                         </tr>
+                        <tr>
+                            <t t-foreach="plo_line_ids" t-as="plo">
+                                <th style="width:5px; height:auto; text-align:center; background: #522c4d" > <span>PLO</span><span t-esc="plo_index + 1" /></th>
+                            </t>
+                        </tr>
+                        <tr>
+                            <th colspan='2' style="width:5px; height:auto; text-align:center; background: #522c4d" >Course Learning OutComes (CLO) </th>
+                            <th colspan='12' style="width:5px; height:auto; text-align:center; background: #522c4d" >Compliance to PLO </th>
+                            <th style="width:5px; height:auto; text-align:center; background: #522c4d" >Delivery </th>
+                            <th style="width:5px; height:auto; text-align:center; background: #522c4d" >Assesment</th>
+                            <th style="width:5px; height:auto; text-align:center; background: #522c4d" >KPI*</th>
+                        </tr>
+                        <t t-set="kpi" t-value="true"/>
+                        <t t-foreach="clo_line_ids" t-as="clo">
+                            <tr>
+                                 <th style="width:5px; height:auto; text-align:center; background: #522c4d" > <span>CLO</span><span t-esc="clo_index + 1" /></th>
+                                 <th style="background: #522c4d"><span style="width:30px" ><span t-raw="clo['name']"/></span></th>
+                                 <t t-foreach="plo_line_ids" t-as="plo">
+                                     <t t-if="plo['name'] == clo['plo']">
+                                         <td style="text-align:center"><span >&#10004;</span></td>
+                                     </t>
+                                     <t t-else="plo['name'] == clo['plo']">
+                                         <td style="text-align:center"><span >&#160;</span></td>
+                                     </t>
+                                 </t>
+                                <td ><span>Lectures</span></td>
+                                <td ><span>Quize and Test</span></td>
+                                <t t-if="kpi">
+                                    <td t-att-rowspan="len(clo_line_ids)" style="background:#fff"><span>KPI is 50%</span></td>
+                                    <t t-set="kpi" t-value="false"/>
+                                </t>
+                            </tr>
+                        </t>
+                     </table>
+
+                </div>
+
+            </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="odoocms_semester_obe_summary_tree" model="ir.ui.view">
+            <field name="name">odoocms.semester.obe.summary.tree</field>
+            <field name="model">odoocms.semester.obe.summary</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false" edit="false">
+                    <field name="plo_id"/>
+                    <field name="percentage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="odoocms_semester_obe_summary_form" model="ir.ui.view">
+            <field name="name">odoocms.semester.obe.summary.form</field>
+            <field name="model">odoocms.semester.obe.summary</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="student_id" readonly="1"/>
+                                <field name="academic_semester_id"/>
+                            </group>
+                            <group>
+                                <field name="plo_id" readonly="1"/>
+                                <field name="percentage"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="semester_activity_summary_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="odoocms_activity_obe_summary_tree" model="ir.ui.view">
+            <field name="name">odoocms.activity.obe.summary.tree</field>
+            <field name="model">odoocms.activity.obe.summary</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false" edit="false">
+                    <field name="subject_id"/>
+                    <field name="clo_id"/>
+                    <field name="domain_id"/>
+                    <field name="emphasis_level"/>
+                    <field name="percentage"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="odoocms_activity_obe_summary_form" model="ir.ui.view">
+            <field name="name">odoocms.activity.obe.summary.form</field>
+            <field name="model">odoocms.activity.obe.summary</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="student_id" readonly="1"/>
+                                <field name="academic_semester_id"/>
+                                <field name="subject_id"/>
+                            </group>
+                            <group>
+                                <field name="clo_id" readonly="1"/>
+                                <field name="domain_id" readonly="1"/>
+                                <field name="semester_plo_id"/>
+                                <field name="emphasis_level"/>
+                                <field name="percentage"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="activity_lines" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="odoocms_student_obe_summary_tree" model="ir.ui.view">
+            <field name="name">odoocms.student.obe.summary.tree</field>
+            <field name="model">odoocms.student.obe.summary</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false" delete="false">
+                    <field name="plo_id"/>
+                    <field name="plo_points" invisible="1"/>
+                    <field name="plo_level" invisible="1"/>
+                    <field name="percentage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="odoocms_student_obe_summary_form" model="ir.ui.view">
+            <field name="name">odoocms.student.obe.summary.form</field>
+            <field name="model">odoocms.student.obe.summary</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="student_id" readonly="1"/>
+                                <field name="plo_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="plo_points"/>
+                                <field name="plo_level"/>
+                                <field name="percentage"/>
+                            </group>
+
+                        </group>
+                        <group>
+                            <field name="semester_plo_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+		<record id="view_odoocms_get_moodle_categories_form" model="ir.ui.view">
+			<field name="name">odoocms.get.moodle.categories.form</field>
+			<field name="model">odoocms.get.moodle.categories</field>
+			<field name="arch" type="xml">
+				<form string="Get Moodle Categories">
+					<footer>
+						<button name="get_categories" string="Get Categories" type="object" class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel" />
+					</footer>
+			   </form>
+			</field>
+		</record>
+
+		<act_window
+				id="action_odoocms_get_moodle_categories"
+				name="Get Moodle Categories"
+				res_model="odoocms.get.moodle.categories"
+				src_model="odoocms.moodle.category"
+				view_mode="form"
+				multi="True"
+            	target="new"
+            	key2="client_action_multi"/>
+
+		
+    </data>
+</odoo>

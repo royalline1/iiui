@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_config_settings_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.core</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="50"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="OdooCMS"
+                     string="OdooCMS"
+                     data-key="odoocms"
+                     groups="odoocms.group_cms_manager">
+                    <h2>OdooCMS Apps</h2>
+
+                    <div class="row mt16 o_settings_container"
+                         title="Specify different activities which is held in an institute.">
+                        <!--
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_activity"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_odoocms_activity"/>
+                                <div class="text-muted">
+                                    Activity
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="Specify different facilities of an institute.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_facility"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_odoocms_facility"/>
+                                <div class="text-muted">
+                                    Facility
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="It allows you to store the details of the Parents.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_parent"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_odoocms_parent"/>
+                                <div class="text-muted">
+                                    Parent
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="It provides the facility to configure the assignment type.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_assignment"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_odoocms_assignment"/>
+                                <div class="text-muted">
+                                    Assignment
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" title="It is used to configure the class room.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_classroom"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_odoocms_classroom"/>
+                                <div class="text-muted">
+                                    Classroom
+                                </div>
+                            </div>
+                        </div>
+                        -->
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="Configuration of fees helps you to provide the start up data of fees according to the courses of an institute.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_fee"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_odoocms_fee"/>
+                                <div class="text-muted">
+                                    Configuration of fees helps you to provide the start up data of fees according to the courses of an institute.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="It is used for admission procedure for the applicant.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_admission"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_odoocms_admission"/>
+                                <div class="text-muted">
+                                    It is used for admission procedure for the applicant.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div name="timetable" class="col-12 col-lg-6 o_setting_box"
+                             title="It is fully integrated application which provides a facility to manage the timing details.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_timetable"/>
+                            </div>
+                            <div name="timetable_sub" class="o_setting_right_pane">
+                                <label for="module_odoocms_timetable"/>
+                                <div class="text-muted">
+                                    Timetable
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="Configuration of Credit Hours.">
+                            <div class="o_setting_right_pane">
+                                 <div class="content-group mt16">
+                                     <label class="o_form_label o_light_label" for="reregister_credit_hours"/>
+<!--                                     <input class="o_field_char o_field_widget o_input" name="credit_hours" placeholder="" type="text" id="o_field_credit_hours"/>-->
+                                     <field name="reregister_credit_hours"/>
+                                 </div>
+                            </div>
+                            <div class="o_setting_right_pane">
+<!--                                <label for="credit_hours"/>-->
+                                <div class="text-muted">
+                                    Configuration Credit Hours Allowed for course re-enrollment for Odoo CMS.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div name="repeat_grades" class="col-12 col-lg-6 o_setting_box"
+                             title="It is for the applicant.">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group mt16">
+                                     <label class="o_form_label o_light_label" for="repeat_grades_allowed" />
+<!--                                     <input class="o_field_char o_field_widget o_input" name="grades" placeholder="" type="text" id="o_field_grades"/>-->
+                                <field name="repeat_grades_allowed"/>
+                                 </div>
+                            </div>
+                            <div class="o_setting_right_pane">
+<!--                                <label for="grades"/>-->
+                                <div class="text-muted">
+                                    Configuration Grades Allowed for course re-enrollment for Odoo CMS.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div name="failed_grades" class="col-12 col-lg-6 o_setting_box"
+                             title="It is for the applicant.">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group mt16">
+                                     <label class="o_form_label o_light_label" for="failed_grades" />
+<!--                                     <input class="o_field_char o_field_widget o_input" name="grades" placeholder="" type="text" id="o_field_grades"/>-->
+                                <field name="failed_grades"/>
+                                 </div>
+                            </div>
+                            <div class="o_setting_right_pane">
+<!--                                <label for="grades"/>-->
+                                <div class="text-muted">
+                                    Configuration Grades that will be considered as Failed.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div name="grades_allowed_time" class="col-12 col-lg-6 o_setting_box"
+                             title="It is for the applicant.">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group mt16">
+                                     <label class="o_form_label o_light_label" for="repeat_grades_allowed_time" />
+<!--                                     <input class="o_field_char o_field_widget o_input" name="grades" placeholder="" type="text" id="o_field_grades"/>-->
+                                <field name="repeat_grades_allowed_time"/>
+                                 </div>
+                            </div>
+                            <div class="o_setting_right_pane">
+<!--                                <label for="grades"/>-->
+                                <div class="text-muted">
+                                    Configuration Semesters Time-gap Allowed for course re-enrollment for Odoo CMS.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div name="grades_allowed_no" class="col-12 col-lg-6 o_setting_box"
+                             title="It is for the applicant.">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group mt16">
+                                     <label class="o_form_label o_light_label" for="repeat_grades_allowed_no" />
+<!--                                     <input class="o_field_char o_field_widget o_input" name="grades" placeholder="" type="text" id="o_field_grades"/>-->
+                                <field name="repeat_grades_allowed_no"/>
+                                 </div>
+                            </div>
+                            <div class="o_setting_right_pane">
+<!--                                <label for="grades"/>-->
+                                <div class="text-muted">
+                                    Configuration: How many number of times a course can be re-registered.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div name="grades" class="col-12 col-lg-6 o_setting_box"
+                             title="It is for the applicant.">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group mt16">
+                                     <label class="o_form_label o_light_label" for="current_academic_semester" />
+<!--                                     <input class="o_field_char o_field_widget o_input" name="grades" placeholder="" type="text" id="o_field_grades"/>-->
+                                <field name="current_academic_semester"/>
+                                 </div>
+                            </div>
+                            <div class="o_setting_right_pane">
+<!--                                <label for="grades"/>-->
+                                <div class="text-muted">
+                                    Configuration for the Current Academic Semester.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="It provides the facility to configure exam related details like Exam types and Exam Rooms.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_exam"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_odoocms_exam"/>
+                                <div class="text-muted">
+                                    Exam
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="It provides the facility to configure library management">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_library"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_odoocms_library"/>
+                                <div class="text-muted">
+                                    Library
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="It provides the Attendance maintanance facility for an institute.To maintain attendance ,attendance register is created for particular batch and course">
+                            <div class="o_setting_left_pane">
+                                <field name="module_odoocms_attendance"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_odoocms_attendance"/>
+                                <div class="text-muted">
+                                    Attendance
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="action_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="view_config_settings_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'odoocms'}</field>
+    </record>
+</odoo>

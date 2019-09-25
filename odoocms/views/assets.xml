@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="odoocms_online_frontend_style" name="OdooCMS" inherit_id="web.assets_common">
+        <xpath expr="." position="inside">
+			<link rel="stylesheet" href="/odoocms/static/src/css/style.css"/>
+        </xpath>
+    </template>
+</odoo>

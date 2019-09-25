@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="portal_my_student_result" inherit_id="portal.portal_my_home" name="Portal My Home :  Result" priority="25">
+    <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+      <t t-call="portal.portal_docs_entry" t-if="student_count">
+        <t t-set="title">My Results</t>
+        <t t-set="url" t-value="'/my/result'"/>
+      </t>
+    </xpath>
+  </template>
+
+    <template id="portal_student_result" name="Portal My Home :My Result">
+    <t t-call="portal.portal_layout">
+      <t t-set="breadcrumbs_searchbar" t-value="True"/>
+      <t t-call="portal.portal_searchbar">
+        <!-- <t t-set="title">Student</t>-->
+      </t>
+      <t t-if="not student">
+        <p>There are currently no data for your account.</p>
+      </t>
+      <t t-if="student">
+        <div style=" text-align: center;background: #1abc9c;color: white; font-size: 30px;">
+          <span>Results Details</span>
+        </div>
+      </t>
+      <t class="list-group-item fle-xgrow-1" t-if="student">
+         <div class="row py-2">
+            <div class="col-xl-12 col-md-12 col-sm-12 mx-auto">
+                <div class="bg-white shadow rounded overflow-hidden">
+                    <div class="px-4 pt-0 pb-4" style="background:#137562;">
+                        <div class="media align-items-end profile-header">
+                            <div class="profile mr-3">
+                                <img alt="..." width="130" class="rounded mb-2 img-thumbnail" t-att-src="image_data_uri(student.image)" t-if="student.image" />
+                                 <img alt="..." width="130" class="rounded mb-2 img-thumbnail" src="/web/static/src/img/user_menu_avatar.png" t-if=" not student.image" />
+                            </div>
+                            <div class="media-body mb-5 text-white">
+                                <h4 class="mt-0 mb-0">
+                                    <span t-field="student.name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                    <span t-field="student.last_name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                </h4>
+                                <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i><span t-field="student.country_id"/></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="py-5 px-4">
+                        <t  t-foreach="student_semesters" t-as="student_semester">
+                        <div class="collapsible" >
+                            <span style="font-weight:bold; color:#0df563">Semester:</span>
+                            <span t-esc="student_semester.academic_semester_id.name"/>
+                            <span style="margin-left:5px;margin-right:5px">|</span>
+                             <span style="font-weight:bold; color:#0df563">Grade Points:</span>
+                            <span t-esc="student_semester.grade_points" t-options='{"widget": "float", "precision": 2}'/>
+                            <span style="margin-left:5px;margin-right:5px">|</span>
+                             <span style="font-weight:bold; color:#0df563">Credit Hours:</span>
+                            <span t-esc="student_semester.credits"/>
+                            <span style="margin-left:5px;margin-right:5px">|</span>
+                             <span style="font-weight:bold; color:#0df563">SGPA:</span>
+                            <span t-esc="student_semester.sgpa" t-options='{"widget": "float", "precision": 2}'/>
+                        </div>
+                        <div class="expendablecontent">
+                            <div class="list-group">
+                                <table id="custom-table">
+                                  <tr>
+                                      <th>Course Name</th>
+                                      <th>Credit Hours</th>
+                                      <th>Grade</th>
+                                      <th>Grade Point</th>
+                                      <th>GPA</th>
+                                  </tr>
+                                  <t t-foreach="student_semester.student_subject_ids" t-as="subject">
+                                      <tr>
+                                          <td> <span t-esc="subject.subject_id.subject_id.name"/> </td>
+                                          <td> <span t-esc="subject.subject_id.weightage"/> </td>
+                                          <td> <span t-esc="subject.grade"/> </td>
+                                          <td> <span t-esc="subject.grade_points" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                          <td> <span t-esc="subject.gpa" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                      </tr>
+                                  </t>
+
+                                </table>
+                            </div>
+                        </div>
+                      </t>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </t>
+    </t>
+  </template>
+
+    <template id="transcript_test" name="transcript">
+    <t t-call="website.layout">
+        <div style="display:block; float: left; margin:auto; width:100%;">
+      <div id="transcript-div">
+        <div class="tr-tb-head"><h2>Semester1</h2></div>
+        <table id ="transcript" >
+          <tr>
+            <td style = "width:20%" >BSE 01</td>
+            <td style = "width:60%">Islamiat</td>
+            <td style = "width:10%">2.00</td>
+            <td style = "width:10%" >A+</td>
+          </tr>
+          <tr>
+            <td style = "width:20%" >BSE 01</td>
+            <td style = "width:60%">Islamiat</td>
+            <td style = "width:10%">2.00</td>
+            <td style = "width:10%" >A+</td>
+          </tr>
+          <tr>
+            <td style = "width:20%" >BSE 01</td>
+            <td style = "width:60%">Islamiat</td>
+            <td style = "width:10%">2.00</td>
+            <td style = "width:10%" >A+</td>
+          </tr>
+        </table>
+        <div class="tr-tb-footer">
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <br/>
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <br/>
+        </div>
+
+      </div>
+
+      <div id="transcript-div">
+        <div class="tr-tb-head"><h2>Semester1</h2></div>
+        <table id ="transcript" >
+          <tr>
+            <td style = "width:20%" >BSE 01</td>
+            <td style = "width:60%">Islamiat</td>
+            <td style = "width:10%">2.00</td>
+            <td style = "width:10%" >A+</td>
+          </tr>
+          <tr>
+            <td style = "width:20%" >BSE 01</td>
+            <td style = "width:60%">Islamiat</td>
+            <td style = "width:10%">2.00</td>
+            <td style = "width:10%" >A+</td>
+          </tr>
+          <tr>
+            <td style = "width:20%" >BSE 01</td>
+            <td style = "width:60%">Islamiat</td>
+            <td style = "width:10%">2.00</td>
+            <td style = "width:10%" >A+</td>
+          </tr>
+        </table>
+        <div class="tr-tb-footer">
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <br/>
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <span>SCH:</span>  <span style="margin-right:15px">11:00</span>
+          <br/>
+        </div>
+
+      </div>
+      </div>
+
+    </t>
+  </template>
+
+
+</odoo>
+
+

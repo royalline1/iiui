@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <button name="action_invoice_open" position="replace">
+                    <button name="action_invoice_send" type="object" states="draft" string="Issue to Student"
+                            class="oe_highlight o_invoice_validate" groups="account.group_account_invoice"/>
+
+                    <button name="action_invoice_open" type="object" states="sent" string="Validate"
+                            class="oe_highlight o_invoice_validate" groups="account.group_account_invoice"/>
+                </button>
+                <field name="state" position="replace">
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,sent,open,paid"/>
+                </field>
+
+            </field>
+        </record>
+
+
+        <record id="view_odoocms_fee_payment_tree" model="ir.ui.view">
+            <field name="name">odoocms.fee.payment.tree</field>
+            <field name="model">odoocms.fee.payment</field>
+            <field name="arch" type="xml">
+                <tree string="Fee Payment" delete="false" editable="bottom">
+                    <field name="date"/>
+                    <field name="description"/>
+                    <field name="amount"/>
+                    <field name="doc_no"/>
+                    <field name="student_code"/>
+                    <field name="receipt_number"/>
+                    <field name="journal_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_odoocms_fee_payment" model="ir.actions.act_window">
+            <field name="name">Fee Payment</field>
+            <field name="res_model">odoocms.fee.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="menu_odoocms_fee_payment"
+                parent="menu_odoocms_student_fee_main"
+                name="Fee Payment"
+                action="action_odoocms_fee_payment"
+                sequence="30"/>
+
+
+        <template id="portal.portal_record_sidebar" name="My Portal Record Sidebar">
+            <div t-attf-class="#{classes}">
+                <div style="height: 300px;margin-top: 0px;width: 400px;background-color: rgba(22, 169, 228, 0.5) !important;" class="card bg-white mb-4" id="sidebar_content">
+                    <div t-if="title" class="card-body text-center pb-2 pt-3">
+                        <t t-raw="title"/>
+                    </div>
+                    <t t-if="entries" t-raw="entries"/>
+                    <div class="card-footer small text-center text-muted border-top-0 pt-1 pb-1 d-none d-lg-block">
+                        Powered by <a target="_blank" href="http://www.aarsol.com" title="AARSOL"><img src="/web/static/src/img/logo.png" alt="Odoo Partner" height="15"/></a>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <record id="paperformat_student_invoice" model="report.paperformat">
+            <field name="name">Student Invoice</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">2</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+    </data>
+</odoo>

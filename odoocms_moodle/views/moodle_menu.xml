@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <menuitem id="moodle_top_menu" name="Moodle" />
+    <menuitem id="moodle_main_menu" name="Functionality" parent="moodle_top_menu"/>
+    <menuitem id="moodle_config_menu" name="Configuration" parent="moodle_top_menu" />
+
+
+    <!--<menuitem id="config_moodle" name="Configure Moodle" parent="config_menu" action="moodle_config_action"/> -->
+    <!--<menuitem id="create_course" name="Courses" parent="main_menu" action="create_course_action" /> -->
+
+
+</odoo>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>	
+
+<template id="admit_card" name="Admit Card">
+	<t t-call="website.layout">
+	<div id="final_data_id" class="page w3-modal" style="padding-bottom:30px; display:block">
+		<div class= "w3-modal-content w3-animate-zoom card-4"  style="width:70%" >
+			<t t-if="applicant">
+					<div class="row col-md-12" style="padding:15px; text-transform: uppercase;">
+						<h2 style="text-align:center; display:block; margin:auto; font-family: 'Open Sans', sans-serif;"><span t-esc="entrytest[0].name" t-if="entrytest[0].name" /></h2>
+					</div>
+					<div class="row col-md-12" style="margin:0px;padding:10px;background-color: #f5f5f5; border-bottom: 2px dotted">
+						<div class="col-md-2">
+							<div style="margin:5px; border:2px solid; height:168px; width:144px">
+							</div>
+						</div>
+						
+						<div class="col-md-8">
+							<div class="col-md-12">
+								<t t-if="company[0].logo">
+									<img style="display:block;margin:auto" t-att-src="'data:image/png;base64,%s' % to_text(company[0].logo)" class="img-responsive" alt="Conxole Admin" width="100"/>
+								</t>
+							</div>
+							<div class="col-md-12">
+								<center><h4>Directorate of Admissions, <span t-esc="entrytest[0].header_one" t-if="entrytest[0].header_one" /></h4>
+							   <b> <span t-esc="entrytest[0].header_two" t-if="entrytest[0].header_two" /> </b><br/>for admission <span t-esc="entrytest[0].career_id.name" t-if="entrytest[0].career_id.name" /> Programmes
+							   
+							   </center>
+							</div>
+						</div>
+						
+						<div class="col-md-2">
+							<div style="margin:5px; border:2px solid; height:168px; width:144px;">
+								<img alt="Profile Image" style="height:168px; width:144px; padding:5px" t-att-src="image_data_uri(applicant.image)" t-if="applicant.image"/>
+								<img alt="Profile Image" style="height:168px; width:144px; padding:5px" src="/web/static/src/img/user_menu_avatar.png" t-else=""/>
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="row col-md-12" style="margin:0px; padding:10px">
+						<div class="col-md-6" style="text-align:center; display:block; margin:auto; font-size:30px">
+							<table class="table table-bordered" >
+									<tr>
+										<td >Roll Number</td>
+										<td > <span style="text-align:center; width:auto;" t-esc="applicant.entryID"/></td>
+									</tr>
+									
+								</table>
+
+						</div>
+					</div>
+					<div class="row col-md-12" style="margin:0px; padding:10px;" >
+						<div class="row col-md-12">
+							<div class="row col-md-3">
+								<span>Name:</span>
+							</div>
+							<div class="row col-md-9">
+								<span t-field="applicant.name"/>
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="row col-md-3">
+								<span>Father Name:</span>
+							</div>
+							<div class="row col-md-9">
+								<span t-field="applicant.father_name"/>
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="row col-md-3">
+								<span>CNIC:</span>
+							</div>
+							<div class="row col-md-9">
+								<span t-field="applicant.cnic"/>
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="row col-md-3">
+								<span>Phone Number:</span>
+							</div>
+							<div class="row col-md-9">
+								<span t-field="applicant.mobile"/>
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="row col-md-3">
+								<span>Address:</span>
+							</div>
+							<div class="row col-md-9">
+								<span t-field="applicant.street"/><span> <br/> </span><span t-field="applicant.street2"/>
+							</div>
+						</div>
+						
+					</div>
+					<div class="row col-md-12" style="margin:0px; padding:10px;" >
+						<fieldset class="col-md-12" style=" border: 1.5px solid" >
+							<legend style="background:#FFC922; color:#FFFFFF; border:1px solid; font-size:25px" >GROUP AND TEST CENTER:</legend>
+							
+							<div class="row col-md-12">
+								<div style="text-align:center;display:block;margin:auto; color:#8B0000; font-size:20px" >
+									<span>Date:</span><span t-field="applicant.center_id.date_test"/><span> at </span><span t-field="applicant.center_id.time_slot"/>
+								</div>
+							</div>
+							<div class="row col-md-12">
+								
+							</div>
+							<div class="row col-md-12">
+								<div class="row col-md-3">
+									<span>Group:</span>
+								</div>
+								<div class="row col-md-9">
+									<span style="color:#0000A0" t-field="applicant.hssc_group"/>
+								</div>
+							</div>
+							<div class="row col-md-12">
+								<div class="row col-md-3">
+									<span>Test Center City:</span>
+								</div>
+								<div class="row col-md-9">
+									<span style="color:#0000A0" t-field="applicant.center_id.name"/>
+								</div>
+							</div>
+							
+						</fieldset>
+					</div>
+					
+					<div class="row col-md-12" style="margin:0px; padding:10px; border:1px dotted" >
+						<legend style="font-size:20px" >General Instructions:</legend>
+						
+						<t t-foreach="instructions" t-as="instruction" >
+							<div class="row col-md-12" style="margin-left:10px">
+								<div style="font-size:15px" >
+									<span style="font-weight:bold" t-field="instruction.id" /><span style="margin-right:2px">:</span><span t-field="instruction.name" />
+								</div>
+							</div>
+						</t>
+						
+						<div class="row col-md-12" style="margin:1px; margin-top:30px">
+							<div style="font-size:15px:display:block;float:left" class="row col-md-10" >
+								<span style="text-align:left">Controller Sign</span>
+							</div>
+							
+							<div style="font-size:15px:display:block;float:left" class="row col-md-2" >
+								<span style="text-align:right" >Controller Sign</span>
+							</div>
+						</div>
+						
+					</div>
+					
+				</t>
+		</div>
+				
+	</div>
+	</t>
+</template>
+
+</odoo>
+
+	

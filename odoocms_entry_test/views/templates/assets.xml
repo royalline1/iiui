@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="odoocms_admission_online_frontend_style" name="Online Admission Form"
+              inherit_id="website.assets_frontend" active="True">
+        <xpath expr="." position="inside">  
+			
+			
+			<!-- Main Style Css -->
+			
+			<link rel="stylesheet" href="/odoocms_entry_test/static/css/w3css.css"/>
+			<link rel="stylesheet" href="/odoocms_entry_test/static/css/style.css"/>
+			
+			
+			
+			<link rel="stylesheet" type="text/css"  href="/odoocms_entry_test/static/css/smart-forms.css"/>
+			<link rel="stylesheet" type="text/css"  href="/odoocms_entry_test/static/css/smart-addons.css"/>
+			<link rel="stylesheet" type="text/css"  href="/odoocms_entry_test/static/css/smart-themes/green.css"/>
+			<link rel="stylesheet" type="text/css"  href="/odoocms_entry_test/static/css/font-awesome.min.css"/>
+			
+          
+			
+			
+			<script type="text/javascript" src="/odoocms_entry_test/static/js/main.js"/>
+			
+			<script type="text/javascript" src="/odoocms_entry_test/static/js/jquery.steps.js"></script>
+			<script type="text/javascript" src="/odoocms_entry_test/static/js/jquery-ui-custom.min.js"></script>
+			<script type="text/javascript" src="/odoocms_entry_test/static/js/jquery.validate.min.js"></script>
+			<script type="text/javascript" src="/odoocms_entry_test/static/js/additional-methods.min.js"></script>
+			<script type="text/javascript" src="/odoocms_entry_test/static/js/jquery-ui-slider-pips.min.js"></script>
+			<script type="text/javascript" src="/odoocms_entry_test/static/js/jquery-ui-touch-punch.min.js"></script>
+			<script type="text/javascript" src="/odoocms_entry_test/static/js/jquery.formShowHide.min.js"></script> 
+			
+			<link rel="stylesheet" href="/odoocms_entry_test/static/css/custom.css"/>
+			<script type="text/javascript" src="/odoocms_entry_test/static/js/clickevent.js"/>
+			
+        </xpath>
+    </template>
+</odoo>
+

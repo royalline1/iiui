@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+ <template id="portal_my_student_courses" inherit_id="portal.portal_my_home" name="Portal My Home : registration entry" priority="25">
+    <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+      <t t-if="student_count" t-call="portal.portal_docs_entry">
+        <t t-set="title"> Registered Courses</t>
+        <t t-set="url" t-value="'/my/course'"/>
+      </t>
+    </xpath>
+  </template>
+
+  <template id="portal_student_course" name="courses">
+    <t t-call="portal.portal_layout">
+      <t t-set="breadcrumbs_searchbar" t-value="True"/>
+      <t t-call="portal.portal_searchbar">
+        <t t-set="title">Student</t>
+      </t>
+      <t t-if="not student.current_semester_ids">
+        <p>There are currently no data for your account.</p>
+      </t>
+       <t class="list-group-item fle-xgrow-1" t-if="student.current_semester_ids">
+           <div style=" text-align: center;background: #1abc9c;color: white; font-size: 30px;">
+                <span>Student Courses Details </span>
+           </div>
+            <div class="row py-2">
+                <div class="col-xl-12 col-md-12 col-sm-12 mx-auto">
+                    <div class="bg-white shadow rounded overflow-hidden">
+                        <div class="px-4 pt-0 pb-4" style="background:#137562;">
+                            <div class="media align-items-end profile-header">
+                                <div class="profile mr-3">
+                                    <img alt="..." width="130" class="rounded mb-2 img-thumbnail" t-att-src="image_data_uri(student.image)" t-if="student.image" />
+                                     <img alt="..." width="130" class="rounded mb-2 img-thumbnail" src="/web/static/src/img/user_menu_avatar.png" t-if=" not student.image" />
+                                </div>
+                                <div class="media-body mb-5 text-white">
+                                    <h4 class="mt-0 mb-0">
+                                        <span t-field="student.name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                        <span t-field="student.last_name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                    </h4>
+                                    <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i><span t-field="student.country_id"/></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-5 px-4">
+                              <strong class="text-muted">
+                                <h3>Registerd Subjects</h3>
+                              </strong>
+
+
+                                        <table id="custom-table">
+                                          <tr>
+                                              <th>Subject Name</th>
+                                              <th>Program</th>
+                                              <th>Academic Session</th>
+                                              <th>Class</th>
+                                              <th>Semester Calendar</th>
+                                          </tr>
+                                          <t t-foreach="student.current_semester_ids[0].student_subject_ids" t-as="subject">
+                                              <tr>
+                                                  <td> <span t-field="subject.subject_id.subject_id.name" /> </td>
+                                                  <td> <span t-field="subject.program_id.name" /> </td>
+                                                  <td> <span t-field="subject.academic_session_id.name" /> </td>
+                                                  <td> <span t-field="subject.class_id.name" /> </td>
+                                                  <td> <span t-field="subject.academic_semester_id.name" /> </td>
+                                              </tr>
+                                          </t>
+
+                                        </table>
+
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+      </t>
+    </t>
+  </template>
+
+</odoo>

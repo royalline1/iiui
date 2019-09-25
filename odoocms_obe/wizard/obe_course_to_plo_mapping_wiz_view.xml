@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="obe_course_to_plo_mapping_wiz_view_form" model="ir.ui.view">
+        <field name="name">obe.course.to.plo.mapping.wiz.form</field>
+        <field name="model">obe.course.to.plo.mapping.wiz</field>
+        <field name="arch" type="xml">
+            <form string="OBE Course To PLO Mapping">
+                <group>
+                	<group>
+						<field name="batch_id"  options="{'no_quick_create':True, 'no_create_edit': True, 'limit': 10}"/>
+		            </group>
+		            <group>
+		            </group>
+                </group>
+                <footer>
+                    <button name="print_report" string="Generate Report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_obe_course_to_plo_mapping_wiz" model="ir.actions.act_window">
+        <field name="name">Course To Plo Mapping</field>
+        <field name="res_model">obe.course.to.plo.mapping.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+     <menuitem
+            id="menu_obe_course_to_plo_mapping_wiz"
+            name="Course To Plo Mapping"
+            action="action_obe_course_to_plo_mapping_wiz"
+            parent="odoocms_obe.menu_odoocms_obe_report"
+            sequence="130"/>
+
+</odoo>

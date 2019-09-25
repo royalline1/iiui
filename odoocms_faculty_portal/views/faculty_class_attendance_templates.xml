@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="faculty_portal_my_home_attendance_class" inherit_id="portal.portal_my_home" name="Portal My Home : Attendance Classes" priority="25">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry" t-if="faculty_count">
+                <t t-set="title">Attendance</t>
+                <t t-set="url" t-value="'/my/classes'"/>
+            </t>
+        </xpath>
+    </template>
+
+      <template id="portal_faculty_attendance_classes" name="My Classes">
+        <t t-call="portal.portal_layout">
+          <t t-set="breadcrumbs_searchbar" t-value="True"/>
+          <t t-call="portal.portal_searchbar">
+             <t t-set="title">Classes</t>
+          </t>
+          <t t-if="not faculty_staff">
+            <p>There are currently no data for your account.</p>
+          </t>
+          <t t-if="faculty_staff">
+            <div style=" text-align: center;background: #1abc9c;color: white; font-size: 30px;">
+              <span>Your Classes</span>
+            </div>
+          </t>
+
+            <style>
+                #custom-table {
+                      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                      border-collapse: collapse;
+                      width: 100%;
+                      margin-left:5px;
+                }
+
+                #custom-table td, #custom-table th {
+                      border: 1px solid #ddd;
+                      padding: 8px;
+                }
+
+                #custom-table tr:nth-child(even){background-color: #f2f2f2;}
+
+                #custom-table tr:hover {background-color: #ddd;}
+
+                #custom-table th {
+                      padding-top: 12px;
+                      padding-bottom: 12px;
+                      text-align: left;
+                      background-color: #137562;
+                      color: white;
+                }
+            </style>
+
+          <t class="list-group-item fle-xgrow-1" t-if="faculty_staff">
+             <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 mx-auto">
+                    <div class="bg-white shadow rounded overflow-hidden">
+                        <div class="px-4 pt-0 pb-4" style="background:#137562;">
+                            <div class="media align-items-end profile-header">
+                                <div class="profile mr-3">
+                                    <img alt="..." width="130" class="rounded mb-2 img-thumbnail" t-att-src="image_data_uri(faculty_staff.image)" t-if="faculty_staff.image" />
+                                     <img alt="..." width="130" class="rounded mb-2 img-thumbnail" src="/web/static/src/img/user_menu_avatar.png" t-if="not faculty_staff.image" />
+                                </div>
+                                <div class="media-body mb-5 text-white">
+                                    <h4 class="mt-0 mb-0">
+                                        <span t-field="faculty_staff.name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                        <span t-field="faculty_staff.last_name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                    </h4>
+                                    <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i><span t-field="faculty_staff.country_id"/></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="py-5 px-4">
+                            <div class="list-group">
+                                    <table id="custom-table">
+                                      <tr>
+                                          <th>class Name</th>
+                                          <th>Code</th>
+                                          <th>Career</th>
+                                          <th>Session</th>
+                                          <th>Department</th>
+                                      </tr>
+                                      <t t-foreach="student_classes" t-as="student_class">
+                                          <tr>
+                                              <td> <a  t-attf-href="/my/class/id/{{student_class.id}}" t-esc="student_class.name" widget="url"/></td>
+
+<!--                                              You can use this one as well-->
+<!--                                              <td> <a  t-attf-href="{{request.httprequest.url_root}}student/profile/id/{{student.student_id.id}}" t-esc="student.student_id.name" widget="url"/></td>-->
+                                              <td> <span t-esc="student_class.code"/> </td>
+                                              <td> <span t-esc="student_class.career_id.name"/> </td>
+                                              <td> <span t-esc="student_class.academic_session_id.name"/> </td>
+                                               <td> <span t-esc="student_class.batch_id.department_id.name"/> </td>
+                                          </tr>
+                                      </t>
+                                    </table>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </t>
+        </t>
+    </template>
+
+
+    <template id="portal_faculty_attendance_class" name="My Class">
+        <t t-call="portal.portal_layout">
+          <t t-set="breadcrumbs_searchbar" t-value="True"/>
+          <t t-call="portal.portal_searchbar">
+             <t t-set="title">My Class</t>
+          </t>
+          <t t-if="not attendance_class">
+            <p>There are currently no Class for your account.</p>
+          </t>
+          <t t-if="attendance_class">
+            <div style=" text-align: center;background: #1abc9c;color: white; font-size: 30px;">
+              <span>Class:</span><span t-esc="attendance_class.name"/>
+            </div>
+          </t>
+                <style>
+                    #class-info {
+                      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                      border-collapse: collapse;
+                      width: 95%;
+                      margin-top:15px;
+                        display: inline;
+                    }
+
+                    #class-info td, #class-info th {
+                      padding: 3px;
+                    }
+
+                    #class-info th {
+                      padding-top: 6px;
+                      text-align: left;
+                    }
+
+                    #custom-table {
+                          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                          border-collapse: collapse;
+                          width: 99%;
+                          margin-left:5px;
+                        }
+
+                        #custom-table td, #custom-table th {
+                          border: 1px solid #ddd;
+                          padding: 8px;
+                        }
+
+                        #custom-table tr:nth-child(even){background-color: #f2f2f2;}
+
+                        #custom-table tr:hover {background-color: #ddd;}
+
+                        #custom-table th {
+                          padding-top: 12px;
+                          padding-bottom: 12px;
+                          text-align: left;
+                          background-color: #137562;
+                          color: white;
+                        }
+
+                </style>
+				<div class="page" style="font-size: 16px; border-style: double;; border-width: 2px; padding:10px ">
+                    <div class="row">
+                        <div style="width:13%; height:100px; padding:5px; margin-left:10px; border:1px solid #f2f2f2">
+                            <img alt="..." width="200px" height="200px" class="rounded mb-2 img-thumbnail" t-att-src="image_data_uri(faculty_staff.employee_id.company_id.logo)" t-if="faculty_staff.employee_id.company_id.logo" />
+                        </div>
+                        <div style="width:84% ;font-size:18px; font-weight:bold; text-align:center">
+                            <div class="col col-12">
+                                <span t-esc="faculty_staff.employee_id.company_id.name" t-if="faculty_staff.employee_id.company_id"/>
+                            </div>
+                            <div style="color:#14421a">
+                               <span>Department of</span>&#160; <span t-esc="attendance_class.batch_id.department_id.name" t-if="attendance_class.batch_id.department_id.name"/>
+                            </div>
+                            <div>
+                                <span>Faculty of </span>&#160;
+                                <span t-esc="attendance_class.batch_id.department_id.faculty_id.name" t-if="attendance_class.batch_id.department_id.faculty_id.name"/>
+                                <span>&#160;</span>
+                                <span t-esc="attendance_class.batch_id.department_id.campus_id.name" t-if="attendance_class.batch_id.department_id.campus_id.name"/>
+                            </div>
+                             <div>
+                                <span style="font-size:14px; font-weight:bold; text-align:center; margin-top:10px; padding:5px; background:#14421a; color: #fff"> Student Attendance</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" style="margin-top:25px;">
+                        <div class="col col-6">
+                            <table id="class-info">
+                                 <tr>
+                                     <th>Class Name:</th> <td><span t-esc="attendance_class.name"/></td>
+                                     <input type="hidden" id="student_class" t-att-value="attendance_class.id"/>
+                                 </tr>
+                                <tr>
+                                     <th>Code:</th><td><span t-esc="attendance_class.code"/></td>
+                                </tr>
+                                <tr>
+                                     <th>Career:</th><td><span t-esc="attendance_class.career_id.name"/></td>
+                                </tr>
+                                 <tr>
+                                     <th>Academic Term:</th><td><span t-esc="attendance_class.academic_semester_id.name"/></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="col col-6">
+                            <table id="class-info">
+                                <tr>
+                                     <th>Session:</th><td><span t-esc="attendance_class.academic_session_id.name"/></td>
+                                </tr>
+                                <tr>
+                                     <th>Subject:</th><td><span t-esc="attendance_class.study_scheme_line_id.subject_id.name"/></td>
+                                </tr>
+                                <tr>
+                                     <th>Room:</th><td><span t-esc="attendance_class.class_room_id.name"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+<!--                    Top table ends here-->
+                    <div class="row">
+                        <table id="custom-table">
+                              <tr>
+                                  <th style="width:8%" >Sr. ID</th>
+                                  <th style="width:15%" >Student ID</th>
+                                  <th style="width:35%" >Name</th>
+                                  <th style="width:15%" >Date</th>
+                                  <th style="width:12%; text-align:center" >
+                                      <div style="display:block; margin:auto; width:auto" id="mark_all_students_div">
+                                          <button class="btn btn-primary" id="mark_all_students" onclick="markall()" >Mark All</button>
+                                      </div>
+                                      <div style ="display:none; margin:auto; width:auto" id="unmark_all_students_div">
+                                          <button class="btn btn-primary" id="unmark_all_students" onclick="unmarkall()" >Unmark All</button>
+                                      </div>
+
+                                  </th>
+                              </tr>
+                            <t t-set="sr" t-value="1"></t>
+                              <t t-foreach="attendance_class.student_ids" t-as="student">
+                                  <tr>
+                                      <td> <span t-esc="sr"/> </td>
+                                      <td> <span t-esc="student.student_id.id_number"/> </td>
+                                      <td> <a  t-attf-href="/my/class/student/profile/id/{{student.student_id.id}}" t-esc="student.student_id.name" widget="url"/></td>
+                                      <td> <span id="day">Date</span> </td>
+                                      <td style="text-align:center"> <input type="checkbox" class="mark-attendance" id="" name="" t-att-value="student.student_id.id" ></input></td>
+                                  </tr>
+                                  <t t-set="sr" t-value="sr+1"></t>
+                              </t>
+
+                            </table>
+                    </div>
+                    <div class="row" style="border:1px solid #D3D3D3; margin:10px">
+                        <div class="col col-6">
+                            <table id="class-info">
+                                 <tr>
+                                     <th>Total Strength:</th><td> <span><span /></span></td>
+                                 </tr>
+                                <tr>
+                                     <th>Total Present:</th><td> <span> <span id="total_present" /></span> </td>
+                                </tr>
+                                <tr>
+                                     <th>Career:</th><td> <span><span id="total_absent" /></span> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-11"></div>
+                        <div class="col col-1" style="display:block; width:auto; float:right" >
+                            <button class="btn btn-primary" id="submit_attendance" name="submit_attendance"  onclick="save_attendance()">Submit</button>
+                        </div>
+
+                    </div>
+
+                </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+            id="menu_odoocms_fee_root"
+            name="Student Fee"
+            groups="odoocms.group_cms_manager,odoocms.group_cms_user,base.group_user"
+            web_icon="odoocms_fee,static/description/icon.png"
+            sequence="11"/>
+
+    <menuitem
+            id="menu_odoocms_student_fee_main"
+            name="Student Fee"
+            parent="menu_odoocms_fee_root"
+            sequence="20"/>
+
+     <menuitem
+            id="menu_fee_configuration"
+            parent="menu_odoocms_fee_root"
+            name="Configuration"
+            sequence="100"/>
+                
+     <menuitem
+            id="menu_fee_reports"
+            parent="menu_odoocms_fee_root"
+            name="Reports"
+            sequence="40"/>
+            
+</odoo>

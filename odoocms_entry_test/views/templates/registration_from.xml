@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>	
+
+<template id="entry_registration" name="Result page">
+	<t t-call="website.layout">
+		<body class="woodbg">
+		<div class="smart-wrap">
+			<div class="smart-forms smart-container wrap-1">
+					<div class="row col-md-12" style="margin:0px;padding:10px;background-color: #f5f5f5;">
+						<div class="col-md-12">
+							<t t-if="company[0].logo">
+								<img style="display:block;margin:auto" t-att-src="'data:image/png;base64,%s' % to_text(company[0].logo)" class="img-responsive" alt="Conxole Admin" width="100"/>
+							</t>
+						</div>
+						<div class="col-md-12">
+							<center><h4>Directorate of Admissions, <span t-esc="entrytest[0].header_one" t-if="entrytest[0].header_one" /></h4>
+						   <b> <span t-esc="entrytest[0].header_two" t-if="entrytest[0].header_two" /> </b><br/>for admission <span t-esc="entrytest[0].career_id.name" t-if="entrytest[0].career_id.name" /> Programmes
+						   
+						   </center>
+						</div>
+					</div>
+					<div class="form-body theme-green smart-steps steps-progress steps-theme-green">
+					 <form method="post" action="#" id="smart-form">
+						
+								
+								
+								<h2>Personal Info</h2>
+								<fieldset>
+								
+									<div class="frm-row">
+										<div class="section colm colm4">
+											<label for="your_name">Name*</label>
+											<label class="field prepend-icon">
+												<input type="text" name="first_name" id="first_name" class="gui-input" pattern="[a-zA-Z]" placeholder="Your Name" t-att-value="applicant.name" />
+												<span class="field-icon"><i class="fa fa-user"></i></span>  
+											</label>
+										</div><!-- end section -->
+										
+										<div class="section colm colm4">
+											<label for="your_name">Father Name*</label>
+											<label class="field prepend-icon">
+												<input type="text" name="father_name" id="father_name" class="gui-input" pattern="[a-zA-Z]" placeholder="Father Name" t-att-value="applicant.father_name"/>
+												<span class="field-icon"><i class="fa fa-user"></i></span>  
+											</label>
+										</div><!-- end section -->
+										<div class="section colm colm4">
+											<label for="your_name">Guardian Name*</label>
+											<label class="field prepend-icon">
+												<input type="text" name="guardian_name" id="guardian_name" class="gui-input" pattern="[a-zA-Z]" placeholder="Gurdian Name" t-att-value="applicant.guardian_name" required="true"/>
+												<span class="field-icon"><i class="fa fa-user"></i></span>   
+											</label>
+										</div><!-- end section -->
+									</div><!-- end .frm-row section -->
+									
+									<div class="frm-row">
+										<div class="section colm colm6">
+											<label for="your_name">CNIC*</label>
+											<label class="field prepend-icon">
+												<input  type="text" name="cnic" id="cnic" t-att-value="applicant.cnic" class="gui-input" placeholder="Applicant CNIC"/>
+												<span class="field-icon"><i class="fa fa-address-card"></i></span>   
+											</label>
+										</div><!-- end section -->
+										
+										<div class="section colm colm6">
+											<label for="your_name">Guardian CNIC*</label>
+											<label class="field prepend-icon">
+												<input type="text" name="guardian_cnic" id="guardian_cnic" class="gui-input" pattern="[a-zA-Z]" placeholder="CNIC of Gurdian" t-att-value="applicant.guardian_cnic" required="true"/>
+												<span class="field-icon"><i class="fa fa-user"></i></span>   
+											</label>
+										</div><!-- end section -->
+									</div><!-- end .frm-row section -->
+									
+									<div class="frm-row">
+										<div class="section colm colm4">
+											<label for="your_name">Email*</label>
+											<label class="field prepend-icon">
+												<input type="email" name="email" id="email" t-att-value="applicant.email" class="gui-input" placeholder="Email address"/>
+												<span class="field-icon"><i class="fa fa-envelope"></i></span>    
+											</label>
+										</div><!-- end section -->
+										
+										<div class="section colm colm4">
+											<label for="your_name">Date of Birth*</label>
+											<label class="field prepend-icon">
+												<input type="date" name="dob" id="dob" class="gui-input" t-att-value="applicant.date_of_birth" required="true" placeholder="Date of Birth"/>
+												<span class="field-icon"><i class="fa fa-user"></i></span>   
+											</label>
+										</div><!-- end section -->
+										
+										<div class="section colm colm4">
+											<label for="your_name">Gender*</label>
+											<label  class="field select" >
+												<select name="select gender" id="gender">
+													<t t-if="applicant.gender=='male'" >
+														<option value="male" selected ="selected">Male</option>
+														<option value="female">Female</option>
+													</t>
+													<t t-if="applicant.gender=='female'" >
+														<option value="male">Male</option>
+														<option value="female" selected ="selected" >Female</option>
+													</t>
+												
+												</select>  
+												<i class="arrow double"></i>  
+											</label>
+										</div><!-- end section -->
+									</div><!-- end .frm-row section -->
+									
+									<div class="frm-row">
+										
+										
+										<div class="section colm colm6">
+											<label for="your_name">Mobile</label>
+											<label class="field prepend-icon">
+												<input type="text" name="mobile" id="mobile" class="gui-input" placeholder="Phone Number" required="true" t-att-value="applicant.mobile" readonly="true"/>
+												<span class="field-icon"><i class="fa fa-phone-square"></i></span>   
+											</label>
+										</div><!-- end section -->
+										<div class="section colm colm6">
+											<label for="your_name">Guardian Phone*</label>
+											<label class="field prepend-icon">
+												<input type="text" name="guardian_number" id="guardian_number" class="gui-input" placeholder="Guardian Number" t-att-value="applicant.guardian_number" required="true" />
+												<span class="field-icon"><i class="fa fa-phone-square"></i></span>   
+											</label>
+										</div><!-- end section -->
+									</div><!-- end .frm-row section -->
+									                                                               
+
+								</fieldset>
+				
+								<h2>Address Info</h2>
+								<fieldset>
+								<legend>Permanent Address</legend>
+									<div class="frm-row">
+										<div class="section colm colm12">
+											<label class="field prepend-icon">
+												<input  type="text" name="per_street" id="per_street" placeholder="Permanent Address line 1" class="gui-input" t-att-value="applicant.per_street" required="true" />
+												<span class="field-icon"><i class="fa fa-map-marker"></i></span>  
+											</label>
+										</div><!-- end section -->               
+									</div><!-- end frm-row section -->
+									<div class="frm-row">
+										<div class="section colm colm12">
+											<label class="field prepend-icon">
+												<input  type="text" name="per_street2" id="per_street2" placeholder="Permanent Address line 2" class="gui-input" t-att-value="applicant.per_street2" required="true" />
+												<span class="field-icon"><i class="fa fa-map-marker"></i></span>  
+											</label>
+										</div><!-- end section -->               
+									</div><!-- end frm-row section -->
+									
+									<div class="section">
+										<div class="option-group field">
+											<label class="option option-green">
+												<input type="checkbox" id="is_same_address" t-att-checked="applicant.is_same_address" onChange="IsSameAdress()"/>
+												<span class="checkbox"></span> 
+												
+												Same as permanent                
+											</label>
+											
+										</div>
+									</div><!-- end section -->   
+									
+									<legend>Present Address</legend>
+									<div class="frm-row">
+										<div class="section colm colm12">
+											<label class="field prepend-icon">
+												<input  type="text" name="street" id="street" placeholder="Present Address line 1" class="gui-input" t-att-value="applicant.street" required="true" />
+												<span class="field-icon"><i class="fa fa-address-book"></i></span>  
+											</label>
+										</div><!-- end section -->               
+									</div><!-- end frm-row section -->
+									<div class="frm-row">
+										<div class="section colm colm12">
+											<label class="field prepend-icon">
+												<input  type="text" name="street2" id="street2" placeholder="Present Address line 2" class="gui-input" t-att-value="applicant.street2" required="true" />
+												<span class="field-icon"><i class="fa fa-address-book"></i></span>  
+											</label>
+										</div><!-- end section -->               
+									</div><!-- end frm-row section -->
+								</fieldset>                            
+								
+								<h2>Education</h2>
+								<fieldset>
+									<legend>Test Center</legend>
+									<div class="frm-row">
+										<div class="section colm colm6">
+											<label  class="field select" >
+												<select name="select center" id="test_center_select">
+												<t t-foreach="test_centers" t-as="test_center">
+													<t t-if="applicant.center_id.id == test_center.id">
+														<option t-att-value="test_center.id" selected="selected"><span t-esc="test_center.name"/><span>----</span><span t-esc="test_center.date_test"/><span>----</span><span t-esc="test_center.time_slot"/></option>
+													</t>
+													<t t-if="not applicant.center_id.id == test_center.id">
+														<option t-att-value="test_center.id" ><span t-esc="test_center.name"/><span>----</span><span t-esc="test_center.date_test"/><span>----</span><span t-esc="test_center.time_slot"/></option>
+													</t>
+												</t>
+											</select>
+												<i class="arrow double"></i>  
+											</label>
+										</div><!-- end section -->               
+									</div><!-- end frm-row section -->
+									
+									<legend>Intermediate</legend>
+									<div class="frm-row">
+										<div class="section colm colm6">
+											<label for="university">Passing Year</label>
+											<label  class="field select" >
+												<select id="hssc_passing_year" name="Passing Year">												
+													<t t-if="applicant.hssc_passing_year == '2019'">
+														<option value="2019" selected='selected'>2019</option>
+														<option value="2018">2018</option>
+														<option value="2017">2017</option>
+														<option value="2016">2016</option>
+													</t>
+													<t t-if="applicant.hssc_passing_year == '2018'">
+														<option value="2018" selected='selected'>2018</option>
+														<option value="2019">2019</option>
+														<option value="2017">2017</option>
+														<option value="2016">2016</option>
+													</t>
+													<t t-if="applicant.hssc_passing_year == '2017'">
+														<option value="2017" selected='selected'>2017</option>
+														<option value="2018">2018</option>
+														<option value="2019">2019</option>
+														<option value="2016">2016</option>
+													</t>
+													<t t-if="applicant.hssc_passing_year == '2016'">
+														<option value="2016" selected='selected'>2016</option>
+														<option value="2018">2018</option>
+														<option value="2017">2017</option>
+														<option value="2019">2019</option>
+													</t>
+													<t t-if="not applicant.hssc_passing_year">
+														<option value="2016" selected='selected'>2016</option>
+														<option value="2018">2018</option>
+														<option value="2017">2017</option>
+														<option value="2019">2019</option>
+													</t>
+												</select> 
+												<i class="arrow double"></i>  
+											</label>
+										</div><!-- end section -->               
+										<div class="section colm colm6">
+											<label for="university">Board</label>
+											<label  class="field select" >
+												<select id= "hssc_board" name="Select Board">
+													<t t-if="applicant.hssc_board == 'Fata'">
+														<option value="Fata" selected='selected' >Fata</option>
+														<option value="Rawalpindi Board">Rawalpindi Board</option>
+														<option value="AJK Mirpur">AJK Mirpur</option>
+													</t>
+													<t t-if="applicant.hssc_board == 'AJK Mirpur'">
+														<option value="Fata" >Fata</option>
+														<option value="Rawalpindi Board">Rawalpindi Board</option>
+														<option value="AJK Mirpur" selected='selected' >AJK Mirpur</option>
+													</t>
+													<t t-if="applicant.hssc_board == 'Rawalpindi Board'">
+														<option value="Fata" >Fata</option>
+														<option value="Rawalpindi Board" selected='selected' >Rawalpindi Board</option>
+														<option value="AJK Mirpur">AJK Mirpur</option>
+													</t>
+													<t t-if="not applicant.hssc_board">
+														<option value="Fata" >Fata</option>
+														<option value="Rawalpindi Board">Rawalpindi Board</option>
+														<option value="AJK Mirpur">AJK Mirpur</option>
+													</t>
+													
+												</select>
+												<i class="arrow double"></i>  
+											</label>
+										</div><!-- end section -->               
+									</div><!-- end frm-row section -->
+									<div class="frm-row">
+										<div class="section colm colm4">
+											<label for="university">Total Marks</label>
+											<label class="field prepend-icon">
+												<input type="number" name="hssc_total_marks" id="hssc_total_marks" placeholder="total marks" class="gui-input" t-att-value="applicant.hssc_total_marks" required="true" />
+												<span class="field-icon"><i class="fa fa-pencil"></i></span>  
+											</label>
+										</div><!-- end section -->   
+										<div class="section colm colm4">
+											<label for="university">Obtained Marks</label>
+											<label class="field prepend-icon">
+												<input type="number" name="hssc_obtained_marks" id="hssc_obtained_marks" placeholder="Obtained marks" class="gui-input" t-att-value="applicant.hssc_obtained_marks" required="true" />
+												<span class="field-icon"><i class="fa fa-pencil"></i></span>  
+											</label>
+										</div><!-- end section --> 
+
+										<div class="section colm colm4">
+											<label for="university">Group</label>
+											<label  class="field select" >
+												<select name="select gender" id="hssc_group">
+													<t t-if="applicant.hssc_group=='ics'" >
+														<option value="ics" selected ="selected">ICS</option>
+														<option value="pre_eng">Pre Engineering</option>
+													</t>
+													<t t-if="applicant.hssc_group=='pre_eng'" >
+														<option value="ics">ICS</option>
+														<option value="pre_eng" selected ="selected" >Pre Engineering</option>
+													</t>
+													<t t-if="not applicant.hssc_group" >
+														<option value="ics">ICS</option>
+														<option value="pre_eng">Pre Engineering</option>
+													</t>
+												
+												</select>
+												<i class="arrow double"></i>  
+											</label>
+										</div><!-- end section --> 
+									</div><!-- end frm-row section -->
+									
+									
+									<legend>Matric</legend>
+									<div class="frm-row">
+										<div class="section colm colm6">
+											<label for="university">Passing Year</label>
+											<label  class="field select" >
+												<select id="ssc_passing_year" name="Passing Year">												
+													<t t-if="applicant.ssc_passing_year == '2019'">
+														<option value="2019" selected='selected'>2019</option>
+														<option value="2018">2018</option>
+														<option value="2017">2017</option>
+														<option value="2016">2016</option>
+													</t>
+													<t t-if="applicant.ssc_passing_year == '2018'">
+														<option value="2018" selected='selected'>2018</option>
+														<option value="2019">2019</option>
+														<option value="2017">2017</option>
+														<option value="2016">2016</option>
+													</t>
+													<t t-if="applicant.ssc_passing_year == '2017'">
+														<option value="2017" selected='selected'>2017</option>
+														<option value="2018">2018</option>
+														<option value="2019">2019</option>
+														<option value="2016">2016</option>
+													</t>
+													<t t-if="applicant.ssc_passing_year == '2016'">
+														<option value="2016" selected='selected'>2016</option>
+														<option value="2018">2018</option>
+														<option value="2017">2017</option>
+														<option value="2019">2019</option>
+													</t>
+													<t t-if="not applicant.ssc_passing_year">
+														<option value="2016" selected='selected'>2016</option>
+														<option value="2018">2018</option>
+														<option value="2017">2017</option>
+														<option value="2019">2019</option>
+													</t>
+												</select>
+												<i class="arrow double"></i>  
+											</label>
+										</div><!-- end section -->               
+										<div class="section colm colm6">
+											<label for="university">Board</label>
+											<label  class="field select" >
+												<select id= "ssc_board" name="Select Board">
+													<t t-if="applicant.ssc_board == 'Fata'">
+														<option value="Fata" selected='selected' >Fata</option>
+														<option value="Rawalpindi Board">Rawalpindi Board</option>
+														<option value="AJK Mirpur">AJK Mirpur</option>
+													</t>
+													<t t-if="applicant.ssc_board == 'AJK Mirpur'">
+														<option value="Fata" >Fata</option>
+														<option value="Rawalpindi Board">Rawalpindi Board</option>
+														<option value="AJK Mirpur" selected='selected' >AJK Mirpur</option>
+													</t>
+													<t t-if="applicant.ssc_board == 'Rawalpindi Board'">
+														<option value="Fata" >Fata</option>
+														<option value="Rawalpindi Board" selected='selected' >Rawalpindi Board</option>
+														<option value="AJK Mirpur">AJK Mirpur</option>
+													</t>
+													<t t-if="not applicant.ssc_board">
+														<option value="Fata" >Fata</option>
+														<option value="Rawalpindi Board">Rawalpindi Board</option>
+														<option value="AJK Mirpur">AJK Mirpur</option>
+													</t>
+												</select>
+												<i class="arrow double"></i>  
+											</label>
+										</div><!-- end section -->               
+									</div><!-- end frm-row section -->
+									<div class="frm-row">
+										<div class="section colm colm4">
+											<label for="university">Total Marks</label>
+											<label class="field prepend-icon">
+												<input type="number" name="ssc_total_marks" id="ssc_total_marks" placeholder="total marks" class="gui-input" t-att-value="applicant.ssc_total_marks" required="true" />
+												<span class="field-icon"><i class="fa fa-pencil"></i></span>  
+											</label>
+										</div><!-- end section -->   
+										<div class="section colm colm4">
+											<label for="university">Obtained Marks</label>
+											<label class="field prepend-icon">
+												<input type="number" name="ssc_obtained_marks" id="ssc_obtained_marks" placeholder="Obtained marks" class="gui-input" t-att-value="applicant.ssc_obtained_marks" required="true" />
+												<span class="field-icon"><i class="fa fa-pencil"></i></span>  
+											</label>
+										</div><!-- end section -->  
+									</div><!-- end frm-row section -->
+									
+								</fieldset>   
+
+								
+								<h2>Photo Upload</h2>
+								<fieldset>
+									<div class="frm-row">
+										<div class="section colm colm6">
+											<!-- Upload  -->
+											<form action="/test" method="post">
+											<input type="hidden" value="Upload Photo" class="btnSubmit" />
+											</form>
+											
+											<div id="body-overlay"><div><img src="/odoocms_admission_online\static\images/loading.gif" width="64px" height="64px"/></div></div>
+											<div class="bgColor">
+												<form id="image-upload-form" action="upload.php" method="post">
+												<!-- <form id="uploadForm" action="/odoocms/attachment/form/odoocms.application" method="post" enctype="multipart/form-data" t-att-data-form_field_department_id="job and job.department_id.id or False" t-att-data-form_field_job_id="job and job.id or False" > -->
+												<!-- <form action="/website_form/" method="post" class="s_website_form" enctype="multipart/form-data" data-model_name="odoocms.application" data-success_page="/example/result" t-att-data-form_field_department_id="job and job.department_id.id or False" t-att-data-form_field_job_id="job and job.id or False"> -->
+													<div id="targetOuter">
+														<div id="targetLayer"><span>Click or Drag image here</span>
+														</div>
+														<img src="/odoocms_admission_online\static\images/imageupload.png"  class="icon-choose-image" />
+														<div class="icon-choose-image" >
+														<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+														<input type="hidden" name="mobile" id="mobile" class="form-control" required="true" t-att-value="applicant.mobile"/>
+														<input name="applicantImage" id="applicantImage" type="file" class="inputFile" onChange="showPreview(this);" />
+														</div>
+													</div>
+													<div>
+														<input type="submit" value="Upload Photo" class="btnSubmit" style="color: #FFFFFF;" />
+													</div>
+												</form>
+											</div>
+										</div><!-- end section -->   
+
+										<div class="section colm colm6">
+											<div class="bgColor">
+												<form id="uploadForm">
+													<div id="targetOuter">
+														<div id="targetLayer2">
+														</div>
+														<t t-if="applicant.image">
+															<img id= "uploaded_image" t-att-src="'data:image/png;base64,%s' % to_text(applicant.image)" width="200px" height="200px" />
+														</t>
+													</div>
+													<div>
+													<span>Uploaded Photo</span>
+												</div>
+												</form>
+											</div>
+										</div><!-- end section -->   
+										
+									</div><!-- end frm-row section -->
+									<div class="section">
+										<div class="option-group field">
+											<label class="option option-green">
+												<span>Note:</span><br/>
+												<p>You are going to confirm the application. After clicking submit button you will see confirmation dilog.Please make sure all the information is filled and correct! You will be responsible for any kind of mistake.</p>           
+											</label>
+											
+										</div>
+									</div><!-- end section -->
+								</fieldset>  							
+						</form>                                                                                   
+					</div><!-- end .form-body section -->
+				
+			</div><!-- end .smart-forms section -->
+		</div><!-- end .smart-wrap section -->
+			
+	</body>
+	
+	
+	<div id="final_data_id" class="page w3-modal" style="padding-bottom:30px">
+		<div class= "w3-modal-content w3-animate-zoom card-4"  style="width:70%" >
+			<t t-if="applicant">
+					<div class="row" style="margin:0px">
+						<div style=" text-align: right;background: #EA4D08;color: white; font-size: 30px;" class="col-md-8 col-sm-8">
+							<span>EntryTest Application Data </span>
+						</div>
+						<div style=" text-align: right ;background: #EA4D08;color: white; font-size: 30px;" class="col-md-4 col-sm-4">
+							<span class="close" id="close_final_modal" onclick="finalModalClose()">X</span>
+						</div>
+					</div>
+					<t class="list-group-item fle-xgrow-1">
+						<div style="box-shadow: 0px 3px 10px 0px rgb(0,0,0,0.3); padding:0px 25px 25px">
+						 
+						  <div class="row">
+							<div class="col-md-5 col-sm-6">
+							  <div style="height:80px;width:100%;margin: auto;padding-top:30px">
+								<strong>Name:</strong>
+								<span t-field="applicant.name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+								<br/>
+								
+							  </div>
+							</div>
+							
+							<div class="col-md-5 col-sm-6">
+							  <img alt="Contact" class="rounded-circle mt-1 o_portal_contact_img" style="width:100px;height:80px;float:right;" t-att-src="image_data_uri(applicant.image)" t-if="applicant.image"/>
+							  <img alt="Contact" class="rounded-circle mt-1 o_portal_contact_img" src="/web/static/src/img/user_menu_avatar.png" t-else=""/>
+							</div>
+						  </div>
+						  <div class=" row mt-4">
+							<style>table th { background-color:#d4e3e5;}
+												 tr:nth-child(even) {background-color: #d4e3e5;}
+												 tr:nth-child(odd) {background-color: #d4e3e5;}
+										</style>
+							<div class="small mb-1">
+							  <strong class="text-muted">
+								<h3>Personal Information</h3>
+							  </strong>
+							</div>
+							<table class="table table-condensed" width="100%">
+							  <tbody>
+										<th class="text-left">Name: </th>
+										<td class="text-left">
+											<span t-field="applicant.name"/>
+										</td>
+										<th class="text-left">Father Name: </th>
+										 <td class="text-left">
+											<span t-field="applicant.father_name"/>
+										</td>
+										<th class="text-left">Email: </th>
+										<td class="text-left">
+											<span t-field="applicant.email"/>
+										</td>
+									<tr style="font-size:14px;">
+										<th class="text-left">CNIC: </th>
+										<td class="text-left">
+											<span t-field="applicant.cnic"/>
+										</td>
+										<th class="text-left">Date of Birth: </th>
+										<td class="text-left">
+											<span t-field="applicant.date_of_birth"/>
+										</td>
+										<th class="text-left">Mobile: </th>
+										<td class="text-left">
+											<span t-field="applicant.mobile"/>
+										</td>
+									</tr>
+									<tr style="font-size:14px;">
+										<th class="text-left">Gender: </th>
+										<td class="text-left">
+											<span t-field="applicant.gender"/>
+										</td>
+										<th class="text-left">Domicile: </th>
+										<td class="text-left">
+											<span t-field="applicant.domicile"/>
+										</td>
+										<th class="text-left">Test Center: </th>
+										<td class="text-left">
+											<span t-field="applicant.center_id.name"/><span>----</span><span t-esc="applicant.center_id.date_test"/><span>----</span><span t-esc="applicant.center_id.time_slot"/>
+										</td>
+									</tr>
+									
+								
+							  </tbody>
+							</table>
+						  </div>
+						  <div class=" row mt-4">
+							<div class="small mb-1">
+							  <strong class="text-muted">
+								<h3>Guardian Details</h3>
+							  </strong>
+							</div>
+							<table class="table table-condensed" width="100%">
+							  <tbody>
+								<tr style="font-size:14px;">
+										<th class="text-left">Guardian Name: </th>
+										<td class="text-left">
+											<span t-field="applicant.guardian_name"/>
+										</td>
+										<th class="text-left">Guardian CNIC: </th>
+										<td class="text-left">
+											<span t-field="applicant.guardian_cnic"/>
+										</td>
+										<th class="text-left">Guardian Phone Number: </th>
+										<td class="text-left">
+											<span t-field="applicant.guardian_number"/>
+										</td>
+									</tr>
+							  </tbody>
+							</table>
+						  </div>
+						  <div class=" row mt-4">
+							<div class="small mb-1">
+							  <strong class="text-muted">
+								<h3>Address Details</h3>
+							  </strong>
+							</div>
+							<table class="table table-condensed" width="100%">
+							  <tbody>
+								<tr style="font-size:20px;">
+									<th class="text-left" colspan="4" >Permanent Address</th>
+								</tr>
+								<tr style="font-size:14px;">
+								  <th class="text-left">Street1: </th>
+								  <td class="text-left" colspan="3">
+									<span t-field="applicant.street"/>
+								  </td>
+								</tr>
+								<tr style="font-size:14px;">
+								  <th class="text-left">Street2: </th>
+								  <td class="text-left" colspan="3">
+									<span t-field="applicant.street2"/>
+								  </td>
+								</tr>
+								
+								<tr style="font-size:20px;">
+									<th class="text-left" colspan="4">Present Address</th>
+								</tr>
+								<tr style="font-size:14px;">
+								  <th class="text-left">Street1: </th>
+								  <td class="text-left" colspan="3">
+									<span t-field="applicant.per_street"/>
+								  </td>
+								</tr>
+								<tr style="font-size:14px;">
+								  <th class="text-left">Street2: </th>
+								  <td class="text-left" colspan="3">
+									<span t-field="applicant.per_street2"/>
+								  </td>
+								</tr>
+							  </tbody>
+							</table>
+						  </div>
+						  
+						  <div class=" row mt-4">
+							<div class="small mb-1">
+							  <strong class="text-muted">
+								<h3>Educational Information</h3>
+							  </strong>
+							</div>
+							<table class="table table-condensed" width="100%">
+							  <tbody>
+									<tr style="font-size:14px;">
+										<th class="text-left">Degree Title: </th>
+										<td class="text-left">
+											<span t-field="applicant.hssc_group"/>
+										</td>
+										<th class="text-left">Passing Year: </th>
+										 <td class="text-left">
+											<span t-field="applicant.hssc_passing_year"/>
+										</td>
+										<th class="text-left">Board/University: </th>
+										<td class="text-left">
+											<span t-field="applicant.hssc_board"/>
+										</td>
+										<th class="text-left">Total Marks: </th>
+										<td class="text-left">
+											<span t-field="applicant.hssc_total_marks"/>
+										</td>
+										<th class="text-left">Obtained Marks: </th>
+										<td class="text-left">
+											<span t-field="applicant.hssc_obtained_marks"/>
+										</td>
+									</tr>
+									<tr style="font-size:14px;">
+										<th class="text-left">Degree Title: </th>
+										<td class="text-left">
+											<span>Matric/O-Level</span>
+										</td>
+										<th class="text-left">Passing Year: </th>
+										 <td class="text-left">
+											<span t-field="applicant.ssc_passing_year"/>
+										</td>
+										<th class="text-left">Board/University: </th>
+										<td class="text-left">
+											<span t-field="applicant.ssc_board"/>
+										</td>
+										<th class="text-left">Total Marks: </th>
+										<td class="text-left">
+											<span t-field="applicant.ssc_total_marks"/>
+										</td>
+										<th class="text-left">Obtained Marks: </th>
+										<td class="text-left">
+											<span t-field="applicant.ssc_obtained_marks"/>
+										</td>
+									</tr>								
+							  </tbody>
+							</table>
+						  </div>
+						  
+							<div class="form-row">
+								<div class="form-holder form-holder-2">
+									<label class="checkboxcontainer" style="font-size:16px">I have read the form carefully and i all the info is correct and i will be responsible for any error/ mistake.
+										<input required="true" type="checkbox" id="final_agreement"/>
+										 <span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-holder form-holder-2">
+									<label class="checkboxcontainer" style="font-size:16px" >I agreed with terms and conditions of EntryTest. 
+										<input required="true" type="checkbox" id="final_terms_agreement"/>
+										 <span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+							<div class="form-row">
+								<input class="btnSubmit" value="Confirm" style="display:block;float:right; width:120px; margin-right:5px" type="button" name="final_confirmation" id="final_confirmation" onclick="finalConfirmation()"/>
+								<input class="btnSubmit" value="Cancel" style="display:block;float:right; width:120px" type="button" name="final_cancel" id="final_cancel" onclick="finalModalClose()"/>
+							</div>
+						  
+						</div>
+					  </t>
+				</t>
+		</div>
+	</div>
+	
+	</t>
+</template>
+</odoo>
+
+	

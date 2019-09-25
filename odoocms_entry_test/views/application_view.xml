@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_odoocms_entrytest_application_tree" model="ir.ui.view">
+        <field name="name">odoocms.entrytest.application.tree</field>
+        <field name="model">odoocms.entrytest.application</field>
+        <field name="arch" type="xml">
+            <tree string="Entry Test application">
+                <field name="name"/>
+                <field name="entryID"/>
+                <field name="date_of_birth"/>
+                <field name="father_name"/>
+                <field name="cnic"/>
+                <field name="gender"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="ssc_obtained_marks"/>
+                <field name="hssc_obtained_marks"/>
+            </tree>
+        </field>
+    </record>
+
+     <record id="view_odoocms_entrytest_application_form" model="ir.ui.view">
+        <field name="name">odoocms.entrytest.application.form</field>
+        <field name="model">odoocms.entrytest.application</field>
+        <field name="arch" type="xml">
+            <form string="Entry Test Application">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="entryID"/>
+                            <field name="date_of_birth"/>
+                            <field name="father_name"/>
+                        </group>
+                        <group>
+                            <field name="guardian_name"/>
+                            <field name="guardian_cnic"/>
+                            <field name="guardian_number"/>
+                        </group>
+
+
+                    </group>
+                    <notebook>
+                        <page string="Personal Information" name="personal_information">
+                            <group>
+                                <group>
+                                    <field name="cnic"/>
+                                    <field name="gender"/>
+                                    <field name="mobile"/>
+                                    <field name="email"/>
+                                </group>
+                                <group>
+                                    <field name="domicile"/>
+                                    <field name="district"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Contact Details">
+                            <group>
+                                <group>
+                                    <label for="street" string="Present Address"/>
+                                    <div name="div_address">
+                                        <field name="street" placeholder="Street..."/>
+                                        <field name="street2" placeholder="Street2"/>
+                                    </div>
+                                </group>
+
+                                <field name="is_same_address" invisible="1"/>
+                                <group name="permanent_address" attrs="{'invisible': [('is_same_address','=', True)]}">
+                                    <label for="per_street" string="Permanent Address"/>
+                                    <div name="div_address">
+                                        <field name="per_street" placeholder="Street..."/>
+                                        <field name="per_street2" placeholder="Street2..."/>
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                         <page string="Academic Information" name="academic_information">
+                            <group>
+                                <group name="ssc">
+                                    <field name="ssc_total_marks"/>
+                                    <field name="ssc_obtained_marks"/>
+                                    <field name="ssc_passing_year"/>
+                                    <field name="ssc_board"/>
+                                </group>
+                                <group name="hssc">
+                                    <field name="hssc_total_marks"/>
+                                    <field name="hssc_obtained_marks"/>
+                                    <field name="hssc_passing_year"/>
+                                    <field name="hssc_board"/>
+                                </group>
+                            </group>
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_odoocms_entrytest_application" model="ir.actions.act_window">
+        <field name="name">Entry Test</field>
+        <field name="res_model">odoocms.entrytest.application</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the First Entry Test Application here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_odoocms_entrytest_application"
+            name="Entry Test Application"
+            parent="menu_odoocms_entrytest_main"
+            action="action_odoocms_entrytest_application"
+            sequence="100"/>
+
+
+</odoo>

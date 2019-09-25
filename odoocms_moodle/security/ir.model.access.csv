@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odoocms_moodle_category_user,odoocms.moodle.category.user,odoocms_moodle.model_odoocms_moodle_category,odoocms.group_cms_user,1,1,1,0
+access_odoocms_moodle_category_manager,odoocms.moodle.category.manager,odoocms_moodle.model_odoocms_moodle_category,odoocms.group_cms_manager,1,1,1,1
+
+access_odoocms_moodle_course_user,odoocms.moodle.course.user,odoocms_moodle.model_odoocms_moodle_course,odoocms.group_cms_user,1,1,1,0
+access_odoocms_moodle_course_manager,odoocms.moodle.course.manager,odoocms_moodle.model_odoocms_moodle_course,odoocms.group_cms_manager,1,1,1,1
+

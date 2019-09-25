@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_odoocms_student_form_inherit2" model="ir.ui.view">
+            <field name="name">odoocms.student.form.inherit2</field>
+            <field name="model">odoocms.student</field>
+            <field name="inherit_id" ref="odoocms.view_odoocms_student_form"/>
+            <field name="arch" type="xml">
+                <button name="create_student_user" position="after">
+                    <button type="object" name="update_moodle_user" string="Update Moodle User"
+                            groups="odoocms.group_cms_manager" class="oe_highlight"/>
+                    <button type="object" name="get_moodle_user" string="Get Moodle User"
+                            groups="odoocms.group_cms_manager" class="oe_highlight"/>
+                    <button type="object" name="enroll_courses" string="Enroll Courses"
+                            groups="odoocms.group_cms_manager" class="oe_highlight"/>
+                </button>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

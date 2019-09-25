@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_odoocms_batch_form" model="ir.ui.view">
+            <field name="name">odoocms.batch.form</field>
+            <field name="model">odoocms.batch</field>
+            <field name="arch" type="xml">
+                <form string="Program Batch">
+                     <header>
+                         <button name="generate_classes" type="object" class="oe_highlight"
+                                string="Generate Classes" groups="odoocms.group_cms_manager"
+                                help="Click to Generate Classes for the Current Semester for All Sections"
+                                attrs="{'invisible': [('academic_semester_id', '=',False)]}"
+                                />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code" required="1"/>
+                            </group>
+                            <group>
+                                <field name="department_id"/>
+                                <field name="career_id"/>
+                            </group>
+                            <group>
+                                <field name="academic_session_id"/>
+                                <field name="academic_semester_id"/>
+                            </group>
+                            <group>
+                                <field name="program_id" domain="[('career_id','=',career_id),('department_id','=',department_id)]"/>
+                                <field name="study_scheme_id" domain="[('academic_session_id','=',academic_session_id),('program_ids','in',[program_id])]"/>
+                                <label for="sequence_number_next"/>
+                                <div>
+                                    <field name="sequence_number_next" style="padding-right: 1.0em"/>
+                                    <field name="sequence_id" required="0"
+                                           attrs="{'readonly': 1}"/>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name='sections' string="Sections">
+                                <field name="section_ids">
+                                    <tree editable='bottom'>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="strength"/>
+                                        <field name="class_room_id"/>
+                                        <field name="student_count"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="view_odoocms_batch_tree" model="ir.ui.view">
+            <field name="name">odoocms.batch.tree</field>
+            <field name="model">odoocms.batch</field>
+            <field name="arch" type="xml">
+                <tree string="Program Batch">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="department_id"/>
+                    <field name="career_id"/>
+                    <field name="program_id"/>
+                    <field name="academic_session_id"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_odoocms_batch_search" model="ir.ui.view">
+            <field name="name">odoocms.batch.search</field>
+            <field name="model">odoocms.batch</field>
+            <field name="arch" type="xml">
+                <search string="Batch">
+                    <field name="name" />
+                    <field name="code"/>
+                    <field name="department_id"/>
+                    <field name="program_id"/>
+                    <newline />
+                    <group expand="0" string="Group By...">
+                        <filter name="academic_session" string="Academic Session" domain="[]" context="{'group_by':'academic_session_id'}" />
+                        <filter name="career" string="Career" domain="[]" context="{'group_by':'career_id'}" />
+                        <filter name="program" string="Program" domain="[]" context="{'group_by':'program_id'}" />
+                        <filter name="department" string='Department' domain="[]" context="{'group_by':'department_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="action_odoocms_batch" model="ir.actions.act_window">
+            <field name="name">Program Batch</field>
+            <field name="res_model">odoocms.batch</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_odoocms_batch_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <menuitem
+                id="menu_odoocms_batch"
+                name="Program Batch"
+                action="action_odoocms_batch"
+                parent="menu_odoocms_registration_main"
+                sequence="4"/>
+    </data>
+</odoo>

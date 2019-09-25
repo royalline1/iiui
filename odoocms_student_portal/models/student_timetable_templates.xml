@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+ <template id="portal_my_student_timetable" inherit_id="portal.portal_my_home" name="Portal My Home : registration entry" priority="30">
+    <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+      <t t-if="student_count" t-call="portal.portal_docs_entry">
+        <t t-set="title">My Timetable</t>
+        <t t-set="url" t-value="'/my/timetable'"/>
+      </t>
+    </xpath>
+  </template>
+
+  <template id="portal_student_timetable" name="timetable">
+    <t t-call="portal.portal_layout">
+         <style>
+                    #time-table {
+                      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                      border-collapse: collapse;
+                      width: 100%;
+                    }
+
+                    #time-table td, #time-table th {
+                      border: 1px solid #ddd;
+                      padding: 8px;
+                    }
+
+                    #time-table tr:nth-child(even){background-color: #f2f2f2;}
+
+                    #time-table tr:hover {background-color: #ddd;}
+
+                    #time-table th {
+                      padding-top: 12px;
+                      padding-bottom: 12px;
+                      text-align: left;
+                      background-color: #137562;
+                      color: white;
+                    }
+                </style>
+      <t t-set="breadcrumbs_searchbar" t-value="True"/>
+      <t t-call="portal.portal_searchbar">
+        <t t-set="title">Student</t>
+      </t>
+      <t t-if="not student">
+        <p>There are currently no data for your account.</p>
+      </t>
+       <t class="list-group-item fle-xgrow-1" t-if="student">
+           <div style=" text-align: center;background: #1abc9c;color: white; font-size: 30px;">
+                <span>Time Table</span>
+           </div>
+            <div class="row py-2">
+                <div class="col-xl-12 col-md-12 col-sm-12 mx-auto">
+                    <div class="bg-white shadow rounded overflow-hidden">
+                        <div class="px-4 pt-0 pb-4" style="background:#137562;">
+                            <div class="media align-items-end profile-header">
+                                <div class="profile mr-3">
+                                    <img alt="..." width="130" class="rounded mb-2 img-thumbnail" t-att-src="image_data_uri(student.image)" t-if="student.image" />
+                                     <img alt="..." width="130" class="rounded mb-2 img-thumbnail" src="/web/static/src/img/user_menu_avatar.png" t-if=" not student.image" />
+                                </div>
+                                <div class="media-body mb-5 text-white">
+                                    <h4 class="mt-0 mb-0">
+                                        <span t-field="student.name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                        <span t-field="student.last_name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                    </h4>
+                                    <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i><span t-field="student.country_id"/></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-5 px-4">
+                              <strong class="text-muted">
+                                <h3>Timetable</h3>
+                              </strong>
+                            <table id="time-table">
+                             <tr >
+                                 <th>&#160;</th>
+                                 <t t-foreach="time_slots" t-as="time_slot">
+                                    <th><span t-esc="time_slot" t-if="time_slot"/></th>
+                                 </t>
+                             </tr>
+
+                            <tr>
+                                <th><span t-esc="days[0]" t-if="days[0]"/></th>
+                                <t t-foreach="timetable['monday']" t-as="mon_time">
+                                   <td t-att-colspan="mon_time['col_span']" style="font-size:10px; text-align:center">
+                                       <span t-esc="mon_time['course']" t-if="mon_time['course']"/><br/>
+                                       <span t-esc="mon_time['faculty']" t-if="mon_time['faculty']"/>
+                                       <br/><span></span>
+                                   </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <th><span t-esc="days[1]" t-if="days[1]"/></th>
+                                <t t-foreach="timetable['tuesday']" t-as="mon_time">
+                                   <td t-att-colspan="mon_time['col_span']" style="font-size:10px; text-align:center">
+                                       <span t-esc="mon_time['course']" t-if="mon_time['course']"/><br/>
+                                       <span t-esc="mon_time['faculty']" t-if="mon_time['faculty']"/>
+                                       <br/><span></span>
+                                   </td>
+                                </t>
+                            </tr>
+                           <tr>
+                                <th><span t-esc="days[2]" t-if="days[2]"/></th>
+                                <t t-foreach="timetable['wed']" t-as="mon_time">
+                                   <td t-att-colspan="mon_time['col_span']" style="font-size:10px; text-align:center">
+                                       <span t-esc="mon_time['course']" t-if="mon_time['course']"/><br/>
+                                       <span t-esc="mon_time['faculty']" t-if="mon_time['faculty']"/>
+                                       <br/><span></span>
+                                   </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <th><span t-esc="days[3]" t-if="days[3]"/></th>
+                                <t t-foreach="timetable['thr']" t-as="mon_time">
+                                   <td t-att-colspan="mon_time['col_span']" style="font-size:10px; text-align:center">
+                                       <span t-esc="mon_time['course']" t-if="mon_time['course']"/><br/>
+                                       <span t-esc="mon_time['faculty']" t-if="mon_time['faculty']"/>
+                                       <br/><span></span>
+                                   </td>
+                                </t>
+                            </tr>
+                           <tr>
+                                <th><span t-esc="days[4]" t-if="days[4]"/></th>
+                                <t t-foreach="timetable['fri']" t-as="mon_time">
+                                   <td t-att-colspan="mon_time['col_span']" style="font-size:10px; text-align:center">
+                                       <span t-esc="mon_time['course']" t-if="mon_time['course']"/><br/>
+                                       <span t-esc="mon_time['faculty']" t-if="mon_time['faculty']"/>
+                                       <br/><span></span>
+                                   </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <th><span t-esc="days[5]" t-if="days[5]"/></th>
+                                <t t-foreach="timetable['sat']" t-as="mon_time">
+                                   <td t-att-colspan="mon_time['col_span']" style="font-size:10px; text-align:center">
+                                       <span t-esc="mon_time['course']" t-if="mon_time['course']"/><br/>
+                                       <span t-esc="mon_time['faculty']" t-if="mon_time['faculty']"/>
+                                       <br/><span></span>
+                                   </td>
+                                </t>
+                            </tr>
+                           <tr>
+                                <th><span t-esc="days[6]" t-if="days[6]"/></th>
+                                <t t-foreach="timetable['sun']" t-as="mon_time">
+                                   <td t-att-colspan="mon_time['col_span']" style="font-size:10px; text-align:center">
+                                       <span t-esc="mon_time['course']" t-if="mon_time['course']"/><br/>
+                                       <span t-esc="mon_time['faculty']" t-if="mon_time['faculty']"/>
+                                       <br/><span></span>
+                                   </td>
+                                </t>
+                            </tr>
+                         </table>
+                            </div>
+                    </div>
+                </div>
+            </div>
+      </t>
+    </t>
+  </template>
+
+</odoo>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_profile" inherit_id="portal.portal_my_home" name="Portal My Home : registration entry" priority="25">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry" t-if="faculty_count">
+                <t t-set="title">My Profile</t>
+                <t t-set="url" t-value="'/my/faculty/profile'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_faculty_profile" name="My Profile">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Students</t>
+            </t>
+            <t t-if="not faculty">
+                <p>There are currently no data for your account.</p>
+            </t>
+           <t t-if="faculty">
+               <div class="row py-2">
+                    <div class="col-xl-12 col-md-12 col-sm-12 mx-auto">
+                        <!-- Profile widget -->
+                        <div class="bg-white shadow rounded overflow-hidden">
+                            <div class="px-4 pt-0 pb-4" style="background:#1abc9c;">
+                                <div class="media align-items-end profile-header">
+                                    <div class="profile mr-3">
+                                        <img alt="..." width="130" class="rounded mb-2 img-thumbnail" t-att-src="image_data_uri(faculty.image)" t-if="faculty.image" />
+                                         <img alt="..." width="130" class="rounded mb-2 img-thumbnail" src="/web/static/src/img/user_menu_avatar.png" t-if=" not faculty.image" />
+                                    </div>
+                                    <div class="media-body mb-5 text-white">
+                                        <h4 class="mt-0 mb-0">
+                                            <span t-field="faculty.name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                            <span t-field="faculty.last_name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                        </h4>
+                                        <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i><span t-field="faculty.country_id"/></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="py-5 px-4">
+
+                                <div class="small mb-1">
+                                  <strong class="text-muted">
+                                    <h3 style="padding:5px; background:#17a488; color:#fff">Personal Information</h3>
+                                  </strong>
+                                </div>
+                                <table class="table table-condensed bg-white shadow rounded overflow-hidden" width="100%">
+                                  <tbody>
+                                    <tr style="font-size:14px;">
+                                      <th class="text-left">Gender: </th>
+                                      <td class="text-left">
+                                        <span t-field="faculty.gender"/>
+                                      </td>
+                                      <th class="text-left">Birth Date: </th>
+                                      <td class="text-left">
+                                        <span t-field="faculty.date_of_birth"/>
+                                      </td>
+                                    </tr>
+                                    <tr style="font-size:14px;">
+                                      <th class="text-left">Nationality: </th>
+                                      <td class="text-left">
+                                        <span t-field="faculty.nationality"/>
+                                      </td>
+                                      <th class="text-left">Language: </th>
+                                      <td class="text-left">
+                                        <span t-field="faculty.lang"/>
+                                      </td>
+                                    </tr>
+                                    <tr style="font-size:14px;">
+                                      <th class="text-left">Blood Group: </th>
+                                      <td class="text-left">
+                                        <span t-field="faculty.blood_group"/>
+                                      </td>
+                                      <th class="text-left">Email: </th>
+                                      <td class="text-left">
+                                        <span t-field="faculty.email"/>
+                                      </td>
+                                    </tr>
+                                    <tr style="font-size:14px;">
+                                      <th class="text-left">CNIC: </th>
+                                      <td class="text-left">
+                                        <span t-field="faculty.cnic"/>
+                                      </td>
+                                      <th class="text-left">Emergency Contact: </th>
+                                      <td class="text-left">
+                                        <span t-field="faculty.emergency_contact"/>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+
+                                <div class="small mb-1">
+                                  <strong class="text-muted">
+                                    <h3 style="padding:5px; background:#17a488; color:#fff">Address Details</h3>
+                                  </strong>
+                                </div>
+                                <table class="table table-condensed bg-white shadow rounded overflow-hidden" width="100%">
+                                  <tbody>
+                                    <tr style="font-size:14px;">
+                                      <th class="text-left">Street1: </th>
+                                      <td class="text-left" colspan="3">
+                                        <span t-field="faculty.street"/>
+                                      </td>
+                                    </tr>
+                                    <tr style="font-size:14px;">
+                                      <th class="text-left">Street2: </th>
+                                      <td class="text-left" colspan="3">
+                                        <span t-field="faculty.street2"/>
+                                      </td>
+                                    </tr>
+                                    <tr style="font-size:14px;">
+                                      <th class="text-left">City: </th>
+                                      <td class="text-left">
+                                        <span t-field="faculty.city"/>
+                                      </td>
+                                      <th class="text-left">Country: </th>
+                                      <td class="text-left">
+                                        <span t-field="faculty.country_id"/>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+
+                            </div>
+                        </div><!-- End profile widget -->
+
+                    </div>
+                </div>
+              </t>
+        </t>
+    </template>
+</odoo>

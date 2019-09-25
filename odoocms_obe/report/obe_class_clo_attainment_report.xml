@@ -1,0 +1,154 @@
+<odoo>
+
+	<template id ="odoocms_obe.obe_class_clo_attainment_report">
+			<t t-call="web.basic_layout">
+                <style>
+                    #semester-plo {
+                          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                          border-collapse: collapse;
+                          width: 100%;
+                            margin-top:15px;
+                        }
+
+                        #semester-plo td, #semester-plo th {
+                          border: 1px solid #ddd;
+                          padding: 2px;
+                          text-align:center;
+                        }
+
+                        #semester-plo tr:nth-child(even){background-color: #f2f2f2;}
+
+                        #semester-plo tr:hover {background-color: #ddd;}
+
+                        #semester-plo th {
+                          padding-top: 12px;
+                          padding-bottom: 12px;
+                          text-align: center;
+                          color: white;
+                        }
+
+                    .verticalTableHeader {
+                        font-size:14px;
+                        height:120px;
+                        writing-mode: vertical-lr;
+                       -ms-writing-mode: tb-rl;
+                       transform: rotate(180deg);
+
+                    }
+
+
+                </style>
+				<div class="page" style="font-size: 12px; padding:30px; border-style:double">
+                    <div style="font-size:18px;font-weight:bold;text-align:center;">
+                          <span>CLO Analysis for Class </span>&#160;<span t-esc="class_id.name"/>
+                    </div>
+                    <!--<div style="font-size:14px;text-align:left;">
+                        <span style="text-weight:bold ">Program:</span>&#160;<span style="color:#4b1869" t-esc="batch.program_id.name"/>
+                    </div>
+                    <div style="font-size:14px; text-align:left;">
+                       <span style="text-weight:bold ">Batch:</span>&#160; <span style="color:#4b1869" t-esc="batch.name"/>
+                    </div>
+                     <div style="font-size:14px; text-align:left;">
+                       <span style="text-weight:bold ">Session:</span>&#160; <span style="color:#4b1869" t-esc="batch.academic_session_id.name"/>
+                    </div>
+                     <div style="font-size:14px; text-align:left;">
+                       <span style="text-weight:bold ">Course:</span>&#160; <span style="color:#4b1869" t-esc="course.subject_id.code"/><span>-</span><span style="color:#4b1869" t-esc="course.subject_id.name"/>
+                    </div>-->
+
+                    <table id="semester-plo">
+
+<!--                        To show clos code at the top-->
+                        <td colspan="2" ><span style="width:30px" ></span>&#160;</td>
+                        <t t-foreach="students[0].obe_activity_ids" t-as="obe_summary">
+                            <t t-if='obe_summary.clo_id.learning_domain == "cognitive"'>
+                                <t t-set="bgcolor" t-value="'#fd5edb'"/>
+                            </t>
+                            <t t-if='obe_summary.clo_id.learning_domain == "psychomotor"'>
+                                <t t-set="bgcolor" t-value="'#00BFFF'"/>
+                            </t>
+                            <t t-if='obe_summary.clo_id.learning_domain == "affective"'>
+                                <t t-set="bgcolor" t-value="'#B7FFBF'"/>
+                            </t>
+
+                            <th t-attf-style="background-color:#{bgcolor};color:#fff" t-att-colspan="len(obe_summary.activity_lines)+1 ">
+                                <span t-esc="obe_summary.clo_id.code.name"/>&#160;(<span t-esc="obe_summary.clo_id.learning_domain"/>)</th>
+                        </t>
+
+                        <tr>
+                            <th colspan="2" style="background:#C0C0C0;"><span>Assessment Tool</span></th>
+                            <t t-foreach="students[0].obe_activity_ids" t-as="obe_summary">
+
+                                <t t-if='obe_summary.clo_id.learning_domain == "cognitive"'>
+                                    <t t-set="bgcolor" t-value="'#fd5edb'"/>
+                                </t>
+                                <t t-if='obe_summary.clo_id.learning_domain == "psychomotor"'>
+                                    <t t-set="bgcolor" t-value="'#00BFFF'"/>
+                                </t>
+                                <t t-if='obe_summary.clo_id.learning_domain == "affective"'>
+                                    <t t-set="bgcolor" t-value="'#B7FFBF'"/>
+                                </t>
+
+                                <t t-foreach="obe_summary.activity_lines" t-as="exam_activity">
+                                    <th t-attf-style="background-color:#{bgcolor};color:#fff"><span t-esc="exam_activity.activity_id.code"/></th>
+                                </t>
+                                <th rowspan="3" t-attf-style="background-color:#{bgcolor};color:#fff"><span class="verticalTableHeader">Norm %</span></th>
+                            </t>
+                        </tr>
+
+                        <tr style="background:#C0C0C0; color: #fff">
+                            <th colspan="2"><span>Assessment Tool(%)</span></th>
+                            <t t-foreach="students[0].obe_activity_ids" t-as="obe_summary">
+                                <t t-foreach="obe_summary.activity_lines" t-as="exam_activity">
+                                    <th><span t-esc="exam_activity.activity_id.obe_weightage"/></th>
+                                </t>
+                            </t>
+                        </tr>
+
+                         <tr style="background:#C0C0C0;">
+                            <th><span>No.</span></th>
+                             <th><span>Reg No.</span></th>
+                            <t t-foreach="students[0].obe_activity_ids" t-as="obe_summary">
+                                 <th t-att-colspan="len(obe_summary.activity_lines)" ><span>100%</span></th>
+                            </t>
+                        </tr>
+
+
+                        <t t-foreach="students" t-as="student_subject">
+                            <tr>
+                                <td><span t-esc="student_subject_index+1"/></td>
+                                 <td><span t-esc="student_subject.student_id.id_number"/></td>
+                                <t t-foreach="student_subject.obe_activity_ids" t-as="obe_summary">
+
+                                    <t t-if='obe_summary.clo_id.learning_domain == "cognitive"'>
+                                        <t t-set="bgcolor" t-value="'#fd5edb'"/>
+                                    </t>
+                                    <t t-if='obe_summary.clo_id.learning_domain == "psychomotor"'>
+                                        <t t-set="bgcolor" t-value="'#00BFFF'"/>
+                                    </t>
+                                    <t t-if='obe_summary.clo_id.learning_domain == "affective"'>
+                                        <t t-set="bgcolor" t-value="'#B7FFBF'"/>
+                                    </t>
+
+
+
+                                    <t t-foreach="obe_summary.activity_lines" t-as="exam_activity">
+                                          <td >
+                                              <span style="width:30px" >
+                                                  <span t-esc=" '{0:,.1f}'.format((exam_activity.percentage)*(exam_activity.activity_id.obe_weightage)/100) "/>
+<!--                                                  <span>%</span>-->
+                                              </span>
+                                          </td>
+                                     </t>
+                                    <td  t-attf-style="background-color:#{bgcolor};color:#fff"><span t-esc="'{0:,.1f}'.format(obe_summary.percentage)"/></td>
+<!--                                    This is total percentage of activites-->
+                                 </t>
+                            </tr>
+                        </t>
+                     </table>
+
+                </div>
+
+            </t>
+    </template>
+
+</odoo>

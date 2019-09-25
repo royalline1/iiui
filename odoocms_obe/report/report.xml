@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- CLO Attainment Summary -->
+		<report
+			id="odoocms_obe.action_report_clo_attainment"
+			string="CLOs Attainment Summary"
+			model="odoocms.class"
+			report_type="qweb-html"
+			name="odoocms_obe.clo_attainment_report"
+			file="odoocms_obe.clo_attainment_report"
+			menu="True"
+		/>
+
+		<!-- Program Wise PLO Attainment Report, This Report is Taken from OBE Reporting Sections -->
+		<report
+			id="odoocms_obe.action_report_program_wise_plo_attainment"
+			string="PLOs Attainment Report (Program Wise)"
+			model="program.wise.plo.attainment.wiz"
+			report_type="qweb-html"
+			name="odoocms_obe.program_wise_plo_attainment_report"
+			file="odoocms_obe.program_wise_plo_attainment_report"
+			menu="False"
+		/>
+
+		<!-- Semester Wise PLO Attainment Report, This Report is Taken from OBE Reporting Sections -->
+		<report
+			id="odoocms_obe.action_report_semester_wise_plo_attainment"
+			string="PLOs Attainment Report (Semester Wise)"
+			model="semester.wise.plo.attainment.wiz"
+			report_type="qweb-html"
+			name="odoocms_obe.semester_wise_plo_attainment_report"
+			file="odoocms_obe.semester_wise_plo_attainment_report"
+			menu="False"
+		/>
+
+		<!-- Course to PLO Mapping -->
+		<report
+			id="odoocms_obe.action_report_obe_course_to_plo_mapping"
+			string="Course To PLO Mapping"
+			model="obe.course.to.plo.mapping.wiz"
+			report_type="qweb-html"
+			name="odoocms_obe.obe_course_to_plo_mapping_report"
+			file="odoocms_obe.obe_course_to_plo_mapping_report"
+			menu="False"
+		/>
+
+		<!-- CLO to PLO Mapping -->
+		<report
+			id="odoocms_obe.action_report_obe_clo_to_plo_mapping"
+			string="CLO to PLO Mapping"
+			model="obe.clo.to.plo.mapping.wiz"
+			report_type="qweb-html"
+			name="odoocms_obe.obe_clo_to_plo_mapping_report"
+			file="odoocms_obe.obe_clo_to_plo_mapping_report"
+			menu="False"
+		/>
+
+		<!-- Class CLO attainment detailed -->
+		<report
+			id="odoocms_obe.action_report_obe_class_clo_attainment"
+			string="Class CLO Attainment"
+			model="odoocms.class"
+			report_type="qweb-html"
+			name="odoocms_obe.obe_class_clo_attainment_report"
+			file="odoocms_obe.obe_class_clo_attainment_report"
+			menu="True"
+		/>
+
+		<!-- Student OBE Transcript Report, This Report is Taken from Student Print Button -->
+		<report
+			id="odoocms_obe.action_report_obe_student_transcript"
+			string="OBE Student Transcript"
+			model="odoocms.student"
+			report_type="qweb-html"
+			name="odoocms_obe.obe_student_transcript_report"
+			file="odoocms_obe.obe_student_transcript_report"
+			menu="True"
+		/>
+
+	</data>
+</odoo>

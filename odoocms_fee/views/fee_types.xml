@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_odoocms_fee_head_form" model="ir.ui.view">
+            <field name="name">odoocms.fee.head.form</field>
+            <field name="model">odoocms.fee.head</field>
+            <field name="arch" type="xml">
+                <form string="Fee Heads">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" placeholder="Eg: Admission Fee"/>
+                                <field name="lst_price" string="Amount" required="1" widget="monetary"/>
+                            </group>
+                            <group>
+                                <field name="payment_type"/>
+                                <field name="category_id"/>
+                                <field name="refund"/>
+                            </group>
+                            <group>
+                                <field name="account_analytic_id"/>
+                                <field name="analytic_tag_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="property_account_income_id" string="GL Account" required="1"/>
+                            </group>
+                            <field name="description_sale" placeholder="Details about the fee" string="Description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_odoocms_fee_head_tree" model="ir.ui.view">
+            <field name="name">odoocms.fee.head.tree</field>
+            <field name="model">odoocms.fee.head</field>
+            <field name="arch" type="xml">
+                <tree string="Fee Heads">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="lst_price" widget="monetary" string="Amount"/>
+                    <field name="payment_type"/>
+                    <field name="category_id"/>
+                    <field name="property_account_income_id" string="GL Account"/>
+                    <field name="refund"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_odoocms_fee_head_search" model="ir.ui.view">
+            <field name="name">odoocms.fee.head.select</field>
+            <field name="model">odoocms.fee.head</field>
+            <field name="arch" type="xml">
+                <search string="Search Fee Heads">
+                    <field name="name" />
+                    <field name="payment_type" />
+                    <field name="lst_price" />
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_payment_type" string="Payment Type" context="{'group_by':'payment_type'}"/>
+                        <filter name="group_by_category_id" string="Category" context="{'group_by':'category_id'}"/>
+                        <filter name="group_by_account_income_id" string="GL Account" context="{'group_by':'property_account_income_id'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+
+        <record id="action_odoocms_fee_head" model="ir.actions.act_window">
+            <field name="name">Fee Heads</field>
+            <field name="res_model">odoocms.fee.head</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="view_odoocms_receipt_type_form" model="ir.ui.view">
+            <field name="name">odoocms.receipt.type.form</field>
+            <field name="model">odoocms.receipt.type</field>
+            <field name="arch" type="xml">
+                <form string="Receipt Types">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1" placeholder="Eg: Semester Fee"/>
+                                <field name="code"/>
+                                <field name="semester_required"/>
+                                <field name="override_amount"/>
+                            </group>
+                            <group>
+                                <field name="fee_head_ids" widget="many2many_tags" required="1"/>
+                            </group>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_odoocms_receipt_type_tree" model="ir.ui.view">
+            <field name="name">odoocms.receipt.type.tree</field>
+            <field name="model">odoocms.receipt.type</field>
+            <field name="arch" type="xml">
+                <tree string="receipt Types">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="semester_required"/>
+                    <field name="override_amount"/>
+                    <field name="fee_head_ids"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_odoocms_receipt_type" model="ir.actions.act_window">
+            <field name="name">Receipt Types</field>
+            <field name="res_model">odoocms.receipt.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="menu_odoocms_fee_head"
+                action="action_odoocms_fee_head"
+                parent="menu_fee_configuration"
+                sequence="40"/>
+
+        <menuitem
+                id="menu_odoocms_receipt_types"
+                action="action_odoocms_receipt_type"
+                parent="menu_fee_configuration"
+                sequence="30"/>
+
+    </data>
+</odoo>

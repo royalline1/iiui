@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- Program Wise Finanacial Report Summary -->
+		<report
+			id="odoocms_fee.action_report_program_financial_summary"
+			string="Program Financial Report Summary"
+			model="program.wise.fin.summary.wiz"
+			report_type="qweb-html"
+			name="odoocms_fee.program_wise_fin_summary_report"
+			file="odoocms_fee.program_wise_fin_summary_report"
+			menu="True"
+		/>
+
+		<!-- Student Warning Letter for Outstanding Views -->
+		<report
+			id="odoocms_fee.action_report_student_dues_warning_letter"
+			string="Student Outstanding Dues Warning"
+			model="program.wise.fin.summary.wiz"
+			report_type="qweb-html"
+			name="odoocms_fee.student_dues_warning_letter_report"
+			file="odoocms_fee.student_dues_warning_letter_report"
+			menu="True"
+		/>
+
+		<!-- Receipt Received Detail -->
+		<report
+			id="odoocms_fee.action_report_receipt_received_detail"
+			string="Receipt Received Detail Report"
+			model="receipt.received.detail.wiz"
+			report_type="qweb-html"
+			name="odoocms_fee.receipt_received_detail_report"
+			file="odoocms_fee.receipt_received_detail_report"
+			menu="True"
+		/>
+
+		<!-- Receipt Received Summary -->
+		<report
+			id="odoocms_fee.action_report_receipt_received_summary"
+			string="Receipt Received Summary Report"
+			model="receipt.received.summary.wiz"
+			report_type="qweb-html"
+			name="odoocms_fee.receipt_received_summary_report"
+			file="odoocms_fee.receipt_received_summary_report"
+			menu="True"
+		/>
+
+		<!-- Student Financial Report Summary -->
+		<report
+			id="odoocms_fee.action_report_student_fin_report_summary"
+			string="Student Financial Report Summary"
+			model="student.fin.report.summary.wiz"
+			report_type="qweb-html"
+			name="odoocms_fee.student_fin_report_summary_report"
+			file="odoocms_fee.student_fin_report_summary_report"
+			menu="True"
+		/>
+
+
+	</data>
+</odoo>

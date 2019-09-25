@@ -1,0 +1,1792 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>	
+
+<template id="addmission_registration" name="Result page">
+	<t t-call="website.layout">
+	
+		<body class="woodbg">
+			<div class="smart-wrap">
+				<div class="smart-forms smart-container wrap-1">
+					<div class="form-body theme-blue smart-steps steps-progress steps-theme-blue stp-six">
+
+					<t t-foreach="students" t-as="student">
+						<div method="post" action="#" id="smart-form-admission">
+
+								<!-- SECTION 1 -->
+								<h2>Personal Details</h2>
+								<fieldset>
+
+									<t t-if="not(auth_signup_cnic_phone)">
+										<legend>Select Program Apply For*</legend>
+										<div class="frm-row">
+											<div class="section colm colm6">
+												<label class="field select">
+													<!-- <label for="programs apply for">Program Applying For*</label> -->
+													<select name="Program Apply For" id="program_apply_for" onchange="saveProgramRegister()">
+														<option value="">Select Program Apply For</option>
+														<t t-foreach="programs_apply_for" t-as="program_apply_for">
+															<t t-if="student.register_id.id == program_apply_for.id">
+																<option t-att-value="program_apply_for.id" selected="selected"><span t-esc="program_apply_for.name"/></option>
+															</t>
+															<t t-if=" not student.register_id.id == program_apply_for.id">
+																<option t-att-value="program_apply_for.id"><span t-esc="program_apply_for.name"/></option>
+															</t>
+														</t>
+													</select>
+												 </label>
+											</div>
+										</div>
+									</t>
+										<div class="block-info" >
+											<legend>Personal Details</legend>
+											<div class="frm-row">
+												<div class="section colm colm6">
+													<label for="your_name">Name*</label>
+													<label class="field prepend-icon">
+
+														<input type="text" name="first_name" id="first_name" class="gui-input" pattern="[a-zA-Z]" placeholder="Your Name" t-att-value="student.first_name" required="true"/>
+														<span class="field-icon"><i class="fa fa-user"></i></span>
+													</label>
+												</div>
+
+												<div class="section colm colm6">
+													<label for="your_name">Last Name*</label>
+													<label class="field prepend-icon">
+
+														<input type="text" name="last_name" id="last_name" class="gui-input" pattern="[a-zA-Z]" placeholder="Last Name" t-att-value="student.last_name" required="true"/>
+														<span class="field-icon"><i class="fa fa-user"></i></span>
+													</label>
+												</div>
+											</div>
+
+											<div class="frm-row">
+												<div class="section colm colm4">
+													<label for="your_name">Father Name*</label>
+													<label class="field prepend-icon">
+
+														<input type="text" name="father_name" id="father_name" class="gui-input" pattern="[a-zA-Z]" placeholder="Father Name" t-att-value="student.father_name" required="true"/>
+														<span class="field-icon"><i class="fa fa-user"></i></span>
+													</label>
+												</div>
+												<div class="section colm colm4">
+													<label for="DOB">Date of Birth*</label>
+													<label class="field prepend-icon">
+
+														<input type="date" name="dob" id="dob" class="gui-input" t-att-value="student.date_of_birth" required="true"/>
+														<span class="field-icon"><i class="fa fa-calendar"></i></span>
+													</label>
+												</div>
+												<div class="section colm colm4">
+													<label for="gender">Gender*</label>
+													<label class="field select">
+
+														<select name="select gender" id="gender">
+														<t t-if="student.gender == 'm'">
+															<option value="m" selected ="selected">Male</option>
+															<option value="f">Female</option>
+														</t>
+														<t t-if="student.gender == 'f'">
+															<option value="f" selected ="selected">Female</option>
+															<option value="m">Male</option>
+														</t>
+														<t t-if="not student.gender">
+															<option value="m" selected ="selected">Male</option>
+															<option value="f">Female</option>
+														</t>
+
+														</select>
+														<i class="arrow double"></i>
+													</label>
+												</div>
+											</div>
+											<div class="frm-row">
+												<div class="section colm colm4">
+													<label for="city">Religion*</label>
+													<label class="field select">
+														<select name="Select Religion" id="religion_id">
+															<t t-foreach="religion_id" t-as="religion">
+																<t t-if="student.religion_id.id == religion.id">
+																	<option t-att-value="religion.id" selected="selected"><span t-esc="religion.name"/></option>
+																</t>
+																<t t-if="not student.religion_id.id == religion.id">
+																	<option t-att-value="religion.id"><span t-esc="religion.name"/></option>
+																</t>
+															</t>
+														</select>
+														<i class="arrow double"></i>
+													</label>
+												</div>
+												<div class="section colm colm4">
+													<label for="nationality">Nationality*</label>
+													<label class="field select">
+
+														<select name="Select Nationalit" id="nationality">
+															<t t-foreach="countries" t-as="country">
+																<t t-if="student.nationality.id == country.id">
+																	<option t-att-value="country.id" selected="selected"><span t-esc="country.name"/></option>
+																</t>
+																<t t-if="not student.nationality.id == country.id">
+																	<t t-if="country.name == 'Pakistan'">
+																		<option t-att-value="country.id"><span t-esc="country.name"/></option>
+																	</t>
+																	<t t-if="not country.name == 'Pakistan'">
+																		<option t-att-value="country.id"><span t-esc="country.name"/></option>
+																	</t>
+
+																</t>
+															</t>
+														</select>
+														<i class="arrow double"></i>
+													</label>
+												</div>
+												<div class="section colm colm4">
+													<label for="nationality">Domicile*</label>
+													<label class="field select">
+
+														<select name="Select Domicile" id="domicile">
+															<option value="AJK">AJK</option>
+															<option value="Balochistan">Balochistan</option>
+															<option value="Fata">Fata</option>
+															<option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
+															<option value="Islamabad-Capital-Territory">Islamabad Capital Territory</option>
+															<option value="Khyber Pakhtoonkhawa">Khyber Pakhtoonkhawa</option>
+															<option value="Punjab">Punjab</option>
+															<option value="Sindh">Sindh</option>
+															<t t-if="student.domicile == 'AJK'">
+																<option value="AJK" selected = "selected">AJK</option>
+															</t>
+															<t t-if="student.domicile == 'Balochistan'">
+																<option value="Balochistan" selected = "selected">Balochistan</option>
+
+															</t>
+															<t t-if="student.domicile == 'Fata'">
+																<option value="Fata" selected = "selected">Fata</option>
+
+															</t>
+															<t t-if="student.domicile == 'Gilgit-Baltistan'">
+																<option value="Gilgit-Baltistan" selected = "selected">Gilgit-Baltistan</option>
+
+															</t>
+															<t t-if="student.domicile == 'Islamabad-Capital-Territory'">
+
+																<option value="Islamabad-Capital-Territory" selected = "selected">Islamabad Capital Territory</option>
+
+															</t>
+															<t t-if="student.domicile == 'Khyber-Pakhtoonkhawa'">
+
+																<option value="Khyber-Pakhtoonkhawa" selected = "selected" >Khyber Pakhtoonkhawa</option>
+
+															</t>
+															<t t-if="student.domicile == 'Punjab'">
+																<option value="Punjab" selected = "selected" >Punjab</option>
+															</t>
+															<t t-if="student.domicile == 'Sindh'">
+																<option value="Sindh" selected = "selected">Sindh</option>
+															</t>
+														</select>
+														<i class="arrow double"></i>
+													</label>
+												</div>
+											</div>
+											<div class="frm-row">
+
+												<div class="section colm colm4">
+													<label for="gender">Blood Group*</label>
+													<label class="field select">
+
+														<select name="select blood Group" id="bloodgroup">
+															<option t-att-value="student.blood_group" selected ="selected"><t t-esc="dict(student.fields_get(allfields=['blood_group'])['blood_group']['selection'])[student.blood_group]"/></option>
+															<option value="B+">B+ve</option>
+															<option value="O+">O+ve</option>
+															<option value="AB+">AB+ve</option>
+															<option value="A+">A+ve</option>
+															<option value="B-">B-ve</option>
+															<option value="O-">O-ve</option>
+															<option value="AB-">AB-ve</option>
+														</select>
+														<i class="arrow double"></i>
+													</label>
+												</div>
+
+
+												<div class="section colm colm4">
+													<label for="cnic">CNIC*</label>
+													<label class="field prepend-icon">
+
+														<input  type="text" name="cnic" id="cnic" class="gui-input" t-att-value="student.cnic" readonly="true"/>
+														<!-- <input  type="text" name="cnic" id="cnic" class="gui-input" t-att-value="current_user.login" readonly="true"/> -->
+														<span class="field-icon"><i class="fa fa-credit-card"></i></span>
+													</label>
+												</div>
+												<div class="section colm colm4">
+													<label for="phone">Phone Number*</label>
+													<label class="field prepend-icon">
+
+														<input type="text" name="phone_1" id="mobile" class="gui-input" placeholder="03400748699" t-att-value="student.mobile" required="true"/>
+														<span class="field-icon"><i class="fa fa-phone-square"></i></span>
+													</label>
+												</div>
+											</div>
+											</div>
+									</fieldset>
+
+								<!-- SECTION 2 -->
+								<h2>Address Details</h2>
+								<fieldset>
+									<div class="block-info" >
+									<legend>Permanent Address</legend>
+									<div class="frm-row">
+										<div class="section colm colm12">
+											<label for="address">Address line 1*</label>
+											<label class="field prepend-icon">
+
+												<input  type="text" name="per_street" id="per_street" placeholder="Permanent Address line 1" class="gui-input" t-att-value="student.per_street" required="true" />
+												<span class="field-icon"><i class="fa fa-map-marker"></i></span>
+											</label>
+										</div>
+									</div>
+									<div class="frm-row">
+										<div class="section colm colm12">
+											<label for="address">Address line 2</label>
+											<label class="field prepend-icon">
+
+												<input  type="text" name="per_street2" id="per_street2" placeholder="Permanent Address line 2" class="gui-input" t-att-value="student.per_street2" required="true" />
+												<span class="field-icon"><i class="fa fa-map-marker"></i></span>
+											</label>
+										</div>
+									</div>
+									<div class="frm-row">
+										<div class="section colm colm4">
+											<label for="address">City*</label>
+											<label class="field prepend-icon">
+
+												<input  type="text" name="city" id="per_city" placeholder="City" class="gui-input" t-att-value="student.per_city" required="true" />
+												<span class="field-icon"><i class="fa fa-bank"></i></span>
+											</label>
+										</div>
+										<div class="section colm colm4">
+											<label for="city">Country*</label>
+											<label class="field select">
+												<select name="Select Country" id="per_country">
+												<t t-foreach="countries" t-as="country">
+													<t t-if="student.per_country_id.id == country.id">
+														<option t-att-value="country.id" selected="selected"><span t-esc="country.name"/></option>
+													</t>
+													<t t-if="not student.per_country_id.id == country.id">
+														<t t-if="country.name == 'Pakistan'">
+															<option t-att-value="country.id"><span t-esc="country.name"/></option>
+														</t>
+														<t t-if="not country.name == 'Pakistan'">
+															<option t-att-value="country.id"><span t-esc="country.name"/></option>
+														</t>
+													</t>
+												</t>
+												</select>
+												<i class="arrow double"></i>
+											</label>
+										</div>
+									</div>
+									</div>
+
+									<div class="block-info" >
+									<legend>Present Address</legend>
+									<div class="section">
+										<div class="option-group field">
+											<label class="option option-blue">
+												<input type="checkbox" id="is_same_address" t-att-checked="student.is_same_address" onclick="isSameAddress()"/>
+												<span class="checkbox"></span>
+												Same as permanent
+											</label>
+										</div>
+									</div><!-- end section -->
+
+									<div class="frm-row">
+										<div class="section colm colm12">
+											<label for="address">Present Address line 1*</label>
+											<label class="field prepend-icon">
+												<input  type="text" name="street" id="street" placeholder="Present Address line 1" class="gui-input" t-att-value="student.street" required="true" />
+												<span class="field-icon"><i class="fa fa-map-marker"></i></span>
+											</label>
+										</div>
+									</div>
+									<div class="frm-row">
+										<div class="section colm colm12">
+											<label for="address">Address line 2</label>
+											<label class="field prepend-icon">
+												<input  type="text" name="street2" id="street2" placeholder="Present Address line 2" class="gui-input" t-att-value="student.street2" required="true" />
+												<span class="field-icon"><i class="fa fa-map-marker"></i></span>
+											</label>
+										</div>
+									</div>
+									<div class="frm-row">
+										<div class="section colm colm4">
+											<label for="address">City*</label>
+											<label class="field prepend-icon">
+												<input  type="text" name="city" id="city" placeholder="City" class="gui-input" t-att-value="student.city" required="true" />
+												<span class="field-icon"><i class="fa fa-bank"></i></span>
+											</label>
+										</div>
+										<div class="section colm colm4">
+											<label for="city">Country*</label>
+											<label class="field select">
+												<select name="Select Country" id="country">
+													<t t-foreach="countries" t-as="country">
+														<t t-if="student.country_id.id == country.id">
+															<option t-att-value="country.id" selected="selected"><span t-esc="country.name"/></option>
+														</t>
+														<t t-if="not student.country_id.id == country.id">
+															<t t-if="country.name == 'Pakistan'">
+																<option t-att-value="country.id"><span t-esc="country.name"/></option>
+															</t>
+															<t t-if="not country.name == 'Pakistan'">
+																<option t-att-value="country.id"><span t-esc="country.name"/></option>
+															</t>
+														</t>
+													</t>
+												</select>
+												<i class="arrow double"></i>
+											</label>
+										</div>
+									</div>
+								</div>
+
+
+								</fieldset>
+
+								<!-- SECTION 3 -->
+								<h2>Photo <br/> Upload</h2>
+								<fieldset>
+									<div class="block-info" >
+									<div class="frm-row">
+										<div class="section colm colm6" >
+											<!-- Upload  -->
+
+											<div id="body-overlay"><div><img src="/odoocms_admission_online\static\images/loading.gif" width="64px" height="64px"/></div></div>
+												<div class="bgColor">
+													<form id="uploadForm" action="upload.php" method="post">
+													<!-- <form id="uploadForm" action="/odoocms/attachment/form/odoocms.application" method="post" enctype="multipart/form-data" t-att-data-form_field_department_id="job and job.department_id.id or False" t-att-data-form_field_job_id="job and job.id or False" > -->
+													<!-- <form action="/website_form/" method="post" class="s_website_form" enctype="multipart/form-data" data-model_name="odoocms.application" data-success_page="/example/result" t-att-data-form_field_department_id="job and job.department_id.id or False" t-att-data-form_field_job_id="job and job.id or False"> -->
+														<div id="targetOuter">
+															<div id="targetLayer"><span>Click or Drag image here</span>
+															</div>
+															<img src="/odoocms_admission_online\static\images/imageupload.png"  class="icon-choose-image" />
+															<div class="icon-choose-image" >
+															<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+															<input name="userImage" id="userImage" type="file" class="inputFile" onChange="showPreview(this);" />
+															</div>
+														</div>
+														<div>
+															<input type="submit" style="color: #FFFFFF;" value="Upload Photo" class="btnSubmit" />
+														</div>
+													</form>
+												</div>
+											</div>
+											<div class="section colm colm6">
+												<div class="bgColor">
+													<form id="uploadForm">
+														<div id="targetOuter">
+															<div id="targetLayer2">
+															</div>
+															<t t-if="student.image">
+																<img id= "uploaded_image" t-att-src="'data:image/png;base64,%s' % to_text(student.image)" width="200px" height="200px" />
+															</t>
+														</div>
+														<div>
+														<span>Uploaded Photo</span>
+													</div>
+													</form>
+												</div>
+											</div>
+									</div>
+									</div>
+								</fieldset>
+
+								<!-- SECTION 4 -->
+								<h2>Education Details</h2>
+										<!-- Trigger/Open The Modal -->
+										<!-- <div class="frm-row"> -->
+									<fieldset>
+											<input type="hidden" name="application_id" id="application_id" t-att-value="student.id" />
+											<div class="block-info" >
+											<legend style="display:block;">Education Details</legend>
+											<button id="IntermediateBtn" class="button btn-primary"  onclick="InterEduc()">Intermediate</button>
+											<button id="matricBtn" class="button btn-primary" onclick="MatricEdu()" >Matric / O - Level</button>
+
+											<div class="section">
+												<div class="option-group field">
+													<label class="option option-blue">
+														<input type="checkbox" id="is_hafiz" t-att-checked="student.is_hafiz" />
+														<span class="checkbox"></span>
+														Are you Hafiz Quran?
+													</label>
+												</div>
+											</div><!-- end section -->
+											</div>
+										<t t-if="not(auth_signup_cnic_phone)">
+											<div class="block-info" >
+												<legend>Entry Test Details</legend>
+												<div class="frm-row">
+													<div class="section colm colm6">
+														<label for="address">Applicant Number*</label>
+														<label class="field prepend-icon">
+
+															<input t-att-value="student.entryID" type="text" name="applicantID" id="applicantID" placeholder="Applicant ID" class="gui-input" readonly="true" />
+															<span class="field-icon"><i class="fa fa-user"></i></span>
+														</label>
+													</div>
+													<div class="section colm colm6">
+														<label for="address">Name*</label>
+														<label class="field prepend-icon">
+
+															<input t-att-value="student.name" type="text" name="applicant_name" id="applicant_name" placeholder="Enter your Name" class="gui-input" required="true" />
+															<span class="field-icon"><i class="fa fa-user"></i></span>
+														</label>
+													</div>
+												</div>
+												<div class="frm-row">
+													<div class="section colm colm6">
+														<label for="address">Obtained Marks*:</label>
+														<label class="field prepend-icon">
+															<input min="0" t-att-value="student.entry_score" type="number" name="test_score" id="test_score" placeholder="Marks are here " class="gui-input" required="true" />
+															<span class="field-icon"><i class="fa fa-user"></i></span>
+														</label>
+													</div>
+													<div class="section colm colm6">
+														<label  for="address">Test Date*:</label>
+														<label class="field prepend-icon">
+															<input type="date" name="test_date" id="test_date" class="gui-input" required="true"/>
+															<span class="field-icon"><i class="fa fa-calendar"></i></span>
+														</label>
+													</div>
+												</div>
+												<div class="frm-row">
+													<t t-if="student.entry_score">
+														<input value="Verified" class="button btn-primary" style="display:block;float:right; width: auto; margin-right:15px; margin-bottom: 10px; " type="button" name="verify_entrytest" id="verify_entrytest" onclick="verifyETEAData()"/>
+													</t>
+													<t t-if="not student.entry_score">
+														<input value="Verify ApplicantID Number" class="button btn-primary" style="display:block;float:right; width:auto;  margin-right:15px; margin-bottom: 10px;" type="button" name="verify_entrytest" id="verify_entrytest" onclick="verifyETEAData()"/>
+													</t>
+												</div>
+											</div>
+										</t>
+										<!-- The Modal -->
+										<div id="IntermediateModal" class="w3-modal cms-modal">
+
+										  <!-- Modal content -->
+										  <div class="w3-modal-content cms-modal-content">
+											<div class="modal-header cms-modal-header">
+											  <h2>Intermediate</h2>
+											  <span class="close" id = "closemodelIntermediate" onclick="InterCloseDialog()">X</span>
+
+											</div>
+											<div class="modal-body cms-modal-body">
+
+												<div class="frm-row">
+													<div class="section colm colm12">
+														<label for="university">Degree</label>
+														<label class="field select">
+
+															<select id="inter_degree" name="Select Degree" onchange="changeDegreeLeve()">
+																<t t-if="len(inter_education)>0">
+																	<t t-if="inter_education[0].degree == 'ICS'">
+																		<option value="ICS" selected="selected">ICS</option>
+																		<option value="FSC">FSC</option>
+																		<option value="DAE">DAE</option>
+																		<option value="A-Level">A-Level</option>
+																	</t>
+																	<t t-if="inter_education[0].degree == 'FSC'">
+																		<option value="ICS">ICS</option>
+																		<option value="FSC" selected="selected">FSC</option>
+																		<option value="DAE">DAE</option>
+																		<option value="A-Level">A-Level</option>
+																	</t>
+																	<t t-if="inter_education[0].degree == 'DAE'">
+																		<option value="ICS" >ICS</option>
+																		<option value="FSC">FSC</option>
+																		<option value="DAE" selected="selected">DAE</option>
+																		<option value="A-Level">A-Level</option>
+																	</t>
+																	<t t-if="inter_education[0].degree == 'A-Level'">
+																		<option value="ICS" >ICS</option>
+																		<option value="FSC">FSC</option>
+																		<option value="DAE">DAE</option>
+																		<option value="A-Level" selected="selected">A-Level</option>
+																	</t>
+																	<t t-if="inter_education[0].degree == ''">
+																		<option value="ICS" >ICS</option>
+																		<option value="FSC">FSC</option>
+																		<option value="DAE">DAE</option>
+																		<option value="A-Level">A-Level</option>
+																	</t>
+																</t>
+																<t t-if="not len(inter_education)>0">
+																	<option value="ICS" >ICS</option>
+																	<option value="FSC">FSC</option>
+																	<option value="DAE">DAE</option>
+																	<option value="A-Level">A-Level</option>
+																</t>
+															</select>
+														<i class="arrow double"></i>
+														</label>
+													</div>
+												</div>
+												<div class="frm-row">
+													<div class="section colm colm12">
+														<label for="university">Passing Year</label>
+														<label class="field select">
+
+															<select id="inter_pass_year" name="Passing Year">
+																<t t-if="len(inter_education)>0">
+																	<t t-foreach="sessions" t-as="session">
+																		<t t-if="inter_education[0].year == session.name ">
+																			<option t-att-value="inter_education[0].year" selected='selected'><span t-esc="inter_education[0].year"/></option>
+																		</t>
+																		<t t-if="not inter_education[0].year == session.name ">
+																			<option t-att-value="session.name"><span t-esc="session.name"/></option>
+																		</t>
+																	</t>
+																</t>
+																<t t-if="not len(inter_education)>0">
+																	<t t-foreach="sessions" t-as="session">
+																		<option t-att-value="session.name" ><span t-esc="session.name"/></option>
+																	</t>
+																</t>
+															</select>
+														<i class="arrow double"></i>
+														</label>
+													</div>
+												</div>
+												<div class="frm-row">
+													<div class="section colm colm12">
+														<label for="university">Board</label>
+														<label class="field select">
+
+															<select id= "inter_board" name="Select Board">
+																<t t-if="len(inter_education)>0">
+																	<t t-foreach="boards" t-as="board">
+																		<t t-if="inter_education[0].board == board.name ">
+																			<option t-att-value="inter_education[0].board" selected='selected'><span t-esc="inter_education[0].board"/></option>
+																		</t>
+																		<t t-if="not inter_education[0].board == board.name ">
+																			<option t-att-value="board.name"><span t-esc="board.name"/></option>
+																		</t>
+																	</t>
+																</t>
+																<t t-if="not len(inter_education)>0">
+																	<t t-foreach="boards" t-as="board">
+																		<option t-att-value="board.name" ><span t-esc="board.name"/></option>
+																	</t>
+																</t>
+														</select>
+														<i class="arrow double"></i>
+														</label>
+													</div>
+												</div>
+												<div class="frm-row" id="row_inter_subject" >
+													<div class="section colm colm12">
+														<label for="university">Subject</label>
+														<label class="field select">
+
+															<select id="inter_subject" name="Select Subject">
+																<t t-if="len(inter_education)>0">
+																	<t t-if="inter_education.subjects == 'Pre-Medical'">
+																		<option value="Pre-Medical" selected="selected">Pre-Medical</option>
+																		<option value="Pre-Engineering">Pre-Engineering</option>
+																		<option value="Computer" >Computer</option>
+																		<option value="DAE">DAE</option>
+																	</t>
+																	<t t-if="inter_education.subjects == 'Pre-Engineering'">
+																		<option value="Pre-Medical">Pre-Medical</option>
+																		<option value="Computer" >Computer</option>
+																		<option value="Pre-Engineering" selected="selected">Pre-Engineering</option>
+																		<option value="DAE">DAE</option>
+																	</t>
+																	<t t-if="inter_education.subjects == 'DAE'">
+																		<option value="Pre-Medical">Pre-Medical</option>
+																		<option value="Computer" >Computer</option>
+																		<option value="Pre-Engineering">Pre-Engineering</option>
+																		<option value="DAE"  selected="selected">DAE</option>
+																	</t>
+																	<t t-if="inter_education.subjects == 'Computer'">
+																		<option value="Pre-Medical">Pre-Medical</option>
+																		<option value="Computer" selected="selected">Computer</option>
+																		<option value="Pre-Engineering" >Pre-Engineering</option>
+																		<option value="DAE">DAE</option>
+																	</t>
+																	<t t-if="inter_education[0].degree == 'A-Level'">
+																		<option value="A-Level" selected="selected">A-Level</option>
+																	</t>
+																</t>
+																<t t-if="not len(inter_education)>0">
+																	<option value="Pre-Medical">Pre-Medical</option>
+																	<option value="Computer" >Computer</option>
+																	<option value="Pre-Engineering" selected="selected">Pre-Engineering</option>
+																	<option value="DAE">DAE</option>
+																</t>
+
+															</select>
+														<i class="arrow double"></i>
+														</label>
+													</div>
+												</div>
+
+
+												<div class="frm-row">
+													<div class="section colm colm4">
+														<label for="university">Total Marks</label>
+														<label class="field prepend-icon">
+
+															<t t-if="len(inter_education)>0">
+																<input type="number" name="intertotalmarks" id="intertotalmarks" placeholder="total marks" class="gui-input" t-att-value="inter_education[0].total_marks" required="true" />
+															</t>
+															<t t-if="not len(inter_education)>0">
+																<input min="500" max="3000" type="number" name="intertotalmarks" id="intertotalmarks" placeholder="total marks" class="gui-input" required="true" />
+															</t>
+															<span class="field-icon"><i class="fa fa-credit-card"></i></span>
+														</label>
+													</div>
+													<div class="section colm colm4">
+														<label for="university">Obtained Marks</label>
+														<label class="field prepend-icon">
+															<t t-if="len(inter_education)>0">
+																<input type="number" name="interbtainedmarks" id="interbtainedmarks" placeholder="total marks" class="gui-input" t-att-value="inter_education[0].obtained_marks" required="true" />
+															</t>
+															<t t-if="not len(inter_education)>0">
+																<input min="500" max="3000" type="number" name="interbtainedmarks" id="interbtainedmarks" placeholder="Obtained marks" class="gui-input" required="true" />
+															</t>
+															<span class="field-icon"><i class="fa fa-credit-card"></i></span>
+														</label>
+													</div>
+													<div class="section colm colm4">
+														<label for="university">No of times Repeats</label>
+														<label class="field prepend-icon">
+
+															<input type="number" name="repeat_times" id="repeat_times" placeholder="0" t-att-value="student.repeat_times" class="gui-input" />
+															<span class="field-icon"><i class="fa fa-pencil"></i></span>
+														</label>
+													</div>
+												</div>
+
+												<!-- <div class="frm-row"> -->
+													<!-- <label class="field prepend-icon"> -->
+														<!-- <label for="gobtainedmarks">Is any additional subject?</label> -->
+														<!-- <div class = "form-input-area"> -->
+															<!-- <input style="margin-left:30px" type="checkbox" name="additional subject" id="is_additional" class="gui-input" /> -->
+															<!-- <span class="checkmark"></span> -->
+														<!-- </div> -->
+
+													<!-- </div> -->
+												<!-- </div> -->
+
+												 <div class="section">
+													<div class="option-group field">
+														<label class="option option-blue">
+															<input type="checkbox" id="is_additional" name="is_additional" t-att-checked="student.is_additional" />
+															<span class="checkbox"></span>
+															Any additional Subject
+														</label>
+													</div>
+												</div><!-- end section -->
+
+											</div>
+											<div class="modal-footer cms-modal-footer">
+												<button id="IntermediatesubmitBtn" class="button btn-primary" onclick="SaveInterEducation()">submit</button>
+												<button id="IntermediatecancelBtn" class="button btn-primary" onclick="InterCloseDialog()">cancel</button>
+											</div>
+										  </div>
+
+										</div>
+										<!-- The Modal -->
+										<div id="MatricModal" class="w3-modal cms-modal">
+
+										  <!-- Modal content -->
+										  <div class="w3-modal-content cms-modal-content">
+											<div class="modal-header cms-modal-header">
+											   <h2>Matric/O-level</h2>
+											  <span class="close" id = "closemodelMatric" onclick="MatricCloseDialog()">X</span>
+											</div>
+											<div class="modal-body cms-modal-body">
+												<div class="frm-row">
+													<div class="section colm colm12">
+														<label for="university">Degree</label>
+														<label class="field select">
+
+															<select id="matric_degree" name="Select Degree">
+																<t t-if="len(matric_education)>0">
+																	<t t-if="matric_education[0].degree == 'O-Level'">
+																		<option value="O-Level">O-Level</option>
+																	</t>
+																	<t t-if="not matric_education[0].degree == 'O-Level'">
+																		<option value="Matric" selected="selected">Matric</option>
+																	</t>
+																</t>
+																<t t-if="not len(matric_education)>0">
+																	<option value="Matric" selected="selected">Matric</option>
+																	<option value="O-Level">O-Level</option>
+																</t>
+															</select>
+															<i class="arrow double"></i>
+														</label>
+													</div>
+												</div>
+												<div class="frm-row">
+													<div class="section colm colm12">
+														<label for="university">Passing Year</label>
+														<label class="field select">
+
+															<select id="matric_pass_year" name="Passing Year">
+																<t t-if="len(matric_education)>0">
+																	<t t-foreach="sessions" t-as="session">
+																		<t t-if="matric_education[0].year == session.name ">
+																			<option t-att-value="matric_education[0].year" selected='selected'><span t-esc="matric_education[0].year"/></option>
+																		</t>
+																		<t t-if="not matric_education[0].year == session.name ">
+																			<option t-att-value="session.name"><span t-esc="session.name"/></option>
+																		</t>
+																	</t>
+																</t>
+																<t t-if="not len(matric_education)>0">
+																	<t t-foreach="sessions" t-as="session">
+																		<option t-att-value="session.name" ><span t-esc="session.name"/></option>
+																	</t>
+																</t>
+															</select>
+															<i class="arrow double"></i>
+														</label>
+													</div>
+												</div>
+												<div class="frm-row">
+													<div class="section colm colm12">
+														<label for="university">Board</label>
+														<label class="field select">
+
+															<select id="matric_board" name="Select Board">
+																<t t-if="len(matric_education)>0">
+																	<t t-foreach="boards" t-as="board">
+																		<t t-if="matric_education[0].board == board.name ">
+																			<option t-att-value="matric_education[0].board" selected='selected'><span t-esc="matric_education[0].board"/></option>
+																		</t>
+																		<t t-if="not matric_education[0].board == board.name ">
+																			<option t-att-value="board.name"><span t-esc="board.name"/></option>
+																		</t>
+																	</t>
+																</t>
+																<t t-if="not len(matric_education)>0">
+																	<t t-foreach="boards" t-as="board">
+																		<option t-att-value="board.name" ><span t-esc="board.name"/></option>
+																	</t>
+																</t>
+
+															</select>
+															<i class="arrow double"></i>
+														</label>
+													</div>
+												</div>
+												<div class="frm-row">
+													<div class="section colm colm12">
+														<label for="university">Subject</label>
+														<label class="field select">
+															<select id="matric_subject" name="Select Subject">
+																<t t-if="len(matric_education)>0">
+																	<t t-if="matric_education[0].subjects == 'Arts'">
+																		<option value="Arts" selected="selected">Arts</option>
+																		<option value="Science">Science</option>
+																	</t>
+																	<t t-if="matric_education[0].subjects == 'Science'">
+																		<option value="Arts">Arts</option>
+																		<option value="Science" selected="selected">Science</option>
+																	</t>
+																</t>
+																<t t-if="not len(matric_education)>0">
+																	<option value="Arts">Arts</option>
+																	<option value="Science" selected="selected">Science</option>
+																</t>
+															</select>
+															<i class="arrow double"></i>
+														</label>
+													</div>
+												</div>
+
+												<div class="frm-row">
+													<div class="section colm colm6">
+														<label for="university">Total Marks</label>
+														<label class="field prepend-icon">
+															<t t-if="len(matric_education)>0">
+																<input type="number" name="matrictotalmarks" id="matrictotalmarks" placeholder="total marks" class="gui-input" t-att-value="matric_education[0].total_marks" required="true" />
+															</t>
+															<t t-if="not len(matric_education)>0">
+																<input min="500" max="3000" type="number" name="matrictotalmarks" id="matrictotalmarks" placeholder="total marks" class="gui-input" required="true" />
+															</t>
+															<span class="field-icon"><i class="fa fa-credit-card"></i></span>
+														</label>
+													</div>
+													<div class="section colm colm6">
+														<label for="university">Obtained Marks</label>
+														<label class="field prepend-icon">
+															<t t-if="len(matric_education)>0">
+																<input type="number" name="matricobtainedmarks" id="matricobtainedmarks" placeholder="total marks" class="gui-input" t-att-value="matric_education[0].obtained_marks" required="true" />
+															</t>
+															<t t-if="not len(matric_education)>0">
+																<input min="500" max="3000" type="number" name="matricobtainedmarks" id="matricobtainedmarks" placeholder="Obtained marks" class="gui-input" required="true" />
+															</t>
+															<span class="field-icon"><i class="fa fa-credit-card"></i></span>
+														</label>
+													</div>
+												</div>
+											</div> <!-- modal body ends here-->
+											<div class="modal-footer cms-modal-footer">
+												<button id="matricsubmitBtn" class="button btn-primary" onclick="saveMatricEducation()">submit</button>
+												<button id="matriccancelBtn" class="button btn-primary" onclick="MatricCloseDialog()">cancel</button>
+											</div>
+										  </div>
+
+										</div>
+										</fieldset>
+
+								<!-- SECTION 5 -->
+								<h2>Program Choices</h2>
+										<fieldset>
+											<legend>Program Choices</legend>
+											<t t-if="auth_signup_cnic_phone">
+												<input type="hidden" name="program_apply_for" id="program_apply_for" value="1"/>
+												<input type="hidden" name ="choice2" value="1" id="choice2"/>
+												<input type="hidden" name ="choice3" value="1" id="choice3"/>
+												<input type="hidden" name ="choice4" value="1" id="choice4"/>
+												<input type="hidden" name ="choice5" value="1" id="choice5"/>
+												<input type="hidden" name ="choice6" value="1" id="choice6"/>
+												<input type="hidden" name ="choice7" value="1" id="choice7"/>
+												<input type="hidden" name ="choice8" value="1" id="choice8"/>
+												<input type="hidden" name ="choice9" value="1" id="choice9"/>
+												<input type="hidden" name ="choice10" value="1" id="choice10"/>
+												<input type="hidden" name ="choice11" value="1" id="choice11"/>
+												<input type="hidden" name ="choice12" value="1" id="choice12"/>
+												<input type="hidden" name ="choice13" value="1" id="choice13"/>
+												<input type="hidden" name ="choice14" value="1" id="choice14"/>
+												<input type="hidden" name ="choice15" value="1" id="choice15"/>
+												<input type="hidden" name ="choice16" value="1" id="choice16"/>
+												<input type="hidden" name ="choice17" value="1" id="choice17"/>
+												<input type="hidden" name ="choice18" value="1" id="choice18"/>
+
+												<input type="hidden" name ="test_date" value="1" id="test_date"/>
+												<input type="hidden" name ="test_date" value="1" id="test_date"/>
+												<input type="hidden" name ="applicantID" value="1" id="applicantID"/>
+												<input type="hidden" name ="test_score" value="1" id="test_score"/>
+												<input type="hidden" name ="verify_entrytest" value="1" id="verify_entrytest"/>
+												<div class="frm-row">
+													<div class="section colm colm6">
+														<label class="field select">
+															<!-- <label for="programs apply for">Program Applying For*</label> -->
+															<select name="choice1" id="choice1" >
+																<option value="">Select Program</option>
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="programs" t-as="program">
+																	<t t-if="student.preference_ids">
+																		<option t-att-value="program.id" t-if="not student.preference_ids[0].program_id.id==program.id"><span t-esc="program.name" t-if="not student.preference_ids[0].program_id.id==program.id"/></option>
+																		<option t-att-value="student.preference_ids[0].program_id.id" selected="selected" t-if="student.preference_ids[0].program_id.id==program.id"><span t-esc="student.preference_ids[0].program_id.name" t-if="student.preference_ids[0].program_id.id==program.id"/></option>
+																	</t>
+																	<t t-if="not student.preference_ids">
+																		<option t-att-value="program.id"><span t-esc="program.name"/></option>
+																	</t>
+																</t>
+															</select>
+														 </label>
+													</div>
+												</div>
+											</t>
+											<t t-if="not(auth_signup_cnic_phone)">
+												<div class="frm-row">
+													<t t-if="len(programs) >=1">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[0].name"/> <span>-</span><span t-esc="programs[0].code"/> </label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[0].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice1" id="choice1" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice1()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice1" id="choice1" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice1()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+
+												<div class="frm-row">
+													<t t-if="len(programs) >=2">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[1].name"/><span>-</span><span t-esc="programs[1].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[1].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice2" id="choice2" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice2()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice2" id="choice2" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice2()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=3">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[2].name"/><span>-</span><span t-esc="programs[2].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[2].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice3" id="choice3" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice3()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice3" id="choice3" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice3()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=4">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[3].name"/><span>-</span><span t-esc="programs[3].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[3].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice4" id="choice4" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice4()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice4" id="choice4" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice4()" />
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=5">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[4].name"/><span>-</span><span t-esc="programs[4].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[4].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice5" id="choice5" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice5()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice5" id="choice5" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice5()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=6">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[5].name"/><span>-</span><span t-esc="programs[5].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[5].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice6" id="choice6" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice6()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice6" id="choice6" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice6()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=7">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[6].name"/><span>-</span><span t-esc="programs[6].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[6].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice7" id="choice7" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice7()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice7" id="choice7" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice7()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=8">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[7].name"/><span>-</span><span t-esc="programs[7].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[7].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice8" id="choice8" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice8()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice8" id="choice8" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice8()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=9">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[8].name"/><span>-</span><span t-esc="programs[8].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[8].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice9" id="choice9" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice9()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice9" id="choice9" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice9()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=10">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[9].name"/><span>-</span><span t-esc="programs[9].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[9].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice10" id="choice10" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice10()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice10" id="choice10" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice10()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=11">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[10].name"/><span>-</span><span t-esc="programs[10].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[10].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice11" id="choice11" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice11()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice11" id="choice11" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice11()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=12">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[11].name"/><span>-</span><span t-esc="programs[11].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[11].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice12" id="choice12" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice12()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice12" id="choice12" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice12()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=13">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[12].name"/><span>-</span><span t-esc="programs[12].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[12].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice13" id="choice13" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice13()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice13" id="choice13" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice13()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=14">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[13].name"/><span>-</span><span t-esc="programs[13].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[13].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice14" id="choice14" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice14()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice14" id="choice14" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice14()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=15">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[14].name"/><span>-</span><span t-esc="programs[14].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[14].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice15" id="choice15" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice15()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice15" id="choice15" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice15()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=16">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[15].name"/><span>-</span><span t-esc="programs[15].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[15].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice16" id="choice16" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice16()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice16" id="choice16" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice16()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=17">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[16].name"/><span>-</span><span t-esc="programs[16].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[16].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice17" id="choice17" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice17()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice17" id="choice17" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice17()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+												<div class="frm-row">
+													<t t-if="len(programs) >=18">
+														<div class="section colm colm8">
+															<!-- <label for="program"><span t-esc="programs[0].name"></span></label> -->
+															<label for="program"><span t-esc="programs[17].name"/><span>-</span><span t-esc="programs[17].code"/></label>
+														</div>
+														<div class="section colm colm4">
+															<label class="field prepend-icon">
+																<t t-set="foo" t-value="true"/>
+																<t t-foreach="program_perferences" t-as="pre">
+																	<t t-if="pre.program_id.id == programs[17].id">
+																		<t t-set="foo" t-value="false"/>
+																		<input type="number" name ="choice18" id="choice18" placeholder="piriorty number"  t-att-value="pre.preference" min="0" max="18" onChange="choice18()"/>
+																	</t>
+																</t>
+																<t t-if="foo">
+																	<input type="number" name ="choice18" id="choice18" placeholder="piriorty number"  value="0" min="0" max="18" onChange="choice18()"/>
+																</t>
+															</label>
+														</div>
+													</t>
+												</div>
+											</t>
+										</fieldset>
+
+								<!-- SECTION 6 -->
+								<h2>Documents Upload</h2>
+								<fieldset>
+										<!-- This is just because form action is not working without this -->
+										<form action="/test" method="post">
+											<input type="hidden" value="Upload Photo" class="btnSubmit" />
+										</form>
+
+										<div id="body-overlay-documents" ><div><img src="/odoocms_admission_online\static\images/loading.gif" width="64px" height="64px"/></div></div>
+										<form id="document_upload_form" action="upload.php" method="post">
+										<div class="block-info block-documents">
+											<legend>Matric Certificate</legend>
+											<div class="frm-row">
+												<div class="form-2col">
+													<input  type="file" name="matric" id="matriccertificate" required="true" accept="image/*" />
+												</div>
+												<div class="form-2col" style="margin-top:10px">
+													<t t-if="application_documents.matric_scaned_copy">
+														<span t-esc="application_documents.matric_scaned_copy_name" />
+														<img onclick="document.getElementById('matric_modal').style.display='block'" class="documents_images" id= "matric" t-att-src="'data:image/png;base64,%s' % to_text(application_documents.matric_scaned_copy)"/>
+													</t>
+												</div>
+												<div id="matric_modal" class="w3-modal" onclick="this.style.display='none'">
+													<div class="w3-modal-content w3-animate-zoom">
+													  <img t-att-src="'data:image/png;base64,%s' % to_text(application_documents.matric_scaned_copy)" style="width:100%"/>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="block-info block-documents" >
+											<legend>Inter Certificate</legend>
+											<div class="frm-row">
+												<div class="form-2col">
+													<input  type="file" name="inter" id="intercertificate" required="true" accept="image/*"/>
+												</div>
+												<div class="form-2col" style="margin-top:10px">
+													<t t-if="application_documents.inter_scaned_copy">
+														<span t-esc="application_documents.inter_scaned_copy_name" />
+														<img onclick="document.getElementById('inter_modal').style.display='block'" class="documents_images" id= "matric" t-att-src="'data:image/png;base64,%s' % to_text(application_documents.inter_scaned_copy)"/>
+													</t>
+												</div>
+												<div id="inter_modal" class="w3-modal" onclick="this.style.display='none'">
+													<div class="w3-modal-content w3-animate-zoom">
+													  <img t-att-src="'data:image/png;base64,%s' % to_text(application_documents.inter_scaned_copy)" style="width:100%"/>
+													</div>
+												</div>
+											</div>
+
+										</div>
+										<div class="block-info block-documents">
+											<legend>Domicile</legend>
+											<div class="frm-row">
+												<div class="form-2col">
+													<input  type="file" name="domicile" id="domicilecertificate"  accept="image/*" />
+												</div>
+												<div class="form-2col" style="margin-top:10px">
+													<t t-if="application_documents.domicile_scaned_copy">
+														<span t-esc="application_documents.domicile_scaned_copy_name" />
+														<img onclick="document.getElementById('domicile_modal').style.display='block'" class="documents_images" id= "matric" t-att-src="'data:image/png;base64,%s' % to_text(application_documents.domicile_scaned_copy)"/>
+													</t>
+												</div>
+												<div id="domicile_modal" class="w3-modal" onclick="this.style.display='none'">
+													<div class="w3-modal-content w3-animate-zoom">
+													  <img t-att-src="'data:image/png;base64,%s' % to_text(application_documents.domicile_scaned_copy)" style="width:100%"/>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="block-info block-documents" >
+											<legend>PRC</legend>
+											<div class="frm-row">
+												<div class="form-2col">
+													<input  type="file" name="prc" id="prccertificate" accept="image/*"/>
+												</div>
+												<div class="form-2col" style="margin-top:10px">
+													<t t-if="application_documents.prc_scaned_copy">
+														<span t-esc="application_documents.prc_scaned_copy_name" />
+														<img onclick="document.getElementById('prc_modal').style.display='block'" class="documents_images" id= "matric" t-att-src="'data:image/png;base64,%s' % to_text(application_documents.prc_scaned_copy)"/>
+													</t>
+												</div>
+												<div id="prc_modal" class="w3-modal" onclick="this.style.display='none'">
+													<div class="w3-modal-content w3-animate-zoom">
+													  <img t-att-src="'data:image/png;base64,%s' % to_text(application_documents.prc_scaned_copy)" style="width:100%"/>
+													</div>
+												</div>
+											</div>
+
+										</div>
+										<div class="block-info block-documents">
+											<legend>Hafiz Quran Certificate</legend>
+											<div class="frm-row">
+												<div class="form-2col">
+													<input  type="file" name="hafiz" id="hqcertificate" accept="image/*"/>
+												</div>
+												<div class="form-2col" style="margin-top:10px">
+													<t t-if="application_documents.hafiz_scaned_copy">
+														<span t-esc="application_documents.hafiz_scaned_copy_name" />
+														<img onclick="document.getElementById('hafiz_modal').style.display='block'" class="documents_images" id= "matric" t-att-src="'data:image/png;base64,%s' % to_text(application_documents.hafiz_scaned_copy)"/>
+													</t>
+												</div>
+												<div id="hafiz_modal" class="w3-modal" onclick="this.style.display='none'">
+													<div class="w3-modal-content w3-animate-zoom">
+													  <img t-att-src="'data:image/png;base64,%s' % to_text(application_documents.hafiz_scaned_copy)" style="width:100%"/>
+													</div>
+												</div>
+											</div>
+
+										</div>
+										<div class="frm-row">
+											<div class="section colm colm12">
+												<input type="submit" value="Upload Documents" class="btnSubmit" style="float:right;display:block;margin:10px;width:150px; color:#FFFFFF;"/>
+											</div>
+										</div>
+
+										</form>
+								</fieldset>
+
+
+						</div>
+						</t>
+						</div>
+					</div>
+				</div>
+			</body>
+
+	
+	<div id="final_data_id" class="page w3-modal" style="padding-bottom:30px">
+	<div class= "w3-modal-content animate-zoom card-4"  style="width:70%" >
+		<t t-if="students">
+			<t t-foreach="students" t-as="student">
+				<div class="row" style="margin:0px">
+					<div style=" text-align: right;background: #EA4D08;color: white; font-size: 30px;" class="col-md-8 col-sm-8">
+						<span>Application Data </span>
+					</div>
+					<div style=" text-align: right ;background: #EA4D08;color: white; font-size: 30px;" class="col-md-4 col-sm-4">
+						<span class="close" id="close_final_modal" onclick="closeFinalModal()">X</span>
+					</div>
+				</div>
+				<t class="list-group-item fle-xgrow-1">
+					<div style="box-shadow: 0px 3px 10px 0px rgb(0,0,0,0.3); padding:0px 25px 25px">
+					 
+					  <div class="row">
+						<div class="col-md-5 col-sm-6">
+						  <div style="height:80px;width:100%;margin: auto;padding-top:30px">
+							<strong>Name:</strong>
+							<span t-field="student.name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+							<span t-field="student.last_name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+							<br/>
+							<strong>Application Number:</strong>
+							<span t-field="student.application_no" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+							<br/>
+							<strong>Application Date:</strong>
+							<span t-field="student.application_date" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+						  </div>
+						</div>
+						
+						<div class="col-md-5 col-sm-6">
+						  <img alt="Contact" class="rounded-circle mt-1 o_portal_contact_img" style="width:100px;height:80px;float:right;" t-att-src="image_data_uri(student.image)" t-if="student.image"/>
+						  <img alt="Contact" class="rounded-circle mt-1 o_portal_contact_img" src="/web/static/src/img/user_menu_avatar.png" t-else=""/>
+						</div>
+					  </div>
+					  <div class=" row mt-4">
+						<style>table th { background-color:#d4e3e5;}
+											 tr:nth-child(even) {background-color: #d4e3e5;}
+											 tr:nth-child(odd) {background-color: #d4e3e5;}
+									</style>
+						<div class="small mb-1">
+						  <strong class="text-muted">
+							<h3>Personal Information</h3>
+						  </strong>
+						</div>
+						<table class="table table-condensed" width="100%">
+						  <tbody>
+									<th class="text-left">Name: </th>
+									<td class="text-left">
+										<span t-field="student.name"/><span t-field="student.last_name"/>
+									</td>
+									<th class="text-left">Father Name: </th>
+									 <td class="text-left">
+										<span t-field="student.father_name"/>
+									</td>
+									<th class="text-left">Email: </th>
+									<td class="text-left">
+										<span t-field="student.email"/>
+									</td>
+								<tr style="font-size:14px;">
+									<th class="text-left">CNIC: </th>
+									<td class="text-left">
+										<span t-field="student.cnic"/>
+									</td>
+									<th class="text-left">Date of Birth: </th>
+									<td class="text-left">
+										<span t-field="student.date_of_birth"/>
+									</td>
+									<th class="text-left">Mobile: </th>
+									<td class="text-left">
+										<span t-field="student.mobile"/>
+									</td>
+								</tr>
+								<tr style="font-size:14px;">
+									<th class="text-left">Gender: </th>
+									<td class="text-left">
+										<span t-field="student.gender"/>
+									</td>
+									<th class="text-left">Nationality: </th>
+									<td class="text-left">
+										<span t-field="student.nationality"/>
+									</td>
+									<th class="text-left">Domicile: </th>
+									<td class="text-left">
+										<span t-field="student.domicile"/>
+									</td>
+								</tr>
+								<tr style="font-size:14px;">
+									<th class="text-left">Blood Group: </th>
+									<td class="text-left">
+										<span t-field="student.blood_group"/>
+									</td>
+									<th class="text-left">Religion: </th>
+									<td class="text-left">
+										<span t-field="student.religion_id.name"/>
+									</td>
+									<th class="text-left">Hafiz Quran: </th>
+									<td class="text-left">
+										<t t-if="student.is_hafiz">
+											<span>Yes</span>
+										</t>
+										<t t-if="not student.is_hafiz">
+											<span>No</span>
+										</t>
+									</td>
+								</tr>
+							
+						  </tbody>
+						</table>
+					  </div>
+					  <div class=" row mt-4">
+						<div class="small mb-1">
+						  <strong class="text-muted">
+							<h3>Address Details</h3>
+						  </strong>
+						</div>
+						<table class="table table-condensed" width="100%">
+						  <tbody>
+							<tr style="font-size:20px;">
+								<th class="text-left" colspan="4" >Permanent Address</th>
+							</tr>
+							<tr style="font-size:14px;">
+							  <th class="text-left">Street1: </th>
+							  <td class="text-left" colspan="3">
+								<span t-field="student.street"/>
+							  </td>
+							</tr>
+							<tr style="font-size:14px;">
+							  <th class="text-left">Street2: </th>
+							  <td class="text-left" colspan="3">
+								<span t-field="student.street2"/>
+							  </td>
+							</tr>
+							<tr style="font-size:14px;">
+							  <th class="text-left">City: </th>
+							  <td class="text-left">
+								<span t-field="student.city"/>
+							  </td>
+							  <th class="text-left">Country: </th>
+							  <td class="text-left">
+								<span t-field="student.country_id.name"/>
+							  </td>
+							</tr>
+							<tr style="font-size:20px;">
+								<th class="text-left" colspan="4">Present Address</th>
+							</tr>
+							<tr style="font-size:14px;">
+							  <th class="text-left">Street1: </th>
+							  <td class="text-left" colspan="3">
+								<span t-field="student.per_street"/>
+							  </td>
+							</tr>
+							<tr style="font-size:14px;">
+							  <th class="text-left">Street2: </th>
+							  <td class="text-left" colspan="3">
+								<span t-field="student.per_street2"/>
+							  </td>
+							</tr>
+							<tr style="font-size:14px;">
+							  <th class="text-left">City: </th>
+							  <td class="text-left">
+								<span t-field="student.per_city"/>
+							  </td>
+							  <th class="text-left">Country: </th>
+							  <td class="text-left">
+								<span t-field="student.per_country_id.name"/>
+							  </td>
+							</tr>
+						  </tbody>
+						</table>
+					  </div>
+					  
+					  <div class=" row mt-4">
+						<div class="small mb-1">
+						  <strong class="text-muted">
+							<h3>Educational Information</h3>
+						  </strong>
+						</div>
+						<table class="table table-condensed" width="100%">
+						  <tbody>
+								<t t-foreach="matric_education" t-as="matric">
+									<tr style="font-size:14px;">
+										<th class="text-left">Degree Title</th>
+										<th class="text-left">Passing Year </th>
+										<th class="text-left">Board/University </th>
+										<th class="text-left">Subjects</th>
+										<th class="text-left">Total Marks</th>
+										<th class="text-left">Obtained Marks </th>
+									</tr>
+									<tr style="font-size:13px;">
+										<td class="text-left">
+											<span t-field="matric.degree"/>
+										</td>
+
+										 <td class="text-left">
+											<span t-field="matric.year"/>
+										</td>
+
+										<td class="text-left">
+											<span t-field="matric.board"/>
+										</td>
+
+										<td class="text-left">
+											<span t-field="matric.subjects"/>
+										</td>
+
+										<td class="text-left">
+											<span t-field="matric.total_marks"/>
+										</td>
+										<td class="text-left">
+											<span t-field="matric.obtained_marks"/>
+										</td>
+									</tr>
+								</t>
+								<t t-foreach="inter_education" t-as="inter">
+									<tr style="font-size:14px;">
+										<td class="text-left">
+											<span t-field="inter.degree"/>
+										</td>
+										 <td class="text-left">
+											<span t-field="inter.year"/>
+										</td>
+										<td class="text-left">
+											<span t-field="inter.board"/>
+										</td>
+										<td class="text-left">
+											<t t-if="inter.degree=='A-Level'">
+												<span t-field="inter.degree"/>
+											</t>
+											<t t-if="not inter.degree =='A-Level'">
+												<span t-field="inter.subjects"/>
+											</t>
+										</td>
+										<td class="text-left">
+											<span t-field="inter.total_marks"/>
+										</td>
+										<td class="text-left">
+											<span t-field="inter.obtained_marks"/>
+										</td>
+									</tr>
+								</t>
+							
+						  </tbody>
+						</table>
+					  </div>
+					  
+					  <div class=" row mt-4">
+						<div class="small mb-1">
+						  <strong class="text-muted">
+							<h3>Entry Test Details</h3>
+						  </strong>
+						</div>
+						<table class="table table-condensed" width="100%">
+						  <tbody>
+							<tr style="font-size:14px;">
+							  <th class="text-left">Applicant ID: </th>
+							  <td class="text-left">
+								<span t-field="student.entryID"/>
+							  </td>
+							</tr>
+							<tr style="font-size:14px;">
+							  <th class="text-left">Score: </th>
+							  <td class="text-left">
+								<span t-field="student.entry_score"/>
+							  </td>
+							</tr>
+						  </tbody>
+						</table>
+					  </div>
+					  
+					  <div class=" row mt-4">
+						<div class="small mb-1">
+						  <strong class="text-muted">
+							<h3>Program Information</h3>
+						  </strong>
+						</div>
+						<table class="table table-condensed" width="100%">
+						  <tbody>
+								<tr style="font-size:20px;" >
+									<th class="text-left" colspan="3" >Program Apply For: </th>
+									<td class="text-left" colspan="9">
+										<span t-field="student.register_id.name"/>
+									</td>
+								</tr>
+								<t t-foreach="program_perferences_ordered" t-as="program_perference_ordered">
+										<!-- <th class="text-left">Preference </th> -->
+										<td class="text-left">
+											<span t-field="program_perference_ordered.program_id.code"/>
+										</td>
+								</t>
+						  </tbody>
+						</table>
+					  </div>
+					  <div class="form-row">
+						  <div class="small mb-1">
+							  <strong class="text-muted">
+								<h3>Matric Scanned Copy</h3>
+							  </strong>
+							</div>
+							<img t-att-src="'data:image/png;base64,%s' % to_text(application_documents.matric_scaned_copy)" style="width:100%"/>
+					  </div>
+					  
+					  <div class="form-row">
+						  <div class="small mb-1">
+							  <strong class="text-muted">
+								<h3>Intermediate Scanned Copy</h3>
+							  </strong>
+							</div>
+							<img t-att-src="'data:image/png;base64,%s' % to_text(application_documents.inter_scaned_copy)" style="width:100%"/>
+					  </div>
+					  
+					  <div class="form-row">
+						  <div class="small mb-1">
+							  <strong class="text-muted">
+								<h3>Domicile Scanned Copy</h3>
+							  </strong>
+							</div>
+							<img t-att-src="'data:image/png;base64,%s' % to_text(application_documents.domicile_scaned_copy)" style="width:100%"/>
+					  </div>
+					  
+					  <div class="form-row">
+						  <div class="small mb-1">
+							  <strong class="text-muted">
+								<h3>PRC Scanned Copy</h3>
+							  </strong>
+							</div>
+							<img t-att-src="'data:image/png;base64,%s' % to_text(application_documents.prc_scaned_copy)" style="width:100%"/>
+					  </div>
+					  
+					  <div class="form-row">
+						  <div class="small mb-1">
+							  <strong class="text-muted">
+								<h3>Hafiz-e-Quran Scanned Copy</h3>
+							  </strong>
+							</div>
+							<img t-att-src="'data:image/png;base64,%s' % to_text(application_documents.hafiz_scaned_copy)" style="width:100%"/>
+					  </div>
+					 <div class="form-row">
+						<div class="form-holder form-holder-2">
+							<label class="checkboxcontainer" style="font-size:16px">I have read the form carefully and i all the info is correct and i will be responsible for any error/ mistake.
+								<input required="true" type="checkbox" id="final_agreement"/>
+								 <span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-holder form-holder-2">
+							<label class="checkboxcontainer" style="font-size:16px" >I agreed with terms and conditions of the University.
+								<input required="true" type="checkbox" id="final_terms_agreement"/>
+								 <span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+					<div class="form-row">
+						<input class="btnSubmit" value="Confirm" style="display:block;float:right; width:120px; margin-right:5px" type="button" name="final_confirmation" id="final_confirmation" onclick="finalConfirmation()"/>
+						<input class="btnSubmit" value="Cancel" style="display:block;float:right; width:120px" type="button" name="final_cancel" id="final_cancel" onclick="closeFinalModal()"/>
+					</div>
+											  
+					</div>
+				  </t>
+			</t>
+		</t>
+	</div>
+				
+			</div>
+	</t>
+</template>
+</odoo>
+
+	

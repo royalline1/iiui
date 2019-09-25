@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template id="template" xml:space="preserve">
+	<t t-extend="ListView.buttons">
+		<t t-jquery="button.o_list_button_add" t-operation="after">
+			<t t-name="tree_view_header">
+				<button t-if="widget.model=='odoocms.moodle.course'" type="button" class="btn btn-default btn-sm o_refresh_course">
+					Refresh	Course		
+				</button>
+				<button t-if="widget.model=='odoocms.moodle.category'" type="button" class="btn btn-default btn-sm o_refresh_category">
+					Refresh	Category		
+				</button>
+			</t>
+		</t>
+	</t>
+</template>

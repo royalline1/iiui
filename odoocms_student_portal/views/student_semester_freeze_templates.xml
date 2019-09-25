@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- <template id="portal_my_home_semester_freeze" inherit_id="portal.portal_my_home" name="Portal My Home : registration entry" priority="25"><xpath expr="//div[hasclass('o_portal_docs')]" position="inside"><t t-if="student" t-call="portal.portal_docs_entry"><t t-set="title">Semester Freeze</t><t t-set="url" t-value="'/my/semester/freeze/request'"/></t></xpath></template>-->
+	<template id="portal_my_home_semester_freeze" inherit_id="portal_student_profilechange" name="Portal My Home :Semester Freeze">
+		<xpath expr="//li[hasclass('list-group-item')]" position="after">
+			<li class="list-group-item">
+				<span class="badge"/>
+				<a href="/my/semester/freeze/request">Reuest Semester Freeze </a>
+			</li>
+		</xpath>
+	</template>
+	<template id="portal_student_semesterfreeze" name="Semester Freeze Request">
+		<t t-call="portal.portal_layout">
+			<t t-set="breadcrumbs_searchbar" t-value="True"/>
+			<t t-call="portal.portal_searchbar">
+				<t t-set="title">Student</t>
+			</t>
+			<section>
+				<form action="/my/requests/semesterfreeze/save" id="request_data" method="post">
+					<div style=" text-align: center;background: #1abc9c;color: white; font-size: 30px;">
+						<span>Request Semester Freeze </span>
+					</div>
+					<t class="list-group-item fle-xgrow-1" t-if="student">
+						<div style="box-shadow: 0px 3px 10px 0px rgb(0,0,0,0.3); padding:0px 25px 25px">
+							<div class="row">
+								<div class="col-md-5 col-sm-6">
+									<div style="height:80px;width:100%;margin: auto;padding-top:30px">
+										<strong>Name:</strong>
+										<span t-field="student.name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+									</div>
+									<div style="height:80px;width:100%;margin: auto;">
+										<strong>ID:</strong>
+										<span t-field="student.id_number" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+
+									</div>
+								</div>
+								<div class="col-md-5 col-sm-6">
+									<img alt="Contact" class="rounded-circle mt-1 o_portal_contact_img" style="width:100px;height:80px;float:right;" t-att-src="image_data_uri(student.image)" t-if="student.image"/>
+									<img alt="Contact" class="rounded-circle mt-1 o_portal_contact_img" src="/web/static/src/img/user_menu_avatar.png" t-else=""/>
+								</div>
+							</div>
+							<div class=" row mt-4">
+								<style>table th { background-color:#d4e3e5;}
+                                 tr:nth-child(even) {background-color: #d4e3e5;}
+                                 tr:nth-child(odd) {background-color: #d4e3e5;}
+                        </style>
+								<table class="table table-condensed" width="100%">
+									<tbody>
+										<tr style="font-size:14px;">
+											<th class="text-left">Current Academic Term: </th>
+											<td class="text-left">
+												<span t-field="student.academic_semester_id.name"/>
+											</td>
+											<th class="text-left">Current Semester: </th>
+											<td class="text-left">
+												<span t-field="student.semester_id.name"/>
+											</td>
+										</tr>
+										<tr style="font-size:14px;">
+											<th class="text-left">Reason</th>
+											<td class="text-left">
+												<input class="form-control o_website_form_input" id="reason" name="reason" required="" type="text"/>
+											</td>
+											<th class="text-left"></th>
+											<td class="text-left">
+												<button class="btn btn-primary" type="submit">Submit</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</t>
+				</form>
+			</section>
+		</t>
+	</template>
+
+	<template id="portal_thankyou" name="Portal My Home :Thank You">
+		<t t-call="portal.portal_layout">
+			<t t-set="breadcrumbs_searchbar" t-value="True"/>
+			<t t-call="portal.portal_searchbar"/>
+			<li class="list-group-item">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1>Thank you!</h1>
+							<p>Your Request Semester Freeze  has been successfully registered,
+                        we will get back to you soon.
+                    </p>
+						</div>
+					</div>
+				</div>
+			</li>
+		</t>
+	</template>
+</odoo>

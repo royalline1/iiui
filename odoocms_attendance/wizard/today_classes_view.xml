@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+		<record id="view_odoocms_timetable_today_class_form" model="ir.ui.view">
+			<field name="name">odoocms.timetable.today.class.form</field>
+			<field name="model">odoocms.timetable.today.class</field>
+			<field name="arch" type="xml">
+				<form string="Schedule Today Classes">
+					<group>
+						<field name="date_class"/>
+					</group>
+					<footer>
+						<button name="generate_classes" string="Generate Classes" type="object" class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel" />
+					</footer>
+			   </form>
+			</field>
+		</record>
+
+		<record id="action_odoocms_timetable_today_class" model="ir.actions.act_window">
+            <field name="name">Schedule Today Classes</field>
+            <field name="res_model">odoocms.timetable.today.class</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+			<field name="target">new</field>
+        </record>
+
+		<menuitem
+                id="menu_odoocms_timetable_today_class"
+                name="Schedule Today Classes"
+                parent="menu_odoocms_class_attendance_root"
+                action="action_odoocms_timetable_today_class"
+				sequence="30"/>
+
+		
+    </data>
+</odoo>

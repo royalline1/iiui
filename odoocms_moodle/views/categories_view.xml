@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+
+    <record id="view_odoocms_moodle_category_tree" model="ir.ui.view">
+        <field name="name">odoocms.moodle.category.tree</field>
+        <field name="model">odoocms.moodle.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="category_parent"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_odoocms_moodle_category_form" model="ir.ui.view">
+        <field name="name">odoocms.moodle.category.form</field>
+        <field name="model">odoocms.moodle.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="True"/>
+                        </group>
+                        <group>
+                            <field name="category_id" readonly="1"/>
+                            <field name="category_parent"/>
+                        </group>
+                    </group>
+                    <field name="description"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <act_window
+            id="action_odoocms_moodle_category"
+            name="Categories"
+            res_model="odoocms.moodle.category"
+            view_mode="tree,form"
+            target="current"
+    />
+
+    <menuitem
+            id="menu_odoocms_moodle_category"
+            name="Categories"
+            parent="moodle_main_menu"
+            action="action_odoocms_moodle_category"/>
+
+
+</data>
+
+
+</odoo>

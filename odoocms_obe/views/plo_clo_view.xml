@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="odoocms_obe_domain_level_form" model="ir.ui.view">
+            <field name="name">odoocms.obe.domain.level.form</field>
+            <field name="model">odoocms.obe.domain.level</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="parameter"/>
+                            </group>
+                            <group>
+                                <field name="learning_domain"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="odoocms_obe_domain_level_tree" model="ir.ui.view">
+            <field name="name">odoocms.obe.domain.level.tree</field>
+            <field name="model">odoocms.obe.domain.level</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="parameter"/>
+                    <field name="learning_domain"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="odoocms_obe_domain_level_search" model="ir.ui.view">
+            <field name="name">odoocms.obe.domain.level.search</field>
+            <field name="model">odoocms.obe.domain.level</field>
+            <field name="arch" type="xml">
+            <search string="Learning Domains">
+               <field name="name"/>
+               <field name="parameter"/>
+                <separator/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Learning Domain" domain="[]" name="learning_domain" context="{'group_by':'learning_domain'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_odoocms_obe_domain_level" model="ir.actions.act_window">
+            <field name="name">Learning Domains</field>
+            <field name="res_model">odoocms.obe.domain.level</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="search_view_id" ref="odoocms_obe_domain_level_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the First Learning Domains Level here.
+                </p>
+            </field>
+        </record>
+
+
+         <record id="odoocms_obe_plos_form" model="ir.ui.view">
+            <field name="name">odoocms.obe.plos.form</field>
+            <field name="model">odoocms.obe.plos</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                            </group>
+                            <group>
+                                <field name="program_id"/>
+                                <field name="batch_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="odoocms_obe_plos_tree" model="ir.ui.view">
+            <field name="name">odoocms.obe.plos.tree</field>
+            <field name="model">odoocms.obe.plos</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="program_id"/>
+                    <field name="batch_id"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="odoocms_obe_plos_search" model="ir.ui.view">
+            <field name="name">odoocms.obe.plos.search</field>
+            <field name="model">odoocms.obe.plos</field>
+            <field name="arch" type="xml">
+            <search string="PLOs">
+               <field name="name"/>
+               <field name="code"/>
+                <separator/>
+               <filter name="master_filter" string="Master (Program)" domain="[('batch_id','=',False)]"/>
+               <filter name="batch_filter" string="Batches" domain="[('batch_id','!=',False)]"/>
+                <separator/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Program" domain="[]" name="program" context="{'group_by':'program_id'}"/>
+                        <filter string="Batch" domain="[]" name="batch" context="{'group_by':'batch_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_odoocms_obe_plos" model="ir.actions.act_window">
+            <field name="name">PLOs</field>
+            <field name="res_model">odoocms.obe.plos</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="search_view_id" ref="odoocms_obe_plos_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the First PLO here.
+                </p>
+            </field>
+        </record>
+
+
+        <record id="odoocms_obe_clos_form" model="ir.ui.view">
+            <field name="name">odoocms.obe.clos.form</field>
+            <field name="model">odoocms.obe.clos</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="emphasis_level"/>
+                                <field name="plo_id"/>
+                                <field name="domain_id"/>
+                            </group>
+                            <group>
+                                <field name="study_scheme_id"/>
+                                <field name="subject_id" readonly="0" domain="[('study_scheme_id','=',study_scheme_id)]"/>
+                                <field name="class_id"/>
+                            </group>
+                            <group></group>
+                            <group>
+                                <field name="weightage"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="odoocms_obe_clos_tree" model="ir.ui.view">
+            <field name="name">odoocms.obe.clos.tree</field>
+            <field name="model">odoocms.obe.clos</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="emphasis_level"/>
+                    <field name="plo_id"/>
+                    <field name="domain_id"/>
+                    <field name="subject_id"/>
+                    <field name="class_id"/>
+                    <field name="weightage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="odoocms_obe_clos_search" model="ir.ui.view">
+            <field name="name">odoocms.obe.clos.search</field>
+            <field name="model">odoocms.obe.clos</field>
+            <field name="arch" type="xml">
+            <search string="CLOs">
+               <field name="emphasis_level"/>
+               <field name="code"/>
+               <separator/>
+               <filter name="master_filter" string="Master (Subject)" domain="[('class_id','=',False)]"/>
+               <filter name="course_filter" string="Course" domain="[('class_id','!=',False)]"/>
+               <filter name="cognitive_domain" string="Cognitive Domain" domain="[('learning_domain','=','cognitive')]"/>
+               <filter name="affective_domain" string="Affective Domain" domain="[('learning_domain','=','affective')]"/>
+               <filter name="psychomotor_domain" string="Psychomotor Domain" domain="[('learning_domain','=','psychomotor')]"/>
+               <separator/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Subject" domain="[]" name="subject" context="{'group_by':'subject_id'}"/>
+                        <filter string="Course" domain="[]" name="course" context="{'group_by':'class_id'}"/>
+                        <filter string="PLO" domain="[]" name="plo" context="{'group_by':'plo_id'}"/>
+                        <filter string="Learning Domain" domain="[]" name="domain" context="{'group_by':'domain_id'}"/>
+                    </group>
+            </search>
+            </field>
+        </record>
+
+        <record id="action_odoocms_obe_clos" model="ir.actions.act_window">
+            <field name="name">CLOs</field>
+            <field name="res_model">odoocms.obe.clos</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="search_view_id" ref="odoocms_obe_clos_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create the First CLO here.
+                </p>
+            </field>
+        </record>
+
+        <record id="odoocms_obe_plocode_tree" model="ir.ui.view">
+            <field name="name">odoocms.obe.plocode.tree</field>
+            <field name="model">odoocms.obe.plocode</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_odoocms_obe_plocode" model="ir.actions.act_window">
+            <field name="name">PLO Codes</field>
+            <field name="res_model">odoocms.obe.plocode</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create the First PLO Code here.
+                </p>
+            </field>
+        </record>
+
+        <record id="odoocms_obe_clocode_tree" model="ir.ui.view">
+            <field name="name">odoocms.obe.clocode.tree</field>
+            <field name="model">odoocms.obe.clocode</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_odoocms_obe_clocode" model="ir.actions.act_window">
+            <field name="name">CLO Codes</field>
+            <field name="res_model">odoocms.obe.clocode</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create the First CLO Code here.
+                </p>
+            </field>
+        </record>
+
+        <record id="odoocms_obe_emphasis_level_tree" model="ir.ui.view">
+            <field name="name">odoocms.obe.emphasis.level.tree</field>
+            <field name="model">odoocms.obe.emphasis.level</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_odoocms_obe_emphasis_level" model="ir.actions.act_window">
+            <field name="name">Emphasis Level</field>
+            <field name="res_model">odoocms.obe.emphasis.level</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create the First Emphasis Level Code here.
+                </p>
+            </field>
+        </record>
+
+        <record id="odoocms_student_obe_summary_tree" model="ir.ui.view">
+            <field name="name">odoocms.student.obe.summary.tree</field>
+            <field name="model">odoocms.student.obe.summary</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false" delete="false">
+                    <field name="plo_id"/>
+                    <field name="plo_points" invisible="1"/>
+                    <field name="plo_level" invisible="1"/>
+                    <field name="percentage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="odoocms_student_obe_summary_form" model="ir.ui.view">
+            <field name="name">odoocms.student.obe.summary.form</field>
+            <field name="model">odoocms.student.obe.summary</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="student_id" readonly="1"/>
+                                <field name="plo_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="plo_points"/>
+                                <field name="plo_level"/>
+                                <field name="percentage"/>
+                            </group>
+
+                        </group>
+                        <group>
+                            <field name="semester_plo_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <menuitem
+                id="menu_odoocms_obe_plos"
+                parent="menu_odoocms_obe_main"
+                name="PLOs"
+                action="action_odoocms_obe_plos"
+                sequence="20"/>
+
+        <menuitem
+                id="odoocms_obe_clos"
+                parent="menu_odoocms_obe_main"
+                name="CLOs"
+                action="action_odoocms_obe_clos"
+                sequence="30"/>
+
+        <menuitem
+                id="menu_odoocms_obe_plocode"
+                parent="menu_odoocms_obe_configuration"
+                name="PLO Codes"
+                action="action_odoocms_obe_plocode"
+                sequence="20"/>
+
+        <menuitem
+                id="menu_odoocms_obe_clocode"
+                parent="menu_odoocms_obe_configuration"
+                name="CLO Codes"
+                action="action_odoocms_obe_clocode"
+                sequence="30"/>
+
+        <menuitem
+                id="menu_odoocms_obe_emphasis_level"
+                parent="menu_odoocms_obe_configuration"
+                name="Emphasis Level"
+                action="action_odoocms_obe_emphasis_level"
+                sequence="30"/>
+
+        <menuitem
+                id="menu_odoocms_obe_domain_level"
+                parent="menu_odoocms_obe_configuration"
+                name="Learning Domain Levels"
+                action="action_odoocms_obe_domain_level"
+                sequence="40"/>
+
+    </data>
+</odoo>

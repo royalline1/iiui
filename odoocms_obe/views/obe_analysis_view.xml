@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="odoocms_student_obe_summary_graph" model="ir.ui.view">
+            <field name="name">odoocms.student.obe.summary.graph</field>
+            <field name="model">odoocms.student.obe.summary</field>
+            <field name="arch" type="xml">
+                <graph string="PLOs" type="pie">
+                    <field name="plo_id" />
+                    <field name="percentage" /> <!-- operator="+"  -->
+                </graph>
+            </field>
+        </record>
+
+		<record id="odoocms_student_obe_summary_pivot" model="ir.ui.view">
+            <field name="name">odoocms.student.obe.summary.pivot</field>
+            <field name="model">odoocms.student.obe.summary</field>
+            <field name="arch" type="xml">
+                <pivot string="PLOs">
+                    <field name="student_id" type="row"/>
+                    <field name="plo_id" type="col"/>
+                    <field name="percentage" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+
+        <record id="action_odoocms_student_obe_summary_pivot" model="ir.actions.act_window">
+            <field name="name">Student PLOs Analysis</field>
+            <field name="res_model">odoocms.student.obe.summary</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="view_id" ref="odoocms_student_obe_summary_pivot"/>
+        </record>
+
+
+
+         <record id="odoocms_activity_obe_summary_graph" model="ir.ui.view">
+            <field name="name">odoocms.activity.obe.summary.graph</field>
+            <field name="model">odoocms.activity.obe.summary</field>
+            <field name="arch" type="xml">
+                <graph string="CLOs" type="pie">
+                    <field name="clo_id" />
+                    <field name="domain_id" />
+                    <field name="percentage" /> <!-- operator="+"  -->
+                </graph>
+            </field>
+        </record>
+
+		<record id="odoocms_activity_obe_summary_pivot" model="ir.ui.view">
+            <field name="name">odoocms.activity.obe.summary.pivot</field>
+            <field name="model">odoocms.activity.obe.summary</field>
+            <field name="arch" type="xml">
+                <pivot string="CLOs">
+                    <field name="student_id" type="row"/>
+                    <field name="clo_id" type="col"/>
+                    <field name="domain_id"/>
+                    <field name="semester_plo_id" type="row" invisible="1"/>
+                    <field name="registration_id" invisible="1"/>
+                    <field name="percentage" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+
+        <record id="action_odoocms_activity_obe_summary_pivot" model="ir.actions.act_window">
+            <field name="name">Activity CLOs Analysis</field>
+            <field name="res_model">odoocms.activity.obe.summary</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="view_id" ref="odoocms_activity_obe_summary_pivot"/>
+        </record>
+
+
+
+         <menuitem
+                id="menu_odoocms_student_obe_summary_pivot"
+                name="Student PLOs Analysis"
+                sequence="10"
+                parent="menu_odoocms_obe_report"
+                action="action_odoocms_student_obe_summary_pivot" />
+
+        <menuitem
+                id="menu_odoocms_activity_obe_summary_pivot"
+                name="Activity CLOs Analysis"
+                sequence="10"
+                parent="menu_odoocms_obe_report"
+                action="action_odoocms_activity_obe_summary_pivot" />
+
+    </data>
+</odoo>

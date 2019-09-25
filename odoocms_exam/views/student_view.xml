@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!--
+        <record id="view_exam_results_students" model="ir.actions.act_window">
+            <field name="name">Exam Results Student</field>
+            <field name="res_model">odoocms.exam.results</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="domain">[('student_id', '=', active_id)]</field>
+            <field name="context">{'search_default_group_exam_id':1}</field>
+        </record>
+
+
+        <record id="student_smart_button_exam_form" model="ir.ui.view">
+            <field name="name">student_smart_button_exam_form.form</field>
+            <field name="model">odoocms.student</field>
+            <field name="inherit_id" ref="odoocms.view_odoocms_student_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="odoocms_exam.view_exam_results_students" type="action"
+                            class="oe_stat_button" icon="fa-archive" string="Exam Results"/>
+                </xpath>
+
+            </field>
+        </record>
+        -->
+
+        <record id="view_odoocms_student_form_inherit_reg" model="ir.ui.view">
+            <field name="name">odoocms.student.form.exam</field>
+            <field name="model">odoocms.student</field>
+            <field name="inherit_id" ref="odoocms_registration.view_odoocms_student_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='registered_courses']" position="after">
+                    <page string="Results" name="results">
+                        <group>
+                            <field name="semester_ids" nolabel="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_odoocms_student_form_inherit_main" model="ir.ui.view">
+            <field name="name">odoocms.student.form.main</field>
+            <field name="model">odoocms.student</field>
+            <field name="inherit_id" ref="odoocms.view_odoocms_student_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/group/group[@name='academic_semester']" position="after">
+                     <group>
+                        <field name="grade_points"/>
+                        <field name="credits"/>
+                         <field name="cgpa"/>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

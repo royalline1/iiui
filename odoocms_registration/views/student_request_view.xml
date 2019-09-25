@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <record id="view_student_semester_freeze_tree" model="ir.ui.view">
+        <field name="name">odoocms.student.semester.freeze.tree</field>
+        <field name="model">odoocms.student.semester.freeze</field>
+        <field name="arch" type="xml">
+            <tree string="Admission Register">
+                <field name="student_id"/>
+                <field name="program_id"/>
+                <field name="batch_id"/>
+                <field name="section_id"/>
+                <field name="academic_semester_id"/>
+                <field name="semester_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_student_semester_freeze_form" model="ir.ui.view">
+        <field name="name">odoocms.student.semester.freeze</field>
+        <field name="model">odoocms.student.semester.freeze</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Freeze Semester Details">
+                <header>
+                    <button type="object" name="freeze_semester" string="Freeze Semester" groups="odoocms.group_cms_manager"
+                        class="oe_highlight" states="draft"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approve,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="program_id"/>
+                            <field name="batch_id"/>
+                        </group>
+                        <group>
+                            <field name="section_id"/>
+                            <field name="academic_semester_id"/>
+                            <field name="semester_id"/>
+                        </group>
+                    </group>
+                    <field name="reason"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                     <field name="message_ids" widget="mail_thread"/>
+                 </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="act_semester_freeze_view" model="ir.actions.act_window">
+        <field name="name">Semster Freeze Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">odoocms.student.semester.freeze</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record id="view_request_semester_unfreeze" model="ir.ui.view">
+        <field name="name">odoocms.student.semester.unfreeze.tree</field>
+        <field name="model">odoocms.student.semester.unfreeze</field>
+        <field name="arch" type="xml">
+            <tree string="Request semester unfreeze">
+                <field name="student_id"/>
+                <field name="program_id"/>
+                <field name="batch_id"/>
+                <field name="section_id"/>
+                <field name="academic_semester_id"/>
+                <field name="semester_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_request_semester_unfreeze_form" model="ir.ui.view">
+        <field name="name">odoocms.student.semester.unfreeze.form</field>
+        <field name="model">odoocms.student.semester.unfreeze</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Request semester unfreeze">
+                <header>
+                    <button type="object" name="unfreeze_semester" string="Freeze Semester" groups="odoocms.group_cms_manager"
+                        class="oe_highlight" states="draft"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approve,done"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                        <field name="student_id"/>
+                        <field name="program_id"/>
+                        <field name="batch_id"/>
+                        <field name="section_id"/>
+                        <field name="academic_semester_id"/>
+                        <field name="semester_id"/>
+
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                     <field name="message_ids" widget="mail_thread"/>
+                 </div>
+            </form>
+        </field>
+    </record>
+    <record id="act_request_semester_unfreeze_view" model="ir.actions.act_window">
+        <field name="name">Student Semeste unfreeze</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">odoocms.student.semester.unfreeze</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <menuitem
+             action="act_semester_freeze_view"
+             id="menu_odoocms_request_semester_freeze"
+             name="Students Semeste Freeze"
+             parent="menu_student_request_root"/>
+
+    <menuitem
+            action="act_request_semester_unfreeze_view"
+            id="menu_odoocms_request_semester_unfreeze"
+            name="Students Semeste unfreeze"
+            parent="menu_student_request_root"/>
+
+
+</odoo>

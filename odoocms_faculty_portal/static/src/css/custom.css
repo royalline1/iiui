@@ -1,0 +1,163 @@
+.list-group-item {
+  user-select: none;
+}
+
+.list-group input[type="checkbox"] {
+  display: none;
+}
+
+.list-group input[type="checkbox"] + .list-group-item {
+  cursor: pointer;
+}
+
+.list-group input[type="checkbox"] + .list-group-item:before {
+  content: "\2713";
+  color: transparent;
+  font-weight: bold;
+  margin-right: 1em;
+  border: 1px solid black;
+}
+
+.list-group input[type="checkbox"]:checked + .list-group-item {
+  background-color: #0275D8;
+  color: #FFF;
+}
+
+.list-group input[type="checkbox"]:checked + .list-group-item:before {
+  color: inherit;
+}
+
+.list-group input[type="radio"] {
+  display: none;
+}
+
+.list-group input[type="radio"] + .list-group-item {
+  cursor: pointer;
+}
+
+.list-group input[type="radio"] + .list-group-item:before {
+  content: "\2022";
+  color: transparent;
+  font-weight: bold;
+  margin-right: 1em;
+
+}
+
+.list-group input[type="radio"]:checked + .list-group-item {
+  background-color: #0275D8;
+  color: #FFF;
+}
+
+.list-group input[type="radio"]:checked + .list-group-item:before {
+  color: inherit;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+
+/*for collapsible*/
+.collapsible {
+  background-color: #137562;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  margin-top:15px;
+}
+
+.active, .collapsible:hover {
+  /*background-color: #555;*/
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
+.profile-header {
+    transform: translateY(5rem);
+}
+
+body {
+    min-height: 100vh;
+}
+
+
+/*This is for tables*/
+
+#custom-table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-left:5px;
+}
+
+#custom-table td, #custom-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#custom-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#custom-table tr:hover {background-color: #ddd;}
+
+#custom-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #137562;
+  color: white;
+}
+
+
+/*for transcript design*/
+#transcript {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border:1px solid;
+}
+
+#transcript td {
+  border-right: 1px solid #ddd;
+  padding: 8px;
+}
+
+#transcript-div{
+  display: block; float: left; margin: auto;
+  width: 48%;
+  padding: 1%;
+}
+.tr-tb-head{
+  text-align:center;
+}
+
+.tr-tb-footer{
+  text-align:center;
+  border:1px solid;
+}

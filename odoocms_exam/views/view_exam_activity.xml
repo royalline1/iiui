@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="odoocms_exam_grade_tree" model="ir.ui.view">
+            <field name="name">odoocms.exam.grade.tree</field>
+            <field name="model">odoocms.exam.grade</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="gpa"/>
+                    <field name="low_per"/>
+                    <field name="high_per"/>
+                </tree>
+            </field>
+        </record>
+
+         <record id="odoocms_exam_grade_form" model="ir.ui.view">
+            <field name="name">odoocms.exam.grade.form</field>
+            <field name="model">odoocms.exam.grade</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" placeholder="Eg: A"/>
+                                <field name="gpa"/>
+                            </group>
+                            <group>
+                                <field name="low_per"/>
+                                <field name="high_per"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_odoocms_exam_grade" model="ir.actions.act_window">
+            <field name="name">Exam Grades</field>
+            <field name="res_model">odoocms.exam.grade</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <record id="odoocms_exam_activity_type_tree" model="ir.ui.view">
+            <field name="name">odoocms.exam.activity.type.tree</field>
+            <field name="model">odoocms.exam.activity.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="weightage"/>
+                    <field name="type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="odoocms_exam_activity_type_form" model="ir.ui.view">
+            <field name="name">odoocms.exam.activity.type.form</field>
+            <field name="model">odoocms.exam.activity.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" placeholder="Eg: Quiz"/>
+                                <field name="code"/>
+                            </group>
+                            <group>
+                                <field name="weightage"/>
+                                <field name="type"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_odoocms_exam_activity_type" model="ir.actions.act_window">
+            <field name="name">Exam Activity Type</field>
+            <field name="res_model">odoocms.exam.activity.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="odoocms_exam_activity_tree" model="ir.ui.view">
+            <field name="name">odoocms.exam.activity.tree</field>
+            <field name="model">odoocms.exam.activity</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="activity_class_id"/>
+                    <field name="academic_semester_id"/>
+                    <field name="class_id"/>
+                    <field name="subject_id"/>
+                    <field name="teacher_id"/>
+                    <field name="date_activity"/>
+                    <field name="max_marks"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="odoocms_exam_activity_form" model="ir.ui.view">
+            <field name="name">odoocms.exam.activity.form</field>
+            <field name="model">odoocms.exam.activity</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" placeholder="Eg: Quiz 1"/>
+                                <field name="code"/>
+                                <field name="activity_class_id"/>
+                                <field name="academic_semester_id"/>
+                            </group>
+                            <group>
+                                <field name="class_id"/>
+                                <field name="subject_id"/>
+                                <field name="teacher_id"/>
+                            </group>
+                            <group name="marks">
+                                <field name="date_activity"/>
+                                <field name="max_marks"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="activity_lines" nolabel="1">
+                                <tree string="Activity Result" editable="bottom">
+                                    <field name="student_id"/>
+                                    <field name="max_marks"/>
+                                    <field name="obtained_marks"/>
+                                    <field name="percentage"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_odoocms_exam_activity" model="ir.actions.act_window">
+            <field name="name">Exam Activity</field>
+            <field name="res_model">odoocms.exam.activity</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="odoocms_exam_activity_line_tree" model="ir.ui.view">
+            <field name="name">odoocms.exam.activity.line.tree</field>
+            <field name="model">odoocms.exam.activity.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="student_id"/>
+                    <field name="activity_id"/>
+                    <field name="max_marks"/>
+                    <field name="obtained_marks"/>
+                    <field name="percentage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="odoocms_exam_activity_summary_form" model="ir.ui.view">
+            <field name="name">odoocms.exam.activity.summary.form</field>
+            <field name="model">odoocms.exam.activity.summary</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="class_id" readonly="1"/>
+                                <field name="subject_id"/>
+                                <field name="academic_semester_id"/>
+                            </group>
+                            <group>
+                                <field name="student_id" readonly="1"/>
+                                <field name="activity_class_id" readonly="1"/>
+                                <field name="percentage"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <field name="activity_lines" nolabel="1">
+                                <tree string="Activity Result" ediy="false" create="false" delete="false">
+                                    <field name="activity_id"/>
+                                    <field name="student_id"/>
+                                    <field name="max_marks"/>
+                                    <field name="obtained_marks"/>
+                                    <field name="percentage"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="odoocms_exam_activity_summary_tree" model="ir.ui.view">
+            <field name="name">odoocms.exam.activity.summary.tree</field>
+            <field name="model">odoocms.exam.activity.summary</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="class_id"/>
+                    <field name="subject_id"/>
+                    <field name="academic_semester_id"/>
+                    <field name="student_id"/>
+                    <field name="activity_class_id"/>
+                    <field name="percentage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_odoocms_exam_activity_summary" model="ir.actions.act_window">
+            <field name="name">Exam Activity</field>
+            <field name="res_model">odoocms.exam.activity.summary</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="view_odoocms_class_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.class.form.inherit</field>
+            <field name="model">odoocms.class</field>
+            <field name="inherit_id" ref="odoocms_registration.view_odoocms_class_form"/>
+            <field name="arch" type="xml">
+                <header position="inside">
+                    <button name="generate_exam_activities" type="object"
+                        attrs="{'invisible': [('exam_activity_class_ids', '!=', [])]}"
+                        class="oe_highlight" string="Generate Exam Activities"/>
+                    <button name="lock_class" type="object"
+                        attrs="{'invisible': [('state','!=','current')]}"
+                        class="oe_highlight" string="Lock for Changes"/>
+                    <button name="unlock_class" type="object"
+                        attrs="{'invisible': [('state','!=','lock')]}"
+                        class="oe_highlight" string="UnLock for Changes"/>
+                    <button name="compute_result" type="object"
+                        attrs="{'invisible': ['|',('exam_activity_ids', '=', []),('state','=','done')]}"
+                        class="oe_highlight" string="Compute Result"/>
+                    <button name="finalize_result" type="object"
+                        attrs="{'invisible': ['|',('exam_activity_ids', '=', []),('state', '!=', 'lock')]}"
+                        class="oe_highlight" string="Finalize Result"/>
+                </header>
+                <xpath expr="//notebook/page[@name='students']" position="after">
+                    <page string="Activity Types" name="activity_types">
+                        <group>
+                            <field name="exam_activity_class_ids" nolabel="1"
+                                   attrs="{'readonly': [('state','=','lock')]}">
+                                <tree editable="bottom">
+                                    <field name="activity_type_id"/>
+                                    <field name="weightage"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+
+                    <page string="Activities" name="exam_activities">
+                        <group>
+                            <field name="exam_activity_ids" nolabel="1"
+                                attrs="{'readonly': [('state','=','lock')]}">
+                                <tree string="Activity Result" editable="bottom">
+                                    <field name="name" required="1"/>
+                                    <field name="code" required="1"/>
+                                    <field name="activity_class_id" required="1"
+                                        domain="[('class_id','=',parent.id)]"/>
+                                    <field name="date_activity"/>
+                                    <field name="max_marks"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+         <record id="view_odoocms_student_subject_tree_inherit" model="ir.ui.view">
+            <field name="name">odoocms.student.subject.tree,inherit</field>
+            <field name="model">odoocms.student.subject</field>
+            <field name="inherit_id" ref="odoocms_registration.view_odoocms_student_subject_tree"/>
+            <field name="arch" type="xml">
+
+                <field name="class_id" position="after">
+                    <field name="total_marks"/>
+                    <field name="normalized_marks"/>
+                    <field name="gpa"/>
+                    <field name="grade"/>
+                </field>
+
+            </field>
+        </record>
+
+        <record id="view_odoocms_student_subject_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.student.subject.form.inherit</field>
+            <field name="model">odoocms.student.subject</field>
+            <field name="inherit_id" ref="odoocms_registration.view_odoocms_student_subject_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='subject_class']" position="after">
+                    <group>
+                        <field name="total_marks"/>
+                        <field name="normalized_marks" readonly="1"/>
+                        <field name="gpa" readonly="1"/>
+                        <field name="grade" readonly="1"/>
+                    </group>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Result Summary" name="activities">
+                        <group>
+                            <field name="exam_activity_ids" nolabel="1">
+                                <tree create="false" edit="false" delete="false">
+                                    <field name="activity_class_id"/>
+                                    <field name="percentage"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <menuitem
+                id="exam_activity_type_menu"
+                parent="menu_odoocms_exam_configuration"
+                name="Exam Activity Types"
+                action="action_odoocms_exam_activity_type"
+                sequence="20"/>
+
+        <menuitem
+                id="exam_grade_menu"
+                parent="menu_odoocms_exam_configuration"
+                name="Exam Grades"
+                action="action_odoocms_exam_grade"
+                sequence="30"/>
+
+    </data>
+</odoo>

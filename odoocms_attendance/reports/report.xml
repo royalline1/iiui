@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- Short Attendance Warning-->
+		<report
+			id="action_report_short_attendance"
+			string="Short Attendance Warning"
+			model="short.attendance.warning.wizard"
+			report_type="qweb-html"
+			name="odoocms_attendance.short_attendance_warning_report"
+			file="odoocms_attendance.short_attendance_warning_report"
+			menu="True"
+		/>
+
+</data>
+</odoo>

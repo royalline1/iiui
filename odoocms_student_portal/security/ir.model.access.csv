@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+
+access_odoocms_subject_portal,access.odoocms.subject.portal,odoocms.model_odoocms_subject,base.group_portal,1,0,0,0
+
+
+access_odoocms_subject_withdraw_user,odoocms.subject.withdraw.user,odoocms_student_portal.model_odoocms_request_subject_withdraw,odoocms.group_cms_user,1,1,1,0
+access_odoocms_subject_withdraw_manager,odoocms.subject.withdraw.manager,odoocms_student_portal.model_odoocms_request_subject_withdraw,odoocms.group_cms_manager,1,1,1,1
+

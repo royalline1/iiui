@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_odoocms_student_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.student.form.inherit</field>
+            <field name="model">odoocms.student</field>
+            <field name="inherit_id" ref="odoocms.view_odoocms_student_form"/>
+            <field name="arch" type="xml">
+<!--                <header position="inside">-->
+<!--                    <button type="object" name="register_first_semester" string="Register First Semester" groups="odoocms.group_cms_user"-->
+<!--                        class="oe_highlight" attrs="{'invisible': [('subject_ids', '!=', [])]}"/>-->
+<!--                </header>-->
+
+                <xpath expr="//notebook/page/group/group[@name='academic_session']" position="after">
+                     <group>
+                        <field name="batch_id" domain="[('academic_session_id','=',academic_session_id)]"/>
+                        <field name="section_id" domain="[('batch_id','=',batch_id)]"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//notebook/page[@name='academic_information']" position="after">
+                    <page string="Registered Cources" name="registered_courses">
+                        <group>
+                            <field name="subject_ids" nolabel="1">
+                                <tree create="false" delete="false" edit="false">
+                                    <field name="academic_semester_id"/>
+                                    <field name="program_id"/>
+                                    <field name="subject_id"/>
+                                    <field name="class_id"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

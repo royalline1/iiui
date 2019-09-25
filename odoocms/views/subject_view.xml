@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odoocms_subject_tree" model="ir.ui.view">
+        <field name="name">odoocms.subject.tree</field>
+        <field name="model">odoocms.subject</field>
+        <field name="arch" type="xml">
+            <tree string="Syllabus Subject">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="weightage"/>
+                <field name="career_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_odoocms_subject_form" model="ir.ui.view">
+        <field name="name">odoocms.subject.form</field>
+        <field name="model">odoocms.subject</field>
+        <field name="arch" type="xml">
+            <form string="Syllabus Subject">
+                <sheet>
+                    <group string="Subject">
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="type"/>
+                            <field name="career_id"/>
+                        </group>
+                        <group>
+                            <field name="lecture"/>
+                            <field name="lab"/>
+                            <field name="weightage"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="outline" placeholder="Enter outline here"/>
+                    </group>
+                    <group>
+                        <field name="suggested_books" placeholder="Enter Suggested Book here"/>
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Enter Description here"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field groups="base.group_user" name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_odoocms_subject_search" model="ir.ui.view">
+        <field name="name">odoocms.subject.search</field>
+        <field name="model">odoocms.subject</field>
+        <field name="priority" eval="14"/>
+        <field name="arch" type="xml">
+        <search string="Subject">
+            <field name="name" string="Subject" filter_domain="['|', ('name','ilike',self), ('code','ilike',self)]"/>
+            <separator/>
+            <newline />
+                <group expand="0" string="Group By...">
+                    <filter string="Career" domain="[]" name="career" context="{'group_by':'career_id'}" />
+                    <filter string="Type" domain="[]" name="type" context="{'group_by':'type'}" />
+
+                </group>
+        </search>
+        </field>
+    </record>
+
+    <record id="action_odoocms_subject" model="ir.actions.act_window">
+        <field name="name">Subjects</field>
+        <field name="res_model">odoocms.subject</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_odoocms_subject_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the First Subject here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_odoocms_subject"
+            name="Subjects"
+            parent="menu_odoocms_config_academic"
+            action="action_odoocms_subject"
+            sequence="20"/>
+    
+   
+</odoo>

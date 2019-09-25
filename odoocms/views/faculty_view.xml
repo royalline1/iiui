@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odoocms_faculty_tree" model="ir.ui.view">
+        <field name="name">odoocms.faculty.tree</field>
+        <field name="model">odoocms.faculty</field>
+        <field name="arch" type="xml">
+            <tree string="Faculty">
+                <field name="code"/>
+                <field name="name"/>
+                
+            </tree>
+        </field>
+    </record>
+    <record id="view_odoocms_faculty_form" model="ir.ui.view">
+        <field name="name">odoocms.faculty.form</field>
+        <field name="model">odoocms.faculty</field>
+        <field name="arch" type="xml">
+            <form string="Faculty">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                    </group>
+
+                     <group colspan="4">
+                        <field name="department_ids">
+                            <tree strin="Departments"> <!-- create="false" delete="false" edit="false" -->
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="campus_id"/>
+                                <field name="chairman_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                     <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                     <field name="activity_ids" widget="mail_activity"/>
+                     <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_odoocms_faculty" model="ir.actions.act_window">
+        <field name="name">Faculty</field>
+        <field name="res_model">odoocms.faculty</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the First Faculty here.
+            </p>
+        </field>
+    </record>
+
+
+       <!-- Career -->
+    <record id="view_odoocms_career_tree" model="ir.ui.view">
+        <field name="name">odoocms.career.tree</field>
+        <field name="model">odoocms.career</field>
+        <field name="arch" type="xml">
+            <tree string="Career" editable="bottom">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+    <!--
+    <record id="view_odoocms_career_form" model="ir.ui.view">
+        <field name="name">odoocms.career.form</field>
+        <field name="model">odoocms.career</field>
+        <field name="arch" type="xml">
+            <form string="Career">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>                            <
+                        </group>
+                        <group>
+                            <field name="color"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    -->
+    <record id="action_odoocms_career" model="ir.actions.act_window">
+        <field name="name">Career</field>
+        <field name="res_model">odoocms.career</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the First Career here.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem
+            id="menu_odoocms_faculty"
+            name="Academic Faculties"
+            parent="menu_odoocms_config_general"
+            action="action_odoocms_faculty"
+            sequence="9"/>
+
+    <menuitem
+            id="menu_odoocms_career"
+            name="Career"
+            parent="menu_odoocms_config_general"
+            action="action_odoocms_career"
+            sequence="5"/>
+
+</odoo>

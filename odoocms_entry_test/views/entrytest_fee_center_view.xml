@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <record id="view_odoocms_entrytest_fee_tree" model="ir.ui.view">
+        <field name="name">odoocms.entrytest.fee.tree</field>
+        <field name="model">odoocms.entrytest.fee</field>
+        <field name="arch" type="xml">
+            <tree string="Entry Test Fee">
+                <field name="branch_code"/>
+                <field name="sequence_no"/>
+                <field name="mobile"/>
+                <field name="submission_date"/>
+                <field name="entrytest_id"/>
+                <field name="is_used"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_odoocms_entrytest_fee_form" model="ir.ui.view">
+        <field name="name">odoocms.entrytest.fee.form</field>
+        <field name="model">odoocms.entrytest.fee</field>
+        <field name="arch" type="xml">
+            <form string="Entry Test Fee">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="branch_code"/>
+                            <field name="sequence_no"/>
+                            <field name="mobile"/>
+                        </group>
+                        <group>
+                            <field name="submission_date"/>
+                            <field name="entrytest_id"/>
+                            <field name="is_used"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_odoocms_entrytest_fee" model="ir.actions.act_window">
+        <field name="name">Entry Test Fee</field>
+        <field name="res_model">odoocms.entrytest.fee</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the First Entry Test Fee here.
+            </p>
+        </field>
+    </record>
+
+        <record id="view_odoocms_entrytest_center_tree" model="ir.ui.view">
+            <field name="name">odoocms.entrytest.center.tree</field>
+            <field name="model">odoocms.entrytest.center</field>
+            <field name="arch" type="xml">
+                <tree string="Entry Test Center">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="capacity"/>
+                    <field name="location"/>
+                    <field name="date_test"/>
+                    <field name="time_slot"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_odoocms_entrytest_center_form" model="ir.ui.view">
+            <field name="name">odoocms.entrytest.center.form</field>
+            <field name="model">odoocms.entrytest.center</field>
+            <field name="arch" type="xml">
+                <form string="Entry Test Center">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="capacity"/>
+                            </group>
+                            <group>
+                                <field name="location"/>
+                                <field name="date_test"/>
+                                <field name="time_slot"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="application_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_odoocms_entrytest_center" model="ir.actions.act_window">
+            <field name="name">Entry Test</field>
+            <field name="res_model">odoocms.entrytest.center</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the First Entry Test Center here.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem
+                id="menu_odoocms_entrytest_center"
+                parent="menu_odoocms_entrytest_main"
+                name="Entry Test Center"
+                action="action_odoocms_entrytest_center"
+                sequence="50"/>
+
+        <menuitem
+                id="menu_odoocms_entrytest_fee"
+                parent="menu_odoocms_entrytest_main"
+                name="Entry Test Fee"
+                action="action_odoocms_entrytest_fee"
+                sequence="60"/>
+
+
+
+    </data>
+
+
+</odoo>

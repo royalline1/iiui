@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--
+        <template id="assets_backend_attendance" name="attendance assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/education_attendances/static/src/css/attendance.css"/>
+            </xpath>
+        </template>
+        -->
+
+        <record id="view_odoocms_class_attendance_form" model="ir.ui.view">
+            <field name="name">odoocms.class.attendance.form</field>
+            <field name="model">odoocms.class.attendance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="attendance_done" type="object"
+                                attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('attendance_created', '=', False)]}"
+                                class="oe_highlight" string="Done"/>
+                        <button name="set_to_draft" type="object" attrs="{'invisible': [('state', '=', 'draft')]}"
+                                string="Set to Draft"/>
+                        <field name="state" readonly="1" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="class_id" attrs="{'readonly': [('attendance_created', '=', True)]}"/>
+                                <field name="faculty_id" attrs="{'readonly': [('attendance_created', '=', True)]}"/>
+                                <field name="academic_semester_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="date_att" attrs="{'readonly': [('attendance_created', '=', True)]}"/>
+                                <field name="attendance_created" invisible="1"/>
+
+                                <field name="all_marked" invisible="1"/>
+                            </group>
+                        </group>
+                        <div style="padding-bottom: 10px;">
+                            <button style="padding: 1px 5px;background: #5fb18e !important;border-color: #63b892 !important;" string="Create Attendance Table"
+                                    name="create_attendance_line" type="object"
+                                    attrs="{'invisible': [('attendance_created', '=', True)]}" class="oe_highlight"/>
+                        </div>
+                        <div style="height: 30px;" attrs="{'invisible': [('attendance_created', '=', False)]}">
+                            <div style="width: 78%;float:left;text-align:right;padding-right: 75px;"
+                                 attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('all_marked', '=', True)]}">
+                                <button style="padding: 1px 5px;background-color: #5fb18d !important;border-color: #5fb18d !important;"
+                                        string="Mark All" name="mark_all_present" type="object"
+                                        class="oe_highlight"/>
+                            </div>
+                            <div style="width: 78%;float:left;text-align:right;padding-right: 75px;"
+                                 attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('all_marked', '=', False)]}">
+                                <button style="padding: 1px 5px;background-color: #e0e0e0;border-color: #e0e0e0;color:#575751;"
+                                        string="Un Mark" name="unmark_all_present" type="object"
+                                        class="oe_highlight"/>
+                            </div>
+
+                        </div>
+                        <div class="table_header_box" attrs="{'invisible': [('attendance_created', '=', False)]}">
+                            <field name="attendance_line" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="student_id" invisible="1"/>
+                                    <field name="student_name" readonly="1" style=" width: 500px; "/>
+                                    <field name="present"/>
+                                    <field name="class_id" invisible="1"/>
+                                    <field name="date_att" invisible="1"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_odoocms_class_attendance_tree" model="ir.ui.view">
+            <field name="name">odoocms.class.attendance.tree</field>
+            <field name="model">odoocms.class.attendance</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="class_id"/>
+                    <field name="date_att"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_odoocms_class_attendance_search" model="ir.ui.view">
+            <field name="name">odoocms.class.attendance.search</field>
+            <field name="model">odoocms.class.attendance</field>
+            <field name="arch" type="xml">
+                <search string="Students Attendants">
+                    <field name="class_id"/>
+                    <field name="date_att"/>
+                    <newline />
+                    <filter string="Today" name="today" domain="[('date_att','=',time.strftime('%%Y-%%m-%%d'))]"/>
+                    <filter string="Done" name="done_state" domain="[('state','!=','draft')]"/>
+                    <newline />
+                    <group expand="0" string="Group By">
+                        <filter string="Class" name="group_class_id" context="{'group_by':'class_id'}"/>
+                        <filter string="Date" name="group_date" context="{'group_by':'date_att'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_odoocms_class_attendance" model="ir.actions.act_window">
+            <field name="name">Attendance</field>
+            <field name="res_model">odoocms.class.attendance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="context">{}</field>
+<!--            <field name="context">{'search_default_today': 1, 'search_default_group_class_id': 1}</field>-->
+        </record>
+
+
+        <record id="view_odoocms_class_attendance_line_form" model="ir.ui.view">
+            <field name="name">odoocms.class.attendance.line.form</field>
+            <field name="model">odoocms.class.attendance.line</field>
+            <field name="arch" type="xml">
+                <form create="0" delete="0" edit="0">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group string="Student Details">
+                                <field name="student_id" invisible="1"/>
+                                <field name="student_name"/>
+                                <field name="class_id"/>
+                            </group>
+                            <group string="Attendance Status (✔️️ = Present)">
+                                <field name="present" readonly="1"/>
+                                <field name="date_att"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_odoocms_class_attendance_line_tree" model="ir.ui.view">
+            <field name="name">odoocms.class.attendance.line.tree</field>
+            <field name="model">odoocms.class.attendance.line</field>
+            <field name="arch" type="xml">
+                <tree create="0" delete="0">
+                    <field name="student_id" invisible="1"/>
+                    <field name="student_name"/>
+                    <field name="class_id"/>
+                    <field name="date_att"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_odoocms_class_attendance_line_search" model="ir.ui.view">
+            <field name="name">odoocms.class.attendance.line.search</field>
+            <field name="model">odoocms.class.attendance.line</field>
+            <field name="arch" type="xml">
+                <search string="Students Attendants">
+                    <filter string="Today" name="today" domain="[('date_att','=',time.strftime('%%Y-%%m-%%d'))]"/>
+                    <separator/>
+                    <filter string="Done" name="done_state" domain="[('state','!=','draft')]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Class" name="group_class_id" context="{'group_by':'class_id'}"/>
+                        <filter string="Day" name="group_date" context="{'group_by':'date_att:day'}"/>
+                        <filter string="Student" name="group_student_id" context="{'group_by':'student_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="action_odoocms_class_attendance_report" model="ir.actions.act_window">
+            <field name="name">Attendance Report</field>
+            <field name="res_model">odoocms.class.attendance.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot,tree,form</field>
+            <field name="target">current</field>
+            <field name="context">{'search_default_done_state': 1,
+                'search_default_group_class_id': 1, 'search_default_group_date':1}
+            </field>
+        </record>
+
+
+        <menuitem
+                id="menu_odoocms_class_attendance"
+                name="Attendance"
+                parent="menu_odoocms_class_attendance_main"
+                action="action_odoocms_class_attendance"
+                sequence="10"/>
+
+        <menuitem
+                id="menu_odoocms_class_attendance_report"
+                parent="menu_odoocms_class_attendance_report_root"
+                action="action_odoocms_class_attendance_report"
+                name="Report"
+                sequence="0"/>
+
+    </data>
+</odoo>

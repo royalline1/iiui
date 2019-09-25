@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+		<act_window
+				id="odoocms_generate_challan"
+				name="Generate Challan/Change Status"
+				src_model="odoocms.student"
+				res_model="odoocms.generate.challan"
+				view_type="form"  view_mode="form" multi="False"
+            	key2="client_action_multi" target="new"
+				groups="odoocms.group_cms_manager"/>
+
+		<record id="view_odoocms_generate_challan_form" model="ir.ui.view">
+			<field name="name">odoocms.generate.challan.form</field>
+			<field name="model">odoocms.generate.challan</field>
+			<field name="arch" type="xml">
+				<form string="Generate Challan">
+
+					<group>
+<!--						<field name="state" required="1"/>-->
+						<field name="semester_required" invisible="1"/>
+						<field name="override_amount" invisible="1"/>
+
+						<field name="receipt_type_ids"
+							   widget="many2many_tags"/>
+
+						<group>
+							<field name="academic_semester_id"
+							   attrs="{
+									'invisible':[('semester_required','=', False)], 'required': [('semester_required','=',True)]
+								}"/>
+							<field name="date_due"/>
+						</group>
+					</group>
+
+
+					<notebook>
+						<page string="Students">
+							<group>
+								<field name="student_ids" colspan="4" nolabel="1">
+									<tree string="Students">
+										<field name="id_number" />
+										<field name="name" />
+										<field name="gender"/>
+										<field name="email"/>
+										<field name="mobile"/>
+										<field name="program_id" />
+										<field name="academic_session_id" />
+										<field name="semester_id" />
+										<field name="state" invisible="1"/>
+									</tree>
+								</field>
+							</group>
+						</page>
+						<page string="Override Amount" attrs="{
+									'invisible':[('override_amount','=',False)]}">
+							<field name="override_line" colspan="4" nolabel="1">
+								<tree editable="bottom">
+									<field name="fee_head_id"/>
+									<field name="payment_type"/>
+									<field name="fee_description"/>
+									<field name="fee_amount"/>
+									<field name="note" />
+								</tree>
+							</field>
+						</page>
+					</notebook>
+
+
+					<footer>
+						<button name="generate_challan" string="Generate/Change Status" type="object" class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel" />
+					</footer>
+			   </form>
+			</field>
+		</record>
+
+		<record id="view_odoocms_admission_challan_form" model="ir.ui.view">
+			<field name="name">odoocms.admission.challan.form</field>
+			<field name="model">odoocms.admission.challan</field>
+			<field name="arch" type="xml">
+				<form string="Admission Challan">
+<!--					<group>-->
+<!--						<field name="state" required="1"/>-->
+<!--					</group>-->
+					<group>
+						<field name="applicant_ids" colspan="4" nolabel="1"/>
+					</group>
+					<footer>
+						<button name="generate_admission_challan" string="Admission Challan" type="object" class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel" />
+					</footer>
+			   </form>
+			</field>
+		</record>
+
+
+
+		<act_window
+				id="odoocms_admission_challan"
+				name="Generate Challan/Change Status"
+				res_model="odoocms.admission.challan"
+				src_model="odoocms.application"
+				view_mode="form"
+				multi="True"
+            	target="new"
+            	key2="client_action_multi"/>
+
+		
+    </data>
+</odoo>

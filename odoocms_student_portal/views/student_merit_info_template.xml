@@ -1,0 +1,129 @@
+<odoo>
+
+    <template id="portal_my_student_merit_list" inherit_id="portal.portal_my_home" name="Portal My Home : registration entry" priority="25">
+    <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+      <t t-if="student_application" t-call="portal.portal_docs_entry">
+        <t t-set="title">Merit List</t>
+        <t t-set="url" t-value="'/my/merit'"/>
+      </t>
+
+    </xpath>
+  </template>
+
+	<template id="portal_applicant_merit" name="Merit Details">
+		 <t t-call="portal.portal_layout">
+          <t t-set="breadcrumbs_searchbar" t-value="True"/>
+          <t t-call="portal.portal_searchbar">
+            <t t-set="title">Applicant</t>
+          </t>
+          <t t-if="not applicant_merit">
+            <p>There are currently no data for your account.</p>
+          </t>
+           <t class="list-group-item fle-xgrow-1" t-if="applicant_merit">
+               <div style=" text-align: center;background: #1abc9c;color: white; font-size: 30px;">
+                    <span>Merit Details </span>
+               </div>
+                <div class="row py-2">
+                    <div class="col-xl-12 col-md-12 col-sm-12 mx-auto">
+                        <div class="bg-white shadow rounded overflow-hidden">
+
+                            <div class="px-4 pt-0 pb-4" style="background:#137562;">
+                                <div class="media align-items-end profile-header">
+                                    <div class="profile mr-3">
+                                        <img alt="..." width="130" class="rounded mb-2 img-thumbnail" t-att-src="image_data_uri(applicant.image)" t-if="applicant.image" />
+                                         <img alt="..." width="130" class="rounded mb-2 img-thumbnail" src="/web/static/src/img/user_menu_avatar.png" t-if=" not applicant.image" />
+                                    </div>
+                                    <div class="media-body mb-5 text-white">
+                                        <h4 class="mt-0 mb-0">
+                                            <span t-field="applicant.name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                        </h4>
+                                        <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i><span t-field="applicant.country_id"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row px-4" style="padding-top:4em">
+                                <div style="font-size:18px; font-weight:bold; text-align:left">
+                                    <div class="col col-12">
+                                        <span>Merit list for </span>&#160;<span t-esc="applicant.register_id.name" t-if="applicant"/>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="row px-4" t-if="locked_application">
+                                <strong class="text-muted">
+                                        <span style="background:#FE8DD">Congratulations you have been selected in </span>&#160;<span t-esc="locked_application.program_id.name"/>
+                                </strong>
+                                 <table id="merit-info">
+                                     <tr>
+                                         <th>Entry ID:</th><td><span t-esc="locked_application.entryID"/></td>
+                                    </tr>
+                                     <tr>
+                                         <th>Program Register:</th> <td><span t-esc="locked_application.register_id.name"/> </td>
+                                     </tr>
+                                    <tr>
+                                         <th>Program:</th><td><span t-esc="locked_application.program_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                         <th>Your Merit No.:</th><td><span t-esc="locked_application.merit_number"/></td>
+                                    </tr>
+                                    <tr>
+                                         <th>Program Merit No:</th><td><span t-esc="locked_application.program_merit_number"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="py-2 px-4" t-if="cancelled_application">
+                                <strong style="color:#FF0000">
+                                    <span >Your Admission has been  </span>&#160;<span t-esc="cancelled_application.state"/><span>ed</span>
+                                </strong>
+                                <div>
+                                    <table id="merit-info">
+                                         <tr>
+                                             <th>Entry ID:</th><td><span t-esc="cancelled_application.entryID"/></td>
+                                        </tr>
+                                         <tr>
+                                             <th>Program Register:</th> <td><span t-esc="cancelled_application.register_id.name"/> </td>
+                                         </tr>
+                                        <tr>
+                                             <th>Program:</th><td><span t-esc="cancelled_application.program_id.name"/></td>
+                                        </tr>
+                                        <tr>
+                                             <th>Your Merit No.:</th><td><span t-esc="cancelled_application.merit_number"/></td>
+                                        </tr>
+                                        <tr>
+                                             <th>Program Merit No:</th><td><span t-esc="cancelled_application.program_merit_number"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="px-4" style="padding-bottom:15px">
+                                <strong class="text-muted">
+                                    <h3>Your Preferences Merit History</h3>
+                                </strong>
+                                <table id="custom-table">
+                                  <tr>
+                                      <th>Merit List</th>
+                                      <th>Program</th>
+                                      <th>Preference</th>
+                                      <th>Program Merit No.</th>
+                                      <th>Total Seats</th>
+                                      <th>Selected</th>
+                                  </tr>
+                                  <t t-foreach="applicant_merit.line_ids" t-as="line_ids">
+                                      <tr>
+                                          <td> <span t-field="line_ids.merit_register_id.merit_list_id.name" /> </td>
+                                          <td> <span t-field="line_ids.program_id.name" /> </td>
+                                          <td> <span t-field="line_ids.preference" /> </td>
+                                          <td> <span t-field="line_ids.program_merit_number" /> </td>
+                                          <td> <span t-field="line_ids.seats" /> </td>
+                                          <td> <span t-field="line_ids.selected" /> </td>
+                                      </tr>
+                                  </t>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </t>
+        </t>
+    </template>
+
+</odoo>

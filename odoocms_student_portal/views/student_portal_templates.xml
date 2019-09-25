@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!--   <template id="portal_my_home_menu_registration" name="Portal layout : registration menu entries" inherit_id="portal.portal_breadcrumbs" priority="25"><xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside"><li ><a  t-attf-href="/Admissions/add?{{ keep_query() }}">Registration</a><t t-else="">Registration</t></li></xpath></template>-->
+  <!--  <template id="portal_my_home_menu_registration" name="your name" inherit_id="portal.portal_breadcrumbs" priority="25"><xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside"><li ><span  t-esc="quotation_count"/><a href="/my/records/portal">Portal Form</a></li></xpath></template>-->
+
+
+    <!--<template id="portal_my_student_semester_activities_inh" inherit_id="portal.portal_breadcrumbs" name="activiinh" >
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li >
+                <span t-if="semester_planing" t-attf-href="/my/home?{{ keep_query() }}">/Your Semester Schedule </span>
+                <span t-if="student_course" t-attf-href="/my/home?{{ keep_query() }}">/Student Courses Details </span>
+                <span t-if="student_semesters" t-attf-href="/my/home?{{ keep_query() }}">/Result </span>
+                    <t t-else=""></t>
+            </li>
+        </xpath>
+    </template>-->
+
+  <template id="portal_my_home_registration" inherit_id="portal.portal_my_home" name="Portal My Home : registration entry" priority="25">
+    <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+      <t t-if="student_count" t-call="portal.portal_docs_entry">
+        <t t-set="title">Student Profile</t>
+        <t t-set="url" t-value="'/my/profile'"/>
+      </t>
+
+      <t t-if="student_count" t-call="portal.portal_docs_entry">
+        <t t-set="title">Requests</t>
+        <t t-set="url" t-value="'/my/request/forms'"/>
+      </t>
+    </xpath>
+  </template>
+
+  <template id="portal_student_profilechange" name="Portal My Home :Profile Change">
+     <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+        <t t-call="portal.portal_searchbar"></t>
+        <li class="list-group-item">
+              <span class="badge"/>
+              <a href="/my/request/forms/open">Request Profile Change </a>
+        </li>
+        <li class="list-group-item">
+              <span class="badge"/>
+              <a href="/my/request/course/enrollment">Course Enrollment Request</a>
+        </li>
+
+    </t>
+  </template>
+
+  <template id="portal_student_profile" name="My Test">
+    <t t-call="portal.portal_layout">
+      <t t-set="breadcrumbs_searchbar" t-value="True"/>
+      <t t-call="portal.portal_searchbar">
+        <t t-set="title">Student</t>
+      </t>
+      <t t-if="not student">
+        <p>There are currently no data for your account.</p>
+      </t>
+       <t t-if="student">
+       <div class="row py-2">
+            <div class="col-xl-12 col-md-12 col-sm-12 mx-auto">
+
+                <!-- Profile widget -->
+                <div class="bg-white shadow rounded overflow-hidden">
+                    <div class="px-4 pt-0 pb-4" style="background:#1abc9c;">
+                        <div class="media align-items-end profile-header">
+                            <div class="profile mr-3">
+                                <img alt="..." width="130" class="rounded mb-2 img-thumbnail" t-att-src="image_data_uri(student.image)" t-if="student.image" />
+                                 <img alt="..." width="130" class="rounded mb-2 img-thumbnail" src="/web/static/src/img/user_menu_avatar.png" t-if=" not student.image" />
+                            </div>
+                            <div class="media-body mb-5 text-white">
+                                <h4 class="mt-0 mb-0">
+                                    <span t-field="student.name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                    <span t-field="student.last_name" t-options="{&quot;widget&quot;: &quot;name&quot;}"/>
+                                </h4>
+                                <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i><span t-field="student.country_id"/></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="py-5 px-4">
+
+                        <div class="small mb-1">
+                          <strong class="text-muted">
+                            <h3 style="padding:5px; background:#17a488; color:#fff">Personal Information</h3>
+                          </strong>
+                        </div>
+                        <table class="table table-condensed bg-white shadow rounded overflow-hidden" width="100%">
+                          <tbody>
+                            <tr style="font-size:14px;">
+                              <th class="text-left">Gender: </th>
+                              <td class="text-left">
+                                <span t-field="student.gender"/>
+                              </td>
+                              <th class="text-left">Birth Date: </th>
+                              <td class="text-left">
+                                <span t-field="student.date_of_birth"/>
+                              </td>
+                            </tr>
+                            <tr style="font-size:14px;">
+                              <th class="text-left">Nationality: </th>
+                              <td class="text-left">
+                                <span t-field="student.nationality"/>
+                              </td>
+                              <th class="text-left">Language: </th>
+                              <td class="text-left">
+                                <span t-field="student.lang"/>
+                              </td>
+                            </tr>
+                            <tr style="font-size:14px;">
+                              <th class="text-left">Blood Group: </th>
+                              <td class="text-left">
+                                <span t-field="student.blood_group"/>
+                              </td>
+                              <th class="text-left">Email: </th>
+                              <td class="text-left">
+                                <span t-field="student.email"/>
+                              </td>
+                            </tr>
+                            <tr style="font-size:14px;">
+                              <th class="text-left">CNIC: </th>
+                              <td class="text-left">
+                                <span t-field="student.cnic"/>
+                              </td>
+                              <th class="text-left">Emergency Contact: </th>
+                              <td class="text-left">
+                                <span t-field="student.emergency_contact"/>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <div class="small mb-1">
+                          <strong class="text-muted">
+                            <h3 style="padding:5px; background:#17a488; color:#fff">Address Details</h3>
+                          </strong>
+                        </div>
+                        <table class="table table-condensed bg-white shadow rounded overflow-hidden" width="100%">
+                          <tbody>
+                            <tr style="font-size:14px;">
+                              <th class="text-left">Street1: </th>
+                              <td class="text-left" colspan="3">
+                                <span t-field="student.street"/>
+                              </td>
+                            </tr>
+                            <tr style="font-size:14px;">
+                              <th class="text-left">Street2: </th>
+                              <td class="text-left" colspan="3">
+                                <span t-field="student.street2"/>
+                              </td>
+                            </tr>
+                            <tr style="font-size:14px;">
+                              <th class="text-left">City: </th>
+                              <td class="text-left">
+                                <span t-field="student.city"/>
+                              </td>
+                              <th class="text-left">Country: </th>
+                              <td class="text-left">
+                                <span t-field="student.country_id"/>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                    </div>
+                </div><!-- End profile widget -->
+
+            </div>
+        </div>
+      </t>
+    </t>
+  </template>
+
+  <template id="portal_student_profilechange_save" name="Profile Chane Request">
+    <t t-call="portal.portal_layout">
+      <t t-set="breadcrumbs_searchbar" t-value="True"/>
+      <t t-call="portal.portal_searchbar">
+        <t t-set="title">Student</t>
+      </t>
+
+      <section>
+        <form id="request_data" action="/request/save" method = "post">
+          <div style=" text-align: center;background: #1abc9c;color: white; font-size: 30px;">
+              <span>Student Profile Change Request</span>
+          </div>
+          <div style="box-shadow: 0px 3px 10px 0px rgb(0,0,0,0.3); padding:0px 25px 25px">
+            <table class="table table-condensed" width="100%">
+                  <tbody>
+                    <tr style="font-size:14px;">
+                      <th class="text-left">Change IN</th>
+                      <td class="text-left">
+                         <select class="form-control o_website_form_input" id="change_in" name="change_in" onchange="changeProfile()" required="">
+                           <option selected="selected" value=""> Select Field </option>
+                           <option  t-attf-value="name">Name</option>
+                           <option t-attf-value="last_name">Last Name</option>
+                           <option t-attf-value="date_of_birth">Date Of Birth</option>
+                           <option t-attf-value="cnic">CNIC</option>
+                         </select>
+                      </td>
+
+                      <th class="text-left">Old Information: </th>
+                      <td class="text-left">
+                        <input type="text" class="form-control o_website_form_input" name="old_info" id="old_info" required=""/>
+                      </td>
+
+                      <th class="text-left">New Information: </th>
+                      <td class="text-left">
+                         <input type="hidden" class="form-control o_website_form_input" id="selected_field" name="selected_field"/>
+                         <input type="text" class="form-control o_website_form_input" name="new_info" required=""/>
+                      </td>
+                      <td class="text-left">
+                         <button type="submit" class="btn btn-primary">Submit</button>
+                      </td>
+                    </tr>
+                  </tbody>
+            </table>
+          </div>
+
+        </form>
+      </section>
+    </t>
+  </template>
+
+  <template id="portal_student_course_enrollment" name="Course Enrollment Request">
+    <t t-call="portal.portal_layout">
+      <t t-set="breadcrumbs_searchbar" t-value="True"/>
+      <t t-call="portal.portal_searchbar">
+        <t t-set="title">Student</t>
+      </t>
+
+      <section>
+        <form id="request_data" action="/request/save" method = "post">
+          <div style=" text-align: center;background: #1abc9c;color: white; font-size: 30px;">
+              <span>Student Course Enrollment Request</span>
+          </div>
+
+          <div style="box-shadow: 0px 3px 10px 0px rgb(0,0,0,0.3); padding:25px 25px">
+
+            <div class="collapsible" >Compulsory Courses</div>
+            <div class="expendablecontent">
+                <div class="list-group">
+                    <t t-if="not compulsory_subject_ids">
+                        <span>There is no course available for registration</span>
+                    </t>
+                    <t t-set="i" t-value="0"/>
+                    <input type="hidden" t-att-value="max_credit_hours" id="max_credit_hours" />
+                    <t t-foreach="compulsory_subject_ids" t-as="cmsclass">
+                        <input type="checkbox" class="com_subject_list" t-att-name="cmsclass.study_scheme_line_id.weightage" t-att-value="cmsclass.id" t-att-id="i+1" />
+                        <label class="list-group-item" t-att-for="i+1">
+                            <span>
+                                <span>Course Name:</span>&#160;&#160;&#160;&#160;<span style="font-weight:normal" t-esc="cmsclass.name" t-if="cmsclass.name"/>
+                            </span>
+                             <span style="float:right">
+                                <span>Credit hours:</span>&#160;&#160;&#160;&#160;<span style="font-weight:normal" t-esc="cmsclass.study_scheme_line_id.lecture" t-if="cmsclass.study_scheme_line_id.lecture"/>
+                                <span >&#160;+&#160;</span><span style="font-weight:normal" t-esc="cmsclass.study_scheme_line_id.lab" t-if="cmsclass.study_scheme_line_id.lab"/><span style="font-weight:normal" t-if="not cmsclass.study_scheme_line_id.lab">0</span>
+                            </span>
+                            <t t-set="i" t-value="i+1"/>
+                          <!-- <span>-&#45;&#45;&#45;&#45;&#45;&#45;<span>Credit Hours:</span></span><span t-esc="cmsclass.subject_id.subject_id.weightage" t-if="cmsclass.subject_id.subject_id.weightage" />-->
+                        </label>
+                      </t>
+                </div>
+            </div>
+
+            <div class="collapsible" >Elected Courses</div>
+            <div class="expendablecontent">
+                <div class="list-group">
+                    <t t-if="not elective_subject_ids">
+                        <span>There is no course available for registration</span>
+                    </t>
+                    <t t-set="i" t-value="0"/>
+                    <t t-foreach="elective_subject_ids" t-as="cmsclass">
+                        <input type="checkbox" class="elected_subject_list" t-att-name="cmsclass.study_scheme_line_id.weightage" t-att-value="cmsclass.id" t-att-id="i+100" />
+                        <label class="list-group-item" t-att-for="i+100">
+                            <span>
+                                <span>Course Name:</span>&#160;&#160;&#160;&#160;<span style="font-weight:normal" t-esc="cmsclass.name" t-if="cmsclass.name"/>
+                            </span>
+                             <span style="float:right">
+                                <span>Credit hours:</span>&#160;&#160;&#160;&#160;<span style="font-weight:normal" t-esc="cmsclass.study_scheme_line_id.lecture" t-if="cmsclass.study_scheme_line_id.lecture"/>
+                                <span >&#160;+&#160;</span><span style="font-weight:normal" t-esc="cmsclass.study_scheme_line_id.lab" t-if="cmsclass.study_scheme_line_id.lab"/><span style="font-weight:normal" t-if="not cmsclass.study_scheme_line_id.lab">0</span>
+                            </span>
+                            <t t-set="i" t-value="i+1"/>
+                          <!-- <span>-&#45;&#45;&#45;&#45;&#45;&#45;<span>Credit Hours:</span></span><span t-esc="cmsclass.subject_id.subject_id.weightage" t-if="cmsclass.subject_id.subject_id.weightage" />-->
+                        </label>
+                      </t>
+                </div>
+            </div>
+
+            <div class="collapsible" >Failed Courses</div>
+            <div class="expendablecontent">
+                <div class="list-group">
+                    <t t-if="not failed_subject_ids">
+                        <span>There is no course available for registration</span>
+                    </t>
+                    <t t-set="i" t-value="0"/>
+                    <t t-foreach="failed_subject_ids" t-as="cmsclass">
+                        <input type="checkbox" class="repeat_subject_list" t-att-name="cmsclass.study_scheme_line_id.weightage" t-att-value="cmsclass.id" t-att-id="i+1000" />
+                        <label class="list-group-item" t-att-for="i+1000">
+                             <span>
+                                <span>Course Name:</span>&#160;&#160;&#160;&#160;<span style="font-weight:normal" t-esc="cmsclass.name" t-if="cmsclass.name"/>
+                            </span>
+                             <span style="float:right">
+                                <span>Credit hours:</span>&#160;&#160;&#160;&#160;<span style="font-weight:normal" t-esc="cmsclass.study_scheme_line_id.lecture" t-if="cmsclass.study_scheme_line_id.lecture"/>
+                                <span >&#160;+&#160;</span><span style="font-weight:normal" t-esc="cmsclass.study_scheme_line_id.lab" t-if="cmsclass.study_scheme_line_id.lab"/><span style="font-weight:normal" t-if="not cmsclass.study_scheme_line_id.lab">0</span>
+                            </span>
+                            <t t-set="i" t-value="i+1"/>
+                          <!-- <span>-&#45;&#45;&#45;&#45;&#45;&#45;<span>Credit Hours:</span></span><span t-esc="cmsclass.subject_id.subject_id.weightage" t-if="cmsclass.subject_id.subject_id.weightage" />-->
+                        </label>
+                      </t>
+                </div>
+            </div>
+            <div class="collapsible" >To improve Courses</div>
+            <div class="expendablecontent">
+                <div class="list-group">
+                    <t t-if="not to_improve_subject_ids">
+                        <span>There is no course available for registration</span>
+                    </t>
+                    <t t-set="i" t-value="0"/>
+                    <t t-foreach="to_improve_subject_ids" t-as="cmsclass">
+                        <input type="checkbox" class="improve_subject_list" t-att-name="cmsclass.study_scheme_line_id.weightage" t-att-value="cmsclass.id" t-att-id="i+10000" />
+                        <label class="list-group-item" t-att-for="i+10000">
+                            <span>
+                                <span>Course Name:</span>&#160;&#160;&#160;&#160;<span style="font-weight:normal" t-esc="cmsclass.name" t-if="cmsclass.name"/>
+                            </span>
+                             <span style="float:right">
+                                <span>Credit hours:</span>&#160;&#160;&#160;&#160;<span style="font-weight:normal" t-esc="cmsclass.study_scheme_line_id.lecture" t-if="cmsclass.study_scheme_line_id.lecture"/>
+                                <span >&#160;+&#160;</span><span style="font-weight:normal" t-esc="cmsclass.study_scheme_line_id.lab" t-if="cmsclass.study_scheme_line_id.lab"/><span style="font-weight:normal" t-if="not cmsclass.study_scheme_line_id.lab">0</span>
+                            </span>
+                            <t t-set="i" t-value="i+1"/>
+                          <!-- <span>-&#45;&#45;&#45;&#45;&#45;&#45;<span>Credit Hours:</span></span><span t-esc="cmsclass.subject_id.subject_id.weightage" t-if="cmsclass.subject_id.subject_id.weightage" />-->
+                        </label>
+                      </t>
+                </div>
+            </div>
+            <input type="button" class="btn btn-primary" id="save_course_reenroll" style="margin:5px" name="save_course_reenroll" value="Submit" onclick="submitCourseRequest()"/>
+          </div>
+        </form>
+      </section>
+    </t>
+  </template>
+
+</odoo>

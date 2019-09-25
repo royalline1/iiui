@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Academic Session -->
+    <record id="view_odoocms_academic_session_tree" model="ir.ui.view">
+        <field name="name">odoocms.academic.session.tree</field>
+        <field name="model">odoocms.academic.session</field>
+        <field name="arch" type="xml">
+            <tree string="Academic Session">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_odoocms_academic_session_form" model="ir.ui.view">
+        <field name="name">odoocms.academic.session.form</field>
+        <field name="model">odoocms.academic.session</field>
+        <field name="arch" type="xml">
+            <form string="Academic Session">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code" required="1"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="active"/>
+                        </group>
+                        <field name="description" placeholder="Enter the Description"/>
+                    </group>
+                    <notebook></notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_odoocms_academic_session_search" model="ir.ui.view">
+        <field name="name">odoocms.academic.session.search</field>
+        <field name="model">odoocms.academic.session</field>
+        <field name="arch" type="xml">
+            <search string="Academic Session">
+                <field name="code"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_odoocms_academic_session" model="ir.actions.act_window">
+        <field name="name">Academic Session</field>
+        <field name="res_model">odoocms.academic.session</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_odoocms_academic_session_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the First Academic Session here.
+            </p>
+        </field>
+    </record>
+
+
+    <!-- Academic Calendar -->
+    <record id="view_odoocms_academic_calendar_tree" model="ir.ui.view">
+        <field name="name">odoocms.academic.calendar.tree</field>
+        <field name="model">odoocms.academic.calendar</field>
+        <field name="arch" type="xml">
+            <tree string="Academic Calendar">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_odoocms_academic_calendar_form" model="ir.ui.view">
+        <field name="name">odoocms.academic.calendar.form</field>
+        <field name="model">odoocms.academic.calendar</field>
+        <field name="arch" type="xml">
+            <form string="Academic Calendar">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code" required="1"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="active"/>
+                        </group>
+                        <field name="description" placeholder="Enter the Description"/>
+                    </group>
+                    <notebook>
+                        <field name="academic_semester_ids"/>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_odoocms_academic_calendar_search" model="ir.ui.view">
+        <field name="name">odoocms.academic.calendar.search</field>
+        <field name="model">odoocms.academic.calendar</field>
+        <field name="arch" type="xml">
+            <search string="Academic Calendar">
+                <field name="code"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_odoocms_academic_calendar" model="ir.actions.act_window">
+        <field name="name">Academic Calendar</field>
+        <field name="res_model">odoocms.academic.calendar</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_odoocms_academic_calendar_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the First Academic Calendar here.
+            </p>
+        </field>
+    </record>
+
+
+    <!-- Academic Term -->
+    <record id="view_odoocms_academic_semester_tree" model="ir.ui.view">
+        <field name="name">odoocms.academic.semester.tree</field>
+        <field name="model">odoocms.academic.semester</field>
+        <field name="arch" type="xml">
+            <tree string="Academic Term">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code" required="1"/>
+                <field name="academic_calendar_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_odoocms_academic_semester_form" model="ir.ui.view">
+        <field name="name">odoocms.academic.semester.form</field>
+        <field name="model">odoocms.academic.semester</field>
+        <field name="arch" type="xml">
+            <form string="Academic Year">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" groups="odoocms.group_cms_manager" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="academic_calendar_id"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="semester_ids" widget="many2many_tags"/>
+                        </group>
+                        <field name="description" placeholder="Enter the Description"/>
+                    </group>
+
+                     <notebook>
+                         <page string="Activities">
+                            <field name="planning_ids">
+                                <tree string="Activities" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                     </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_odoocms_academic_semester_search" model="ir.ui.view">
+        <field name="name">odoocms.academic.semester.search</field>
+        <field name="model">odoocms.academic.semester</field>
+        <field name="arch" type="xml">
+            <search string="Academic Term">
+                <field name="code"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_odoocms_academic_semester" model="ir.actions.act_window">
+        <field name="name">Academic Term</field>
+        <field name="res_model">odoocms.academic.semester</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_odoocms_academic_semester_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the First Academic Term here.
+            </p>
+        </field>
+    </record>
+
+    <!-- Semester -->
+    <record id="view_odoocms_semester_tree" model="ir.ui.view">
+        <field name="name">odoocms.semester.tree</field>
+        <field name="model">odoocms.semester</field>
+        <field name="arch" type="xml">
+            <tree string="Semester" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="number"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_odoocms_semester" model="ir.actions.act_window">
+        <field name="name">Semester</field>
+        <field name="res_model">odoocms.semester</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the First Semester here.
+            </p>
+        </field>
+    </record>
+
+
+
+    <!-- Company Form -->
+    <record id="odoocms_view_company_form" model="ir.ui.view">
+            <field name="name">res.company.form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="signature" widget="image" />
+                </xpath>
+                <notebook colspan="4" position="inside">
+                    <page name="institute_detail" string="Institute Detail">
+                        <group name="container_education">
+                            <group name="registration_info" string="Registration Info" >
+                                <field name="affiliation"/>
+                                <field name="register_num"/>
+                            </group>
+                            <group string="Accreditation">
+                                <field name="accreditation"/>
+                                <field name="approval_authority" />
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+    <menuitem
+            id="menu_odoocms_academic_session"
+            name="Academic Session"
+            parent="menu_odoocms_config_calendar"
+            action="action_odoocms_academic_session"
+            sequence="10"/>
+
+    <menuitem
+            id="menu_odoocms_academic_calendar"
+            name="Academic Calendar"
+            parent="menu_odoocms_config_calendar"
+            action="action_odoocms_academic_calendar"
+            sequence="10"/>
+
+    <menuitem
+            id="menu_odoocms_academic_semester"
+            name="Academic Term"
+            parent="menu_odoocms_config_calendar"
+            action="action_odoocms_academic_semester"
+            sequence="20"/>
+
+    <menuitem
+            id="menu_odoocms_semester"
+            name="Semester"
+            parent="menu_odoocms_config_general"
+            action="action_odoocms_semester"
+            sequence="6"/>
+
+</odoo>

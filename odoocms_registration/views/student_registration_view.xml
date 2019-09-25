@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_odoocms_student_subject_tree" model="ir.ui.view">
+            <field name="name">odoocms.student.subject.tree</field>
+            <field name="model">odoocms.student.subject</field>
+            <field name="arch" type="xml">
+                <tree string="Student Registration" editable="bottom">
+                    <field name="student_id"/>
+                    <field name="program_id"/>
+                    <field name="academic_session_id"/>
+                    <field name="academic_semester_id"/>
+                    <field name="subject_id"/>
+                    <field name="class_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_odoocms_student_subject_form" model="ir.ui.view">
+            <field name="name">odoocms.student.subject.form</field>
+            <field name="model">odoocms.student.subject</field>
+            <field name="arch" type="xml">
+                <form string="Student Registration">
+                    <sheet>
+                       <group>
+                            <group>
+                                <field name="student_id" readonly="1"/>
+                                <field name="program_id"/>
+                            </group>
+                            <group>
+                                <field name="academic_session_id"/>
+                                <field name="academic_semester_id"/>
+                            </group>
+                            <group name="subject_class">
+                                <field name="subject_id"/>
+                                <field name="class_id" readonly="1"/>
+                            </group>
+                       </group>
+                        <notebook>
+
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_odoocms_student_subject_search" model="ir.ui.view">
+            <field name="name">odoocms.student.subject.search</field>
+            <field name="model">odoocms.student.subject</field>
+            <field name="arch" type="xml">
+                <search string="Student Registration">
+                    <field name="student_id"/>
+                    <field name="program_id"/>
+                    <field name="academic_semester_id"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="group_by_student" string="Student" domain="[]" context="{'group_by':'student_id'}"/>
+                        <filter name="group_by_program" string="Program" domain="[]" context="{'group_by':'program_id'}"/>
+                        <filter name="group_by_session" string="Academic Session" domain="[]" context="{'group_by':'academic_session_id'}"/>
+                        <filter name="group_by_semester" string="Academic Term" domain="[]" context="{'group_by':'academic_semester_id'}"/>
+                        <filter name="group_by_subject" string="Subject" domain="[]" context="{'group_by':'subject_id'}"/>
+                        <filter name="group_by_class" string="Class" domain="[]" context="{'group_by':'class_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_odoocms_student_subject" model="ir.actions.act_window">
+            <field name="name">Student Registration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">odoocms.student.subject</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_odoocms_student_subject_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <menuitem
+                id="menu_odoocms_student_subject"
+                name="Student Registration"
+                action="action_odoocms_student_subject"
+                parent="menu_odoocms_registration_main"
+                sequence="20"/>
+
+    </data>
+</odoo>

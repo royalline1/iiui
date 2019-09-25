@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_odoocms_student_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.student.form.inherit</field>
+            <field name="model">odoocms.student</field>
+            <field name="inherit_id" ref="odoocms_registration.view_odoocms_student_form_inherit"/>
+            <field name="arch" type="xml">
+                <field name="section_id" position="after">
+                    <field name="hostel_facility"/>
+                    <field name="hostel_cubical"/>
+                    <field name="feemerit" widget="radio"/>
+<!--                    <field name="challan_status" widget="radio"/>-->
+                </field>
+            </field>
+        </record>
+
+        <record id="view_odoocms_student_form_inherit2" model="ir.ui.view">
+            <field name="name">odoocms.student.form.inherit2</field>
+            <field name="model">odoocms.student</field>
+            <field name="inherit_id" ref="odoocms.view_odoocms_student_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='academic_information']" position="after">
+                    <page string="Fee Receipts" name="fee_receipts">
+                        <group string="Receipts">
+                            <field name="receipt_ids" nolabel="1">
+                                <tree edit="false" create="false" delete="false">
+                                    <field name="date_invoice" string="Receipt Date"/>
+                                    <field name="number"/>
+                                    <field name="journal_id"/>
+                                    <field name="date_due"/>
+                                    <field name="amount_total_signed" string="Total" sum="Total"/>
+                                    <field name="residual_signed" string="Amount Due" sum="Amount Due"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Fee Structures">
+                            <field name="fee_structure_ids" nolabel="1">
+                                <tree editable="bottom" delete="false">
+                                    <field name="category_id"/>
+                                    <field name="fee_head_id" domain="[('category_id','=',category_id)]"/>
+                                    <field name="fee_amount" required="1" widget="monetary"/>
+                                    <field name="payment_type"/>
+                                    <field name="note" required="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_odoocms_application_form" model="ir.ui.view">
+            <field name="name">odoocms.application.form.inherit</field>
+            <field name="model">odoocms.application</field>
+            <field name="inherit_id" ref="odoocms_admission.view_odoocms_application_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='admission']/group/group/field[@name='program_id']" position="after">
+<!--                    <field name="hostel_facility"/>-->
+<!--                    <field name="hostel_cubical"/>-->
+                    <field name="feemerit" widget="radio" readonly="1"/>
+                    <field name="challan_status" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

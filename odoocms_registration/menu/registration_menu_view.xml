@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <menuitem
+                id="menu_odoocms_registration_root"
+                name="Registration"
+                groups="odoocms.group_cms_manager,odoocms_registration.group_registration_user"
+                web_icon="odoocms_registration,static/description/icon.png"
+                sequence="12"/>
+
+        <menuitem
+                id="menu_odoocms_registration_main"
+                name="Registration"
+                parent="menu_odoocms_registration_root"
+                sequence="20"/>
+
+        <menuitem
+                id="menu_student_request_root"
+                name="Students Requests"
+                parent="menu_odoocms_registration_root"
+                sequence="30"/>
+
+        <menuitem
+                id="menu_odoocms_registration_report"
+                name="Registration Reports"
+                parent="menu_odoocms_registration_root"
+                sequence="150"/>
+
+        <menuitem
+                id="menu_registration_configuration"
+                parent="menu_odoocms_registration_root"
+                name="Configuration"
+                groups="odoocms.group_cms_manager,odoocms_registration.group_registration_manager"
+                sequence="200"/>
+
+
+</odoo>

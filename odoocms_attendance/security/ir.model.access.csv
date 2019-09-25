@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odoocms_class_attendance_user,access.odoocms.class.attendance.user,odoocms_attendance.model_odoocms_class_attendance,odoocms.group_cms_user,1,1,1,0
+access_odoocms_class_attendance_manager,access.odoocms.class.attendance.manager,odoocms_attendance.model_odoocms_class_attendance,odoocms.group_cms_manager,1,1,1,1
+
+access_odoocms_class_attendance_line_user,access.odoocms.class.attendance.line.user,odoocms_attendance.model_odoocms_class_attendance_line,odoocms.group_cms_user,1,1,1,0
+access_odoocms_class_attendance_line_manager,access.odoocms.class.attendance.line.manager,odoocms_attendance.model_odoocms_class_attendance_line,odoocms.group_cms_manager,1,1,1,1

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   <template id="portal_my_home_registration" name="Portal My Home : registration entry" inherit_id="portal.portal_my_home" priority="25">
+    <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+
+        <t  t-call="portal.portal_docs_entry" t-if="(not student_count) and (not faculty_count)">
+           <t t-set="title">Online Admission Registration</t>
+            <t t-set="url" t-value="'/admission/registration'"/>
+        </t>
+           
+       
+    </xpath>
+  </template>
+ 
+</odoo>

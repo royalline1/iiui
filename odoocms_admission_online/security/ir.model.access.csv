@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odoocms_entrytest_result_user,access.odoocms.entrytest.result.user,odoocms_admission_online.model_odoocms_entrytest_result,odoocms.group_cms_user,1,1,1,0
+access_odoocms_entrytest_result_manager,access.odoocms.entrytest.result.manager,odoocms_admission_online.model_odoocms_entrytest_result,odoocms.group_cms_manager,1,1,1,1
+
+access_odoocms_admission_fee_user,access.odoocms.admission.fee.user,odoocms_admission_online.model_odoocms_admission_fee,odoocms.group_cms_user,1,1,1,0
+access_odoocms_admission_fee_manager,access.odoocms.admission.fee.manager,odoocms_admission_online.model_odoocms_admission_fee,odoocms.group_cms_manager,1,1,1,1

@@ -1,0 +1,90 @@
+<odoo>
+    <template id ="odoocms_obe.program_wise_plo_attainment_report">
+		<t t-call="web.html_container">
+			<t t-call="web.basic_layout">
+
+                <style>
+                    #program-plo {
+                      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                      border-collapse: collapse;
+                      width: 100%;
+                        margin-top:15px;
+                    }
+
+                    #program-plo td, #program-plo th {
+                      border: 1px solid #ddd;
+                      padding: 8px;
+                    }
+
+                    #program-plo tr:nth-child(even){background-color: #f2f2f2;}
+
+                    #program-plo tr:hover {background-color: #ddd;}
+
+                    #program-plo th {
+                      padding-top: 12px;
+                      padding-bottom: 12px;
+                      text-align: left;
+                      background-color: #6f1964;
+                      color: white;
+                    }
+
+                </style>
+
+                <div class="page" style="font-size: 12px; border:1px solid #6f1964; padding:15px">
+
+                    <div style="font-size:18px;font-weight:bold;text-align:left;">
+                          <span> Student Wise Program OutCome (PLO) Attainment</span>
+                    </div>
+                    <div style="font-size:14px;text-align:left;">
+                        <span style="text-weight:bold ">Program:</span>&#160;<span style="color:#4b1869" t-esc="data['program_id'][1]"/>
+                    </div>
+                    <div style="font-size:14px; text-align:left;">
+                       <span style="text-weight:bold ">Batch:</span>&#160; <span style="color:#4b1869" t-esc="data['batch_id'][1]"/>
+                    </div>
+
+                    <table id="program-plo">
+                        <tr>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">SR No.</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">Registration No.</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">Name</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 1</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 2</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 3</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 4</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 5</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 6</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 7</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 8</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 9</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 10</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 11</th>
+                            <th style="font-size:12px;font-weight:bold;text-align:left;">PLO 12</th>
+                        </tr>
+                        <tbody>
+                             <t t-foreach="rep_data['lines']" t-as="ln">
+                                 <tr style="font-size:12px;">
+                                    <td><span t-esc="ln_index + 1" /></td>
+                                    <td style="color:#4b1869" ><span t-esc="ln['student_id']" /></td>
+                                    <td><span t-esc="ln['student_name']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-1']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-2']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-3']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-4']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-5']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-6']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-7']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-8']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-9']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-10']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-11']" /></td>
+                                    <td style="color:#4b1869; text-align:right"><span t-esc="ln['PLO-12']" /></td>
+                                 </tr>
+                             </t>
+                        </tbody>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

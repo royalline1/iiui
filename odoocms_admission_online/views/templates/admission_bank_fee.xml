@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>	
+<template id="admission_bank_fee" name="Result page">
+	<t t-call="website.layout">
+		<!-- <div class="oe_structure"> -->
+		<div class="background">
+			<div class="container">
+				<div class="d-flex justify-content-center h-100">
+					<div class="card">
+						<div class="card-header">
+							<h3>Varification of Admission Fee</h3>
+						</div>
+						<div class="card-body">
+							<form action="/onlineadmission/registration/fee" method="post">
+								<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+								<div class="input-group form-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="fa fa-bank"></i></span>
+									</div>
+									<input type="text" name="branch_code" class="form-control" placeholder="Branch Code"/>
+								</div>
+								<div class="input-group form-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+									</div>
+									<input type="text" name="voucher_no" class="form-control" placeholder="Vochar Number"/>
+									
+								</div>
+								<div class="input-group form-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="fa fa-user"></i></span>
+									</div>
+									<input type="text" name="applicant_name" class="form-control" placeholder="Same Name as on Voucher"/>
+									
+								</div>
+								<div class="form-group">
+									<input type="submit" value="Verify" id="signupbutton" class="btn float-right login_btn"/>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- </div> -->
+	</t>
+</template>
+
+</odoo>
+
+	

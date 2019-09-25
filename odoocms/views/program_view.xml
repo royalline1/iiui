@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        
+    <record id="view_odoocms_program_tree" model="ir.ui.view">
+        <field name="name">odoocms.program.tree</field>
+        <field name="model">odoocms.program</field>
+        <field name="arch" type="xml">
+            <tree string="Syllabus Program">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="career_id"/>
+                <field name="department_id"/>
+                <field name="faculty_id"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_odoocms_program_form" model="ir.ui.view">
+        <field name="name">odoocms.program.form</field>
+        <field name="model">odoocms.program</field>
+        <field name="arch" type="xml">
+            <form string="Syllabus Program">
+                <sheet>
+                    <group string="Program">
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="duration"/>
+                			<field name="credit_hours"/> 
+                        </group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="career_id"/>
+                            <field name="faculty_id"/>
+                        </group>
+                        <group>
+                            <field name="import_identifier"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page name="schemes" string="Study Schemes">
+                            <group colspan="4">
+                                <field name="scheme_ids">
+                                    <tree string="Study Schemes"> <!-- create="false" delete="false" edit="false" -->
+                                        <field name="code"/>
+                                        <field name="name"/>
+                                        <field name="faculty_id"/>
+                                        <field name="career_id"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="programs" string="Users">
+                            <group colspan="4">
+                                <field name="user_ids">
+                                    <tree string="Users"> <!-- create="false" delete="false" edit="false" -->
+                                        <field name="name"/>
+                                        <field name="login"/>
+                                        <field name="login_date"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+		            <field groups="base.group_user" name="message_follower_ids" widget="mail_followers"/>
+		            <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+		        </div>
+            </form>            
+        </field>
+    </record>
+    
+    <record id="view_odoocms_program_search" model="ir.ui.view">
+        <field name="name">odoocms.program.search</field>
+        <field name="model">odoocms.program</field>
+        <field name="priority" eval="14"/>
+        <field name="arch" type="xml">
+        <search string="Program">
+           <field name="name"/>
+           <field name="code"/>
+            <newline />
+                <group expand="0" string="Group By...">
+                    <filter string="Department" domain="[]" name="department" context="{'group_by':'department_id'}"/>
+                    <filter string="Career" domain="[]" name="career" context="{'group_by':'career_id'}"/>
+                    <filter string="Faculty" domain="[]" name="faculty" context="{'group_by':'faculty_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_odoocms_program" model="ir.actions.act_window">
+        <field name="name">Program</field>
+        <field name="res_model">odoocms.program</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_odoocms_program_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the First Program here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_odoocms_program"
+            parent="menu_odoocms_config_academic"
+            name="Academic Programs"
+            action="action_odoocms_program"
+            sequence="10"/>
+
+</odoo>

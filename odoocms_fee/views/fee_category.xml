@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_odoocms_fee_category_form" model="ir.ui.view">
+            <field name="name">odoocms.fee.category.form</field>
+            <field name="model">odoocms.fee.category</field>
+            <field name="arch" type="xml">
+                <form string="Fee Category">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" placeholder="Eg: Institutional"/>
+                                <field name="code"/>
+                            </group>
+                            <group>
+                                <field name="parent_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_odoocms_fee_category_tree" model="ir.ui.view">
+            <field name="name">odoocms.fee.category.tree</field>
+            <field name="model">odoocms.fee.category</field>
+            <field name="arch" type="xml">
+                <tree string="Fee Category" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="parent_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_odoocms_fee_category" model="ir.actions.act_window">
+            <field name="name">Fee Category</field>
+            <field name="res_model">odoocms.fee.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="menu_odoocms_fee_category"
+                action="action_odoocms_fee_category"
+                parent="menu_fee_configuration"
+                sequence="50"/>
+    </data>
+</odoo>

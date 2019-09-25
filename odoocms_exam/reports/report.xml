@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+		<!-- Student Transcript Report -->
+		<report
+			id="action_report_student_transcript_docp"
+			string="Student Transcript"
+			model="odoocms.student"
+			report_type="qweb-docp"
+			name="odoocms_exam.student_transcript_report"
+			file="odoocms_exam.student_transcript_report"
+			menu="True"
+		/>
+
+		<!-- Student Provisional Certificate-->
+		<report
+			id="action_report_student_provisional_certificate"
+			string="Student Provisional Certificate"
+			model="student.provisional.certificate.wiz"
+			report_type="qweb-html"
+			name="odoocms_exam.student_provisional_certificate_report"
+			file="odoocms_exam.student_provisional_certificate_report"
+			menu="True"
+		/>
+
+		<!-- GPA Wise Students-->
+		<report
+			id="action_report_gpa_wise_student"
+			string="GPA Wise Students"
+			model="gpa.wise.student.wiz"
+			report_type="qweb-html"
+			name="odoocms_exam.gpa_wise_student_report"
+			file="odoocms_exam.gpa_wise_student_report"
+			menu="True"
+		/>
+
+		<!-- Less GPA Warning-->
+		<report
+			id="action_report_gpa_warning"
+			string="GPA Warning"
+			model="gpa.warning.wizard"
+			report_type="qweb-html"
+			name="odoocms_exam.gpa_warning_report"
+			file="odoocms_exam.gpa_warning_report"
+			menu="True"
+		/>
+
+		<!-- Student Exam Slip-->
+		<report
+			id="action_report_student_exam_slip"
+			string="Exam Slip"
+			model="student.exam.slip.wiz"
+			report_type="qweb-html"
+			name="odoocms_exam.student_exam_slip_report"
+			file="odoocms_exam.student_exam_slip_report"
+			menu="True"
+		/>
+
+</data>
+</odoo>

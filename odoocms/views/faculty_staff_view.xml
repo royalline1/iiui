@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_faculty_create_employee" model="ir.actions.act_window">
+        <field name="name">Create Employee</field>
+        <field name="res_model">wizard.faculty.employee</field>
+    </record>
+
+    <record id="view_odoocms_faculty_staff_kanban" model="ir.ui.view">
+        <field name="name">odoocms.faculty.staff.kanban</field>
+        <field name="model">odoocms.faculty.staff</field>
+        <field name="arch" type="xml">
+            <kanban class="odoocms_faculty_staff_kanban">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="mobile"/>
+                <field name="image"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_res_partner_kanban">
+                            <div class="o_kanban_image">
+                                <t t-if="record.image.raw_value">
+                                    <img t-att-src="kanban_image('odoocms.faculty.staff', 'image', record.id.raw_value)"  alt="Faculty"/>
+                                </t>
+                                <t t-if="!record.image.raw_value">
+                                    <img t-att-src='_s + "/base/static/src/img/avatar.png"' alt="Faculty"/>
+                                </t>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong>
+                                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                <ul>
+                                    <li t-if="record.contact_address.raw_value">
+                                        <field name="contact_address" />
+                                    </li>
+                                    <li t-if="record.mobile.raw_value">
+                                        <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/>
+                                        <field name="mobile"/>
+                                    </li>
+                                    <li t-if="record.email.raw_value">
+                                        <i class="fa fa-envelope" role="img" aria-label="Email" title="Email"/>
+                                        <a t-attf-href="mailto:#{record.email.value}">
+                                            <field name="email"/>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="view_odoocms_faculty_staff_tree" model="ir.ui.view">
+        <field name="name">odoocms.faculty.staff.tree</field>
+        <field name="model">odoocms.faculty.staff</field>
+        <field name="arch" type="xml">
+            <tree string="Faculty">
+                <field name="name"/>
+                <field name="gender"/>
+                <field name="date_of_birth"/>
+                <field name="blood_group"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="emergency_contact" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_odoocms_faculty_staff_form" model="ir.ui.view">
+        <field name="name">odoocms.faculty.staff.form</field>
+        <field name="model">odoocms.faculty.staff</field>
+        <field name="arch" type="xml">
+            <form string="Faculty">
+                <header>
+                     <button name="%(action_faculty_create_employee)d" type="action" class="oe_highlight"
+                            string="Create Employee" groups="odoocms.group_cms_manager"
+                            help="Click to create Employee Record for this Faculty Member"
+                            attrs="{'invisible': [('employee_id', '!=',False)]}"
+                            />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" groups="odoocms.group_cms_manager" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+                    <div class="oe_title">
+                        <h2>
+                            <field name="title" placeholder="Title" style="width: 30%%" />
+                        </h2>
+
+                        <label for="name" class="oe_edit_only" string="Name"/>
+                        <h2>
+                            <table>
+                                <tr>
+                                    <td style="padding-right:10px;"><field name="first_name" required="1" placeholder="First Name" /></td>
+                                    <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" /></td>
+                                </tr>
+                            </table>
+                        </h2>
+                    </div>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"
+                           string="Tags" placeholder="e.g. Medalist"/>
+
+                    <notebook>
+                        <page string="Faculty Details">
+                            <group>
+                                <group>
+                                    <field name="father_name"/>
+                                    <field name="date_of_birth"/>
+                                    <field name="nationality" />
+                                </group>
+                                <group>
+                                    <field name="gender"/>
+                                    <field name="blood_group"/>
+                                    <field name="emergency_contact" context="{'show_address': 1}"
+                                        options='{"always_reload": True}' />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Contact Details">
+                            <group>
+                                <group>
+                                    <field name="email" required="1"/>
+                                    <field name="employee_id" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="mobile" required="1"/>
+                                    <field name="phone"/>
+                                </group>
+                            </group>
+
+                            <group string="Address Detail" name="address">
+                                <label for="type" />
+                                <div name="div_type">
+                                    <field class="oe_inline" name="type" />
+                                </div>
+                                <label for="street" string="Address" />
+                                <div name="div_address">
+                                    <field name="street" placeholder="Street..." />
+                                    <field name="street2" placeholder="Street2" />
+                                    <div class="address_format">
+                                        <field name="city" placeholder="City" style="width: 40%%" />
+                                        <field name="state_id" class="oe_no_button"
+                                            placeholder="State" style="width: 37%%" options='{"no_open": True}' />
+                                        <field name="zip" placeholder="ZIP" style="width: 20%%" />
+                                    </div>
+                                    <field name="country_id" placeholder="Country" class="oe_no_button"
+                                        options='{"no_open": True}' />
+                                </div>
+                            </group>
+                        </page>
+                        <page string="Subjects">
+                            <field name="subject_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                     <field name="message_ids" widget="mail_thread"/>
+                 </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_odoocms_faculty_staff_search" model="ir.ui.view">
+        <field name="name">odoocms.faculty.staff.search</field>
+        <field name="model">odoocms.faculty.staff</field>
+        <field name="arch" type="xml">
+            <search string="Faculty">
+                <field name="name" />
+                <field name="blood_group" />
+                <newline />
+                <group expand="0" string="Group By...">
+                    <filter name="blood_group" string="Blood Group" domain="[]"
+                        context="{'group_by':'blood_group'}" />
+                    <filter name="nationality" string="Nationality" domain="[]"
+                        context="{'group_by':'nationality'}" />
+                    <filter string='Gender' name="group_gender" domain="[]" context="{'group_by' : 'gender'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_odoocms_faculty_staff" model="ir.actions.act_window">
+        <field name="name">Faculty Staff</field>
+        <field name="res_model">odoocms.faculty.staff</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="view_odoocms_faculty_staff_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the First Faculty Member here.
+            </p>
+        </field>
+    </record>
+
+
+    <record id="view_employee_form_address_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.address.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <!--
+            <field name="address_home_id" position="replace">
+                <field name="address_home_id" domain="[('supplier', '=', True)]" context="{'show_address': 1, 'employee': True}" options='{"always_reload": True, "highlight_first_line": True}'/>
+            </field>
+            <field name="address_id" position="replace">
+                <field name="address_id" context="{'show_address': 1}" options='{"always_reload": True, "highlight_first_line": True}'/>
+            </field> -->
+            <field name="user_id" position="replace">
+                <field name="user_id" string="Related User" domain="[('partner_id', '=', address_home_id)]"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Wizard to Create Employee & User from Faculty form -->
+    <record id="view_faculty_create_employee_form" model="ir.ui.view">
+        <field name="name">wizard.faculty.employee.form</field>
+        <field name="model">wizard.faculty.employee</field>
+        <field name="arch" type="xml">
+            <form string="Create Employee">
+                <group col="4">
+                    <field name="user_boolean"/>
+                </group>
+                <footer groups="base.group_user">
+                    <button name="create_employee" type="object" string="Create Employee" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_faculty_create_employee" model="ir.actions.act_window">
+        <field name="name">Create Employee</field>
+        <field name="res_model">wizard.faculty.employee</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_faculty_create_employee_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Wizard to Create User from Faculty form -->
+    <record id="view_faculty_user_create_form" model="ir.ui.view">
+        <field name="name">wizard.faculty.user.form</field>
+        <field name="model">wizard.faculty.user</field>
+        <field name="arch" type="xml">
+            <form string="Create Users">
+                <p class="oe_grey">Create User for selected Faculty(s)</p>
+                <separator string="Faculty" colspan="4"/>
+                <field name="faculty_ids" widget="many2many_tags" readonly="1"/>
+                <footer>
+                    <button string="Create Users" name="create_faculty_user" type="object" default_focus="1" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window
+            id="action_faculty_user_create"
+            multi="True"
+            name="Create Users"
+            res_model="wizard.faculty.user"
+            src_model="odoocms.faculty.staff"
+            view_mode="form"
+            target="new"
+            view_type="form"/>
+
+
+    <menuitem
+            id="menu_odoocms_faculty_staff"
+            name="Faculty Staff"
+            parent="menu_odoocms_faculty_root"
+            action="action_odoocms_faculty_staff"
+            sequence="10"/>
+
+</odoo>

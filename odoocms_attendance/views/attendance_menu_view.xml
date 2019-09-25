@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+            id="menu_odoocms_class_attendance_root"
+            name="Attendance"
+            parent="odoocms.menu_odoocms_root"
+            sequence="20"/>
+
+    <menuitem
+            id="menu_odoocms_class_attendance_main"
+            name="Attendance"
+            parent="menu_odoocms_class_attendance_root"
+            sequence="1"/>
+
+    <menuitem
+            id="menu_odoocms_class_attendance_report_root"
+            parent="menu_odoocms_class_attendance_root"
+            name="Reports"
+            sequence="11"/>
+
+</odoo>
+

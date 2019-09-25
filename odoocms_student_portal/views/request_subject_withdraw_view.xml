@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_request_subject_withdraw" model="ir.ui.view">
+        <field name="name">request.subject.withdraw.tree</field>
+        <field name="model">odoocms.request.subject.withdraw</field>
+        <field name="arch" type="xml">
+            <tree string="Request subject withdraw">
+                <field name="student_id"/>
+                <field name="program_id"/>
+                <field name="batch_id"/>
+                <field name="section_id"/>
+                <field name="academic_semester_id"/>
+                <field name="semester_id"/>
+                <field name="subject_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_request_subject_withdraw_form" model="ir.ui.view">
+        <field name="name">request.subject.withdraw</field>
+        <field name="model">odoocms.request.subject.withdraw</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Request subject withdraw">
+                <header>
+                    <field name="state" statusbar_visible="draft,approv,done" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                        <field name="student_id"/>
+                        <field name="program_id"/>
+                        <field name="batch_id"/>
+                        <field name="section_id"/>
+                        <field name="academic_semester_id"/>
+                        <field name="semester_id"/>
+                        <field name="subject_id"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field groups="base.group_user" name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="act_request_subject_withdraw_view" model="ir.actions.act_window">
+        <field name="name">Student request subject withdraw Form</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">odoocms.request.subject.withdraw</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_student_request_root" name="Students Requests" parent="odoocms.menu_odoocms_root" sequence="30"/>
+    <menuitem action="act_request_subject_withdraw_view" id="menu_odoocms_request_subject_withdraw" name="Students request subject withdraw" parent="menu_student_request_root"/>
+</odoo>

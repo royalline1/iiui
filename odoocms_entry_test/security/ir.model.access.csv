@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odoocms_entrytest_user,access.odoocms.entrytest.user,odoocms_entry_test.model_odoocms_entrytest,odoocms.group_cms_user,1,1,1,0
+access_odoocms_entrytest_manager,access.odoocms.entrytest.manager,odoocms_entry_test.model_odoocms_entrytest,odoocms.group_cms_manager,1,1,1,1
+
+access_odoocms_entrytest_fee_user,access.odoocms.entrytest.fee.user,odoocms_entry_test.model_odoocms_entrytest_fee,odoocms.group_cms_user,1,1,1,0
+access_odoocms_entrytest_fee_manager,access.odoocms.entrytest.fee.manager,odoocms_entry_test.model_odoocms_entrytest_fee,odoocms.group_cms_manager,1,1,1,1
+
+access_odoocms_entrytest_center_user,access.odoocms.entrytest.center.user,odoocms_entry_test.model_odoocms_entrytest_center,odoocms.group_cms_user,1,1,1,0
+access_odoocms_entrytest_center_manager,access.odoocms.entrytest.center.manager,odoocms_entry_test.model_odoocms_entrytest_center,odoocms.group_cms_manager,1,1,1,1
+
+access_odoocms_entrytest_application_user,access.odoocms.entrytest.application.user,odoocms_entry_test.model_odoocms_entrytest_application,odoocms.group_cms_user,1,1,1,0
+access_odoocms_entrytest_application_manager,access.odoocms.entrytest.application.manager,odoocms_entry_test.model_odoocms_entrytest_application,odoocms.group_cms_manager,1,1,1,1
+
+access_odoocms_entrytest_instruction,access_odoocms_entrytest_instruction,model_odoocms_entrytest_instruction,base.group_user,1,1,1,0

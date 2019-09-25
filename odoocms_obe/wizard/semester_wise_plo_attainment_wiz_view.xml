@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="semester_wise_plo_attainment_wiz_view_form" model="ir.ui.view">
+        <field name="name">semester.wise.plo.attainment.wiz.form</field>
+        <field name="model">semester.wise.plo.attainment.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Semester Wise PLO Attainment Wizard">
+                <group>
+                	<group>
+						<field name="program_id" options="{'no_quick_create':True, 'no_create_edit': True, 'limit': 10}"/>
+                        <field name="batch_id" domain="[('program_id','=',program_id)]" options="{'no_quick_create':True, 'no_create_edit': True, 'limit': 10}"/>
+                        <field name="academic_semester_id" options="{'no_quick_create':True, 'no_create_edit': True, 'limit': 10}"/>
+
+                    </group>
+		            <group>
+		            </group>
+                </group>
+                <footer>
+                    <button name="print_report" string="Generate Report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+     <record id="action_semester_wise_plo_attainment_wiz" model="ir.actions.act_window">
+            <field name="name">Semester Wise PLO Attainment</field>
+            <field name="res_model">semester.wise.plo.attainment.wiz</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+         <menuitem
+                id="menu_semester_wise_plo_attainment_wiz"
+                name="Semester Wise PLO Attainment"
+                action="action_semester_wise_plo_attainment_wiz"
+                parent="odoocms_obe.menu_odoocms_obe_report"
+                sequence="110"/>
+</odoo>

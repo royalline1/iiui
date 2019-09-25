@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<menuitem
+            id="menu_odoocms_root"
+            name="Odoo CMS"
+			groups="group_cms_manager,group_cms_user,base.group_user"
+            web_icon="odoocms,static/description/cms.jpg"
+            sequence="5"/>
+
+		<menuitem
+				id="menu_odoocms_students_root"
+				name="Students"
+				groups="group_cms_manager,group_cms_user,base.group_user"
+				parent="menu_odoocms_root"
+				sequence="10"/>
+
+		<menuitem
+				id="menu_odoocms_faculty_root"
+				name="Faculty"
+				groups="group_cms_manager,group_cms_user,base.group_user"
+				parent="menu_odoocms_root"
+				sequence="15"/>
+
+		<menuitem
+				id="menu_odoocms_general"
+				name="General"
+				groups="group_cms_manager,group_cms_user,base.group_user"
+				parent="menu_odoocms_root"
+				sequence="20"/>
+
+		<menuitem
+				id="menu_odoocms_report"
+				name="Reports"
+				parent="menu_odoocms_root"
+				sequence="80"/>
+
+		<menuitem
+				id="menu_odoocms_configuration"
+				parent="menu_odoocms_root"
+				name="Configuration"
+				groups="group_cms_manager"
+				sequence="100"/>
+
+
+			<menuitem
+					id="menu_odoocms_settings"
+                  	name="Settings"
+                  	parent="menu_odoocms_configuration"
+                  	action="action_config_settings"
+                  	groups="base.group_system"
+                  	sequence="1"/>
+
+
+			<menuitem
+					id="menu_odoocms_config_calendar"
+					name="Calendar"
+					parent="menu_odoocms_configuration"
+					sequence="10"/>
+
+			<menuitem
+					id="menu_odoocms_config_academic"
+					name="Academic"
+					parent="menu_odoocms_configuration"
+					sequence="20"/>
+
+			<menuitem
+					id="menu_odoocms_config_general"
+					name="General Management"
+					parent="menu_odoocms_configuration"
+					sequence="180"/>
+
+</odoo>

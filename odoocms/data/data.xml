@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+         <record id="odoocms_roomtype_1" model="odoocms.room.type">
+            <field name="name">Classrooms</field>
+            <field name="code">genClassroom</field>
+            <field name="type">Room</field>
+        </record>
+
+        <record id="odoocms_roomtype_1" model="odoocms.room.type">
+            <field name="name">Computing Laboratories</field>
+            <field name="code">computingLab</field>
+            <field name="type">Room</field>
+        </record>
+
+        <record id="odoocms_roomtype_1" model="odoocms.room.type">
+            <field name="name">Additional Instructional Rooms</field>
+            <field name="code">departmental</field>
+            <field name="type">Room</field>
+        </record>
+
+        <record id="odoocms_roomtype_1" model="odoocms.room.type">
+            <field name="name">Special Use Rooms</field>
+            <field name="code">specialUse</field>
+            <field name="type">Room</field>
+        </record>
+
+        <record id="odoocms_roomtype_1" model="odoocms.room.type">
+            <field name="name">Outside Locations</field>
+            <field name="code">nonUniversity</field>
+            <field name="type">Other</field>
+        </record>
+
+    </data>
+</odoo>

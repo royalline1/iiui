@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <menuitem
+                id="menu_odoocms_obe_root"
+                name="Outcome Based Education"
+                groups="odoocms.group_cms_manager,odoocms_obe.group_obe_user"
+                web_icon="odoocms_obe,static/description/icon.png"
+                sequence="12"/>
+
+        <menuitem
+                id="menu_odoocms_obe_main"
+                name="OBE"
+                parent="menu_odoocms_obe_root"
+                sequence="20"/>
+
+        <menuitem
+                id="menu_odoocms_obe_report"
+                name="OBE Reports"
+                parent="menu_odoocms_obe_root"
+                sequence="150"/>
+
+        <menuitem
+                id="menu_odoocms_obe_configuration"
+                parent="menu_odoocms_obe_root"
+                name="Configuration"
+                groups="odoocms.group_cms_manager,odoocms_obe.group_obe_manager"
+                sequence="200"/>
+
+</odoo>
+

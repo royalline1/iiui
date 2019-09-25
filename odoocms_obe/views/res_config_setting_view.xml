@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_config_settings_form" model="ir.ui.view">
+        <field name="name">res.config.settings.obe</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="odoocms.view_config_settings_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@name='timetable']" position="after">
+                <div name="obe" class="col-12 col-lg-6 o_setting_box"
+                     title="It is for the applicant.">
+                    <div class="o_setting_right_pane">
+                        <div class="content-group mt16">
+                             <label class="o_form_label o_light_label" for="clo_kpi" />
+<!--                                     <input class="o_field_char o_field_widget o_input" name="grades" placeholder="" type="text" id="o_field_grades"/>-->
+                        <field name="clo_kpi"/>
+                         </div>
+                    </div>
+                    <div class="o_setting_right_pane">
+<!--                                <label for="grades"/>-->
+                        <div class="text-muted">
+                            KPI for CLOs.
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

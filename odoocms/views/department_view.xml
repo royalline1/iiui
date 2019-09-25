@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odoocms_department_tree" model="ir.ui.view">
+        <field name="name">odoocms.department.tree</field>
+        <field name="model">odoocms.department</field>
+        <field name="arch" type="xml">
+            <tree string="Department">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="campus_id"/>
+                <field name="faculty_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_odoocms_department_form" model="ir.ui.view">
+        <field name="name">odoocms.department.form</field>
+        <field name="model">odoocms.department</field>
+        <field name="arch" type="xml">
+            <form string="Department">
+                <sheet>
+                    <group string="Department">
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                        	<field name="campus_id"/>
+                            <field name="faculty_id"/>
+                        	<field name="chairman_id"/>
+                    	</group>
+                    </group>
+
+                    <notebook colspan="4">
+                        <page string="Programs">
+                            <field name="program_ids">
+                                <tree create="false" delete="false" edit="false">
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="duration"/>
+                                    <field name="credit_hours"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Faculty">                           
+                            <group >
+                                <field name="professor_ids" colspan="4"/>
+                            </group>
+                            <group >
+                                <field name="associate_professor_ids"  colspan="4"/>
+                            </group>
+                            <group >
+                                <field name="assistant_professor_ids"  colspan="4"/>
+                            </group>
+                            <group >
+                                <field name="lecturer_ids"  colspan="4"/>
+                            </group>
+                            <group >
+                                <field name="lab_engineer_ids"  colspan="4"/>
+                            </group>
+                            <group >
+                                <field name="visiting_faculty_ids"  colspan="4"/>
+                            </group>
+                            <group >
+                                <field name="assistant_dean_ids"  colspan="4"/>
+                            </group>
+                            <group >
+                                <field name="coordinator_ids"  colspan="4"/>
+                            </group>                              
+                        </page>
+                    </notebook>
+                </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                     <field name="message_ids" widget="mail_thread"/>
+                 </div>
+            </form>
+        </field>
+    </record>
+
+     <record id="view_odoocms_department_search" model="ir.ui.view">
+        <field name="name">odoocms.department.search</field>
+        <field name="model">odoocms.department</field>
+        <field name="priority" eval="14"/>
+        <field name="arch" type="xml">
+        <search string="Department">
+           <field name="name"/>
+           <field name="code"/>
+            <newline />
+                <group expand="0" string="Group By...">
+                    <filter string="Campus" domain="[]" name="campus" context="{'group_by':'campus_id'}" />
+                    <filter string="Faculty" domain="[]" name="faculty" context="{'group_by':'faculty_id'}" />
+                    <filter string="Program" domain="[]" name="program" context="{'group_by':'program_ids'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_odoocms_department" model="ir.actions.act_window">
+        <field name="name">Department</field>
+        <field name="res_model">odoocms.department</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_odoocms_department_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the First Department here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_odoocms_department"
+            parent="menu_odoocms_config_general"
+            name="Departments"
+            action="action_odoocms_department"
+            sequence="20"/>
+
+</odoo>

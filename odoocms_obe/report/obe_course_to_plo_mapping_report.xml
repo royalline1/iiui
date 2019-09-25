@@ -1,0 +1,99 @@
+<odoo>
+
+	<template id ="odoocms_obe.obe_course_to_plo_mapping_report">
+		<t t-call="web.html_container">
+			<t t-call="web.basic_layout">
+                <style>
+                    #semester-plo {
+                          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                          border-collapse: collapse;
+                          width: 100%;
+                            margin-top:15px;
+                        }
+
+                        #semester-plo td, #semester-plo th {
+                          border: 1px solid #ddd;
+                          padding: 8px;
+                        }
+
+                        #semester-plo tr:nth-child(even){background-color: #f2f2f2;}
+
+                        #semester-plo tr:hover {background-color: #ddd;}
+
+                        #semester-plo th {
+                          padding-top: 12px;
+                          padding-bottom: 12px;
+                          text-align: center;
+                          background-color: #6f1964;
+                          color: white;
+                        }
+
+                    .verticalTableHeader {
+                        font-size:14px;
+                        height:120px;
+                        writing-mode: vertical-lr;
+                        -epub-writing-mode:vertical-rl;
+                        -webkit-writing-mode:vertical-rl;
+                       -ms-writing-mode: tb-rl;
+                       transform: rotate(180deg);
+
+                    }
+
+
+                </style>
+				<div class="page" style="font-size: 16px; border-style: double;; border-width: 2px; padding:30px ">
+                    <div style="font-size:18px;font-weight:bold;text-align:center;">
+                          <span>Course To PLO Mapping</span>
+                    </div>
+                    <table id="semester-plo">
+                         <tr>
+                             <th rowspan="2" style="width:5px; height:auto"><span class="verticalTableHeader"> Semester No.</span></th>
+                             <th rowspan="2" style="width:5px; height:auto" ><span class="verticalTableHeader"> Course Code </span></th>
+                             <th rowspan="2" style="text-align:center" >Course Title</th>
+                             <t t-foreach="plo_line_ids" t-as="plo">
+                                 <th style="width:5px; height:auto"> <span class="verticalTableHeader"  t-esc="plo['name']"/></th>
+                             </t>
+                         </tr>
+                        <tr>
+                            <t t-foreach="plo_line_ids" t-as="plo">
+                                <th style="width:5px; height:auto; text-align:center; background: #522c4d" > <span>PLO</span><span t-esc="plo_index + 1" /></th>
+                            </t>
+                        </tr>
+                        <t t-foreach="line_ids" t-as="semester">
+                            <tr>
+                                <t t-set="sp" t-value="len(line_ids[semester])+1"></t>
+                                <th t-att-rowspan="sp"> <span class="verticalTableHeader" >Semester-<span t-esc="semester"/> </span> </th>
+                                <t t-foreach="line_ids[semester]" t-as="courses">
+                                     <tr>
+                                         <th style="background: #522c4d"><span t-esc="courses['code']"></span></th>
+                                         <th style="background: #522c4d"><span t-esc="courses['name']"></span></th>
+                                         <t t-foreach="plo_line_ids" t-as="plo">
+                                             <t t-set="i" t-value="1"/>
+                                             <t t-set="foo" t-value="true"/>
+                                             <t t-if="len(courses['plo_id'])==0">
+                                                  <td style="text-align:center"><span >&#160;</span></td>
+                                             </t>
+                                             <t t-foreach="courses['plo_id']" t-as="plo_id" t-if="foo">
+                                                 <t t-if="plo_id==plo['name']">
+                                                     <td style="text-align:center"> <span>&#10004;</span></td>
+                                                     <t t-set="foo" t-value="false"/>
+                                                 </t>
+                                                 <t t-if="not plo_id==plo['name'] and len(courses['plo_id'])==i">
+                                                     <td style="text-align:center"><span >&#160;</span></td>
+                                                 </t>
+                                                 <t t-set="i" t-value="i+1" ></t>
+                                             </t>
+                                         </t>
+                                     </tr>
+                                </t>
+                            </tr>
+                        </t>
+                     </table>
+
+                </div>
+
+            </t>
+        </t>
+    </template>
+
+</odoo>

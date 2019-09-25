@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_odoocms_program_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.program.form.inherit</field>
+            <field name="model">odoocms.program</field>
+            <field name="inherit_id" ref="odoocms.view_odoocms_program_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='schemes']" position="after">
+                    <page string="PLOs" name="plos">
+                        <group>
+                            <field name="plo_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code" options="{'create': true, 'create_edit': true}"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_odoocms_batch_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.batch.form.inherit</field>
+            <field name="model">odoocms.batch</field>
+            <field name="inherit_id" ref="odoocms_registration.view_odoocms_batch_form"/>
+            <field name="arch" type="xml">
+                <button name="generate_classes" position="after">
+                    <button name="copy_plos" type="object" class="oe_highlight"
+                        string="Copy PLOs" groups="odoocms.group_cms_manager"
+                        help="Click to Copy PLOs from the Program Template"
+                        attrs="{'invisible': [('plo_ids', '!=',[])]}"
+                        />
+                </button>
+
+                <xpath expr="//notebook/page[@name='sections']" position="after">
+                    <page string="PLOs" name="plos">
+                        <group>
+                            <field name="plo_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code" options="{'create': true, 'create_edit': true}"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_odoocms_study_scheme_line_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.study.scheme.line.inherit</field>
+            <field name="model">odoocms.study.scheme.line</field>
+            <field name="inherit_id" ref="odoocms.view_odoocms_study_scheme_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="CLOs" name="clos">
+                        <group>
+                            <field name="clo_ids" nolabel="1">
+                                <tree>
+                                    <field name="code" options="{'create': true, 'create_edit': true}"/>
+                                    <field name="description"/>
+                                    <field name="emphasis_level"/>
+                                    <field name="plo_id"/>
+                                    <field name="domain_id"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_odoocms_class_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.class.form.inherit</field>
+            <field name="model">odoocms.class</field>
+            <field name="inherit_id" ref="odoocms_registration.view_odoocms_class_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="copy_clos" type="object" class="oe_highlight"
+                        string="Copy CLOs" groups="odoocms.group_cms_manager"
+                        help="Click to Copy CLOs from the Subject Study Scheme"
+                        attrs="{'invisible': [('clo_ids', '!=',[])]}"
+                        />
+                </xpath>
+
+                <xpath expr="//notebook/page[@name='students']" position="after">
+                    <page string="CLOs" name="clos">
+                        <group>
+                            <field name="clo_ids" nolabel="1">
+                                <tree>
+                                    <field name="code" options="{'create': true, 'create_edit': true}"/>
+                                    <field name="description"/>
+                                    <field name="emphasis_level"/>
+                                    <field name="plo_id"/>
+                                    <field name="domain_id"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_odoocms_class_form_inherit2" model="ir.ui.view">
+            <field name="name">odoocms.class.form.inherit2</field>
+            <field name="model">odoocms.class</field>
+            <field name="inherit_id" ref="odoocms_exam.view_odoocms_class_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='exam_activity_ids']/tree/field[@name='max_marks']" position="after">
+                    <field name="obe_weightage" required="1"/>
+                    <field name="clo_id" domain="[('class_id','=', parent.id)]" required="1"/>
+                    <field name="domain_id" required="1"/>
+                    <button name="activity_result" type="object" string="Result"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="odoocms_exam_activity_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.exam.activity.form.inherit</field>
+            <field name="model">odoocms.exam.activity</field>
+            <field name="inherit_id" ref="odoocms_exam.odoocms_exam_activity_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='marks']" position="after">
+                    <group>
+                        <field name="obe_weightage" required="1"/>
+                        <field name="class_id" invisible="1"/>
+                        <field name="clo_id" domain="[('class_id','=', class_id)]" required="1"/>
+                        <field name="domain_id" required="1"/>
+                    </group>
+
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_odoocms_student_subject_form_inherit" model="ir.ui.view">
+            <field name="name">odoocms.student.subject.form.inherit</field>
+            <field name="model">odoocms.student.subject</field>
+            <field name="inherit_id" ref="odoocms_registration.view_odoocms_student_subject_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="OBE Summary" name="obe_activities">
+                        <group>
+                             <field name="obe_activity_ids" nolabel="1">
+                                <tree create="false" edit="false" delete="false">
+                                    <field name="clo_id"/>
+                                    <field name="domain_id"/>
+                                    <field name="percentage"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="odoocms_student_semester_form" model="ir.ui.view">
+            <field name="name">odoocms.student.semester.form.obe</field>
+            <field name="model">odoocms.student.semester</field>
+            <field name="inherit_id" ref="odoocms_exam.odoocms_student_semester_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='student_subject_ids']" position="after">
+                    <field name="plo_ids"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_odoocms_student_form_inherit_obe" model="ir.ui.view">
+            <field name="name">odoocms.student.form.obe</field>
+            <field name="model">odoocms.student</field>
+            <field name="inherit_id" ref="odoocms_exam.view_odoocms_student_form_inherit_reg"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='results']" position="after">
+                    <page string="PLOs" name="plos">
+                        <group>
+                            <field name="plo_ids" nolabel="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

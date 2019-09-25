@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odoocms_faculty_portal_odoocms_faculty_portal,odoocms_faculty_portal.odoocms_faculty_portal,model_odoocms_faculty_portal_odoocms_faculty_portal,,1,0,0,0

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  	<data >
+	
+		<!-- To hide email if signup with entryID is checked -->
+		<template id="account_sign_up_entryID" inherit_id="auth_signup.fields">
+			<xpath expr="//div[@class='form-group field-login']" position="replace">
+	          	<div t-if="signup_entryID_way_enabled" class="form-group field-login">
+					<label for="login">User Id</label>
+					<input type="text" name="login" t-att-value="login" id="login" class="form-control form-control-sm" autofocus="autofocus"
+						autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+				</div>
+				
+				<div t-if="signup_entryID_way_enabled and not signup_CNICPhone_way_enabled" class="form-group field-cnic">
+	                <label for="CNIC" class="control-label">CNIC</label>
+	                <input type="text" name="cnic" t-att-value="cnic" id="cnic" class="form-control" 
+	                required="required" t-att-readonly="'readonly' if only_passwords else None"
+	                t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+            	</div>
+				
+				<div t-if="not signup_entryID_way_enabled" class="form-group field-login">
+					<label for="login">Your Email</label>
+					<input type="text" name="login" t-att-value="login" id="login" class="form-control form-control-sm" autofocus="autofocus"
+						autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+				</div>
+			</xpath>
+	   	</template>
+
+		<!-- To show phone and CNIC if signup with CNICPhone is checked -->
+		<template id="account_sign_up_CNICPhone" inherit_id="auth_signup.fields">
+			<xpath expr="//div[@class='form-group field-name']" position="before">
+
+				<div t-if="signup_CNICPhone_way_enabled and not signup_entryID_way_enabled" class="form-group field-cnic">
+	                <label for="CNIC" class="control-label">CNIC</label>
+	                <input type="text" name="cnic" t-att-value="cnic" id="cnic" class="form-control"
+	                required="required" t-att-readonly="'readonly' if only_passwords else None"
+	                t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+
+					<label for="Phone" class="control-label">Mobile</label>
+	                <input type="text" name="mobile" t-att-value="mobile" id="mobile" class="form-control"
+	                required="required" t-att-readonly="'readonly' if only_passwords else None"
+	                t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+            	</div>
+			</xpath>
+	   	</template>
+
+		
+		<template id="account_sign_in_details_change_id" inherit_id="web.login">
+	      <xpath expr="//div[@class='form-group field-login']/label" position="replace">
+	            <label t-if="signup_entryID_way_enabled" for="login">User ID</label>
+				<label t-if="not signup_entryID_way_enabled" for="login">Email</label>
+	      </xpath>
+	   	</template>
+		
+		<record id="res_partner_form_id_inherited" model="ir.ui.view">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<field name="website" position="before">
+					<field name="cnic"/>
+					<field name="mobile"/>
+				 </field>
+			</field>
+        </record>
+  	</data>
+ </openerp>
