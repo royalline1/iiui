@@ -57,5 +57,15 @@
 			menu="True"
 		/>
 
+		<report
+			id="action_report_student_dmc"
+			string="Student DMC"
+			model="student.dmc.wiz"
+			report_type="qweb-html"
+			name="odoocms_exam.student_semester_dmc_report"
+			file="odoocms_exam.student_semester_dmc_report"
+			menu="False"
+		/>
+
 </data>
 </odoo>
